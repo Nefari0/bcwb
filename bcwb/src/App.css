@@ -1,3 +1,65 @@
-.app-header {
+.app {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.hero {
+    width: 100vw;
+    height: 200px;
+    background-color: red;
+}
+
+/* --- REUSABLE --- */
+
+
+/* SMALLER ELEMENTS */
+h1,
+h2,
+h3 {
+  color: #555;  
+}
+
+h1 {
+  font-size: 36px;
+  /* text-transform: uppercase; */
+  font-weight: 100;
+  letter-spacing: 2px;
+  /* font-style: italic; */
   
+  /* font-family: 'Great Vibes', cursive; */
+  /* font-family: 'Inter', sans-serif; */
+  font-family: 'Playfair Display', serif;
+  /* font-family: 'Poppins', sans-serif; */
+}
+
+h2 {
+  margin-bottom: 48px;
+  font-size: 36px;
+  letter-spacing: -0.5px;
+  /* 24 / 30 / 36 -- approved font sizes*/ 
+}
+
+h3 {
+  font-size: 30px;
+  margin-bottom: 20px;
+  margin-top: 40px;
+}
+
+h4 {
+  font-size: 20px;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+p {
+  font-size: 22px;
+  line-height: 1.5;
+  margin-bottom: 15px;
+}
+
+/* --- MEDIA QUERIES --- */
+@media (max-width:1200px) {
+    .hero {display: none;}
 }
