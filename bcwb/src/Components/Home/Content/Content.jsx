@@ -1,4 +1,3 @@
-import './Content.css'
 
 const Content = (props) => {
 

@@ -3,9 +3,6 @@ import data from '../../../data'
 import axios from 'axios'
 import { useState,useEffect } from 'react'
 import Content from '../Content/Content'
-// const style = {
-//     width:'120px'
-// }
 
 const style = {
     height:'50px',
