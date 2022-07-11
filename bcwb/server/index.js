@@ -1,5 +1,4 @@
 require('dotenv').config();
-// const { default: axios } = require('axios');
 const express = require('express')
 const session = require('express-session')
 const massive = require('massive');
@@ -21,10 +20,11 @@ app.use(
         }),
     )
 
-// --- endpoints --- //
+// --- Endpoints --- //
 app.get('/api/photos/all',photosController.getAll)
 app.post('/api/photos/new',photosController.addPhoto)
 
+// --- Server --- //
 app.use( express.static( __dirname + '/../build'));
 app.get('*', (req,res) => {
 res.send(path.join(__dirname, '../build/index.html'))
