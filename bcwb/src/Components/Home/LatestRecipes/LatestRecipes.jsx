@@ -4,7 +4,7 @@ import { useEffect,useState } from "react";
 import Content from '../Content/Content';
 
 const style = { // Styling for Content.js
-    width:'100%',
+    width:'50px',
     margin:'auto',
 
 }
@@ -23,7 +23,7 @@ const LatestRecipes = () => {
     }
 
     const mappedItems = items.map(el => {
-        return <Content key={el.id} img={el.img} text={el.title} style={style} />
+        return <Content key={el.photo_id} img={el.url} text={null} style={style} />
     })
 
     return(
