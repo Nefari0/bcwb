@@ -21,8 +21,9 @@ app.use(
         }),
     )
 
-        // --- endpoints --- //
-        app.get('/api/photos/all',photosController.getAll)
+// --- endpoints --- //
+app.get('/api/photos/all',photosController.getAll)
+app.post('/api/photos/new',photosController.addPhoto)
 
 app.use( express.static( __dirname + '/../build'));
 app.get('*', (req,res) => {
