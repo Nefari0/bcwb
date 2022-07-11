@@ -1,1 +1,1 @@
-SELECT * FROM bcc_photos
+SELECT * FROM bcwb_photos
