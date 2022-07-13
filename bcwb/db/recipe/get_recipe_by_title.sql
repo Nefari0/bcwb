@@ -1,0 +1,1 @@
+SELECT * FROM recipe WHERE title = $1
