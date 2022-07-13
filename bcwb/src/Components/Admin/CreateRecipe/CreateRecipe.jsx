@@ -21,13 +21,14 @@ const CreateRecipe = () => {
     const [ exists,setExists ] = useState(false)
     const [formFields, setFormFields] = useState(defaultState);
     const { title, description, ingredient, step, category } = formFields;
+    const [ newRecipe,setNewRecipe ] = useState(null)
     const [ recipe,setRecipe ] = useState(null)
     const [ error,setError ] = useState(null)
 
     const createRecipe = (event) => {
         event.preventDefault();
         axios.post('/api/recipes/create',formFields).then(res => {
-            setRecipe(res.data)
+            setNewRecipe(res.data)
         }).catch(err => {
             setError('This title is already being used. Please choose another title')
         })
@@ -46,8 +47,11 @@ const CreateRecipe = () => {
         // axios.post(url,title,album)
     }
 
-    const addPhoto = () => { // Adds cover image
-        // axios.post()
+    const addRecipePhoto = async (cover_image_url) => {
+        const { description,title,category,published,recipe_id,pintereste_url } = newRecipe[0]
+        await axios.put('/api/recipes/edit',{description,title,category,published,cover_image_url,recipe_id,pintereste_url}).then(res => {
+            setRecipe(res.data)
+        })
     }
 
     const handleChange = (event) => {
@@ -108,8 +112,7 @@ const CreateRecipe = () => {
             <h1>Create Recipe</h1>
         
             {error ? <ErrorMessage error={error} setError={setError} /> : null}
-            {/* <AddPhotos /> */}
-            {recipe === null ? initRecipe() : null}
+            {newRecipe === null ? initRecipe() : <AddPhotos updateDB={addRecipePhoto} />}
         
         {/* <form>
             <label>Add Ingredient</label>
