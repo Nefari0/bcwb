@@ -1,17 +1,17 @@
-
 import './App.css';
 import Nav from './Components/Nav/Nav';
-import SignIn from './Components/SignIn/SignIn';
 import Home from './Components/Home/Home';
+import routes from './routes';
+import { Link } from 'react-router-dom'
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-          <img className='hero' />
-          <Nav />
+        <Link to='/' ><img className='hero' /></Link>
+        <Nav />
       </header>
-        <Home />
+        {routes}
     </div>
   );
 }
