@@ -1,6 +1,8 @@
 import './Nav.css'
 import Hamburgar from './Hamburger'
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import routes from '../../routes'
 
 const Nav = (props) => {
 
@@ -15,7 +17,7 @@ const Nav = (props) => {
                 <li>item</li>
             </ul>
             <Hamburgar setMenu={setMenu} menu={menu} /> 
-            <h1>logo</h1>
+            <Link to='/' ><h1>logo</h1></Link>
             <h1>search</h1>
             <ul className={`mobile-nav ${menu ? true : 'closed'}`} >
                 {menu ? <div>
