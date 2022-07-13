@@ -2,27 +2,35 @@ import './CreateRecipe.scss'
 import { useState } from 'react'
 import FormInput from '../../Form/FormInput'
 import Button from '../../Form/Button'
+import AddPhotos from '../Photos/AddPhotos'
 import axios from 'axios'
-import { FormInputLabel } from '../../Form/FormInput.styles'
+// import { FormInputLabel } from '../../Form/FormInput.styles'
+import { ErrorMessage } from '../../ErrorMessage/ErrorMessage'
+import { Group } from '../../Form/FormInput.styles'
 
 const defaultState = {
     title:'',
     description:'',
+    category:'',
     ingredient:'',
     step:'',
-    category:'',
     steps:[]
 }
 
 const CreateRecipe = () => {
     const [ exists,setExists ] = useState(false)
-    const [ state,setState ] = useState(defaultState)
     const [formFields, setFormFields] = useState(defaultState);
     const { title, description, ingredient, step, category } = formFields;
     const [ recipe,setRecipe ] = useState(null)
+    const [ error,setError ] = useState(null)
 
-    const createRecipe = () => {
-        // axios.post(new_recipe).then(res setRecipe(res.data))
+    const createRecipe = (event) => {
+        event.preventDefault();
+        axios.post('/api/recipes/create',formFields).then(res => {
+            setRecipe(res.data)
+        }).catch(err => {
+            setError('This title is already being used. Please choose another title')
+        })
         // then the next step should be available by changing value from null
     }
 
@@ -38,7 +46,7 @@ const CreateRecipe = () => {
         // axios.post(url,title,album)
     }
 
-    const addPhoto = () => {
+    const addPhoto = () => { // Adds cover image
         // axios.post()
     }
 
@@ -48,17 +56,15 @@ const CreateRecipe = () => {
         setFormFields({ ...formFields, [name]: value });
       };
 
-    return(
-        <main className='CreateRecipe'>
-
-            <h1>Create Recipe</h1>
-        {recipe === null ? 
-        <form onSubmit={() => {}}  >
+    const initRecipe = () => { // Initialize new recipe form
+        return(
+            <form onSubmit={createRecipe}>
 
             <FormInput 
              label={`Title`}
              name='title'
-             type='text' 
+             type='text'
+             required
              onChange={handleChange} 
              value={title} 
             />
@@ -67,6 +73,7 @@ const CreateRecipe = () => {
              label='Description'
              name='description'
              type='text' 
+             required
              onChange={handleChange} 
              value={description} 
             />
@@ -74,15 +81,37 @@ const CreateRecipe = () => {
             <FormInput
              label='Category'
              name='category'
-             type='text' 
+             type='text'
+             required
              onChange={handleChange} 
              value={category} 
             />
-
             <Button type="submit" >Next</Button>
         </form>
-        :
-        <form>
+        )
+    }
+
+    const options = () => { // Adding new contents and info after recipe is initialized
+
+        return (
+            <>
+                <Button>Photos</Button>
+                <Button>Instructions</Button>
+                <Button>Ingredients</Button>
+            </>
+        )
+    }
+
+    return(
+        <main className='CreateRecipe'>
+
+            <h1>Create Recipe</h1>
+        
+            {error ? <ErrorMessage error={error} setError={setError} /> : null}
+            {/* <AddPhotos /> */}
+            {recipe === null ? initRecipe() : null}
+        
+        {/* <form>
             <label>Add Ingredient</label>
             <input type="text" name="ingredient" value={ingredient} onChange={handleChange} />
             <button>Add</button>
@@ -91,7 +120,8 @@ const CreateRecipe = () => {
             <input type="text" name="step" value={step} onChange={handleChange} />
             <button type="submit" >Add</button>
             <button>Delete Recipe</button>
-        </form>}
+        </form> */}
+        
         </main>
      
     )
