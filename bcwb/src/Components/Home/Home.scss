@@ -1,0 +1,14 @@
+.home {
+    padding: 40px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.home section {
+    width: 100%;
+    margin: auto;
+    display: flex;
+    overflow: scroll;
+}
