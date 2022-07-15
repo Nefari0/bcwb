@@ -2,7 +2,8 @@ require('dotenv').config();
 const express = require('express')
 const session = require('express-session')
 const massive = require('massive');
-const path = require('path')
+const path = require('path');
+const { deletePhoto } = require('./controller/photosController');
 const photosController = require('./controller/photosController');
 const recipeController = require('./controller/recipeController');
 
@@ -25,6 +26,8 @@ app.use(
 // --- Photos --- //
 app.get('/api/photos/all',photosController.getAll)
 app.post('/api/photos/new',photosController.addPhoto)
+app.delete('/api/photos/delete/:photo_id',photosController.deletePhoto)
+app.put('/api/photos/update',photosController.updatePhoto)
 
 // --- Recipes --- //
 app.get('/api/recipes/get/all', recipeController.getAllRecipes)
