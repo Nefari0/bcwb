@@ -1,0 +1,1 @@
+DELETE FROM bcwb_photos WHERE photo_id = $1
