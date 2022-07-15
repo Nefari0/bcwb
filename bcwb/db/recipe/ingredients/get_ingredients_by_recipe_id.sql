@@ -1,0 +1,1 @@
+SELECT * FROM ingredient_items WHERE recipe_id = $1

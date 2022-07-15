@@ -13,6 +13,13 @@ module.exports = {
         return res.status(200).send(recipe)
     },
 
+    getRecipeById: async (req,res) => {
+        const { recipe_id } = req.params
+        const db = req.app.get('db')
+        const recipe = await db.recipe.get_recipe_by_id([recipe_id])
+        return res.status(200).send(recipe)
+    },
+
     createRecipe: async (req,res) => {
         const { title,description,category } = req.body
 
@@ -45,5 +52,35 @@ module.exports = {
         const db = req.app.get('db')
         const recipe = await db.recipe.delete_recipe([recipe_id])
         return res.status(200).send(recipe)
+    },
+    // --- Instrucions --- //
+
+    getInstructionsByRecipeId: async (req,res) => {
+        // const { recipe_id } = req.params
+        const recipe_id = parseInt(req.params.recipe_id)
+        const db = req.app.get('db')
+        const instructions = await db.recipe.instructions.get_instructions_by_recipe_id([recipe_id])
+        console.log('hit instructions',instructions)
+        return res.status(200).send(instructions)
+    },
+
+    editInstructionsByRecipeId: async (req,res) => {
+
+    },
+
+    deleteInstructionsByRecipeId: async (req,res) => {
+
+    },
+
+    postInstructionsByRecipeId: async (req,res) => {
+
+    },
+
+    // --- Ingredients --- //
+    getIngredientByRecipeId: async (req,res) => {
+        const db = req.app.get('db')
+        const { recipe_id } = req.params
+        const ingredients = await db.recipe.ingredients.get_ingredients_by_recipe_id([recipe_id])
+        return res.status(200).send(ingredients)
     }
 } 
