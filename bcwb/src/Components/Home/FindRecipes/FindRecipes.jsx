@@ -1,40 +1,40 @@
-import '../Home.css'
-import data from '../../../data'
-import axios from 'axios'
+import '../Home.scss'
 import { useState,useEffect } from 'react'
 import Content from '../Content/Content'
+import data from '../../../data'
 
 const style = {
-    height:'50px',
-    width:'50px',
-    borderRadius:'50%'
+    main:{
+        margin:'auto',
+    },
+    img:{
+        height:'200px',
+        width:'200px',
+        borderRadius:'50%'
+    }
 }
 
 const FindRecipes = (props) => {
 
     const [ items,setItems ] = useState([])
-    const displayed = items.splice(0,7)
 
     useEffect(() => {
         getDB()
-    })
+    },[])
 
     const getDB = () => {
-            axios.get("https://www.breakingbadapi.com/api/characters"
-    ).then(res => {
-        setItems(res.data)
-    })
+        setItems([...data])
     }
 
 
 
-    const mappedItems = displayed.map(el => {
-        // return <img key={el.car_id} src={el.img} style={style} />
-        return <Content key={el.char_id} img={el.img} text={el.portrayed} style={style} />
+    const mappedItems = items.map(el => {
+
+        return <Content key={el.id} img={el.img} text={null} style={style} />
     })    
 
     return(
-        <section>
+        <section style={{hieght:'500px'}} >
             {mappedItems}
         </section>
     )
