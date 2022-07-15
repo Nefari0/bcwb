@@ -4,6 +4,7 @@ const session = require('express-session')
 const massive = require('massive');
 const path = require('path')
 const photosController = require('./controller/photosController');
+const recipeController = require('./controller/recipeController');
 
 const { SESSION_SECRET, CONNECTION_STRING, SERVER_PORT } = process.env;
 
@@ -21,8 +22,22 @@ app.use(
     )
 
 // --- Endpoints --- //
+// --- Photos --- //
 app.get('/api/photos/all',photosController.getAll)
 app.post('/api/photos/new',photosController.addPhoto)
+
+// --- Recipes --- //
+app.get('/api/recipes/get/all', recipeController.getAllRecipes)
+app.get('/api/recipes/get/recipe/:recipe_id', recipeController.getRecipeById)
+app.post('/api/recipes/create', recipeController.createRecipe)
+app.put('/api/recipes/edit', recipeController.updateRecipe)
+app.delete('/api/recipes/delete/:recipe_id', recipeController.deleteRecipe)
+// --- Recipe instructions --- //
+app.get('/api/instructions/:recipe_id', recipeController.getInstructionsByRecipeId)
+
+// --- Recipe ingredients --- //
+app.get('/api/ingredients/:recipe_id', recipeController.getIngredientByRecipeId)
+// --------------------------------------------------- //
 
 // --- Server --- //
 app.use( express.static( __dirname + '/../build'));
