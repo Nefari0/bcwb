@@ -4,9 +4,7 @@ import FormInput from '../../Form/FormInput'
 import Button from '../../Form/Button'
 import AddPhotos from '../Photos/AddPhotos'
 import axios from 'axios'
-// import { FormInputLabel } from '../../Form/FormInput.styles'
 import { ErrorMessage } from '../../ErrorMessage/ErrorMessage'
-import { Group } from '../../Form/FormInput.styles'
 
 const defaultState = {
     title:'',
@@ -112,8 +110,7 @@ const CreateRecipe = () => {
             <h1>Create Recipe</h1>
         
             {error ? <ErrorMessage error={error} setError={setError} /> : null}
-            {newRecipe === null ? initRecipe() : <AddPhotos updateDB={addRecipePhoto} />}
-        
+            {newRecipe === null ? initRecipe() : <AddPhotos updateDB={addRecipePhoto} />}        
         {/* <form>
             <label>Add Ingredient</label>
             <input type="text" name="ingredient" value={ingredient} onChange={handleChange} />
