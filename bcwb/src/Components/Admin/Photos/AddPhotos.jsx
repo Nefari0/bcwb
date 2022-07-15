@@ -1,12 +1,17 @@
-import { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import './Photos.css'
 import Resizer from 'react-image-file-resizer'
 import axios from 'axios'
 import { app } from '../../../base'
+import { PortraitImage } from '../../StyledComponents.styles'
 import { getStorage,ref,uploadBytesResumable,getDownloadURL } from 'firebase/storage'
+import Button from '../../Form/Button'
 const storage = getStorage(app)
  
-const Photos = (prop) => {
+const Photos = (props) => {
+
+    const { title,album,updateDB } = props
+
     const path = `bcwb/images` // Location of images on cloud
     const [ preview,setPreview ] = useState(null)
     const [ file,setFile ] = useState([])
@@ -22,16 +27,6 @@ const Photos = (prop) => {
         
     })
 
-    useEffect(() => {
-        getPhotoApi()
-    },[])
-
-    const getPhotoApi = () => {
-        axios.get('/api/photos/all').then(res => {
-            setPhotos(res.data)
-        })
-    }
-
     const resize = async (e) => {
         var fileInput = false;
 
@@ -46,12 +41,12 @@ const Photos = (prop) => {
                     400,
                     267,
                     "JPEG",
-                    100,
+                    50,
                     0,
                     (uri) => {
                         console.log(uri,'uri')
                         const objUrl = URL.createObjectURL(uri)
-                        setPreview({previewImageFile:objUrl})
+                        setPreview(objUrl)
                         setFile(uri)
                     },
                     "file",
@@ -78,8 +73,12 @@ const Photos = (prop) => {
         // add to DB
         await addToDb(dlUrl)
 
+        // update cover photo if applicable
+        if(updateDB != null){await updateDB(dlUrl)}
+
     }
 
+    // --- This function will be phased out - api calls will come from parent component
     const addToDb = async (url) => {
         const title = 'title' // for testing
         const album = 'album' // for testing
@@ -88,19 +87,40 @@ const Photos = (prop) => {
         })
     }
 
-    // const mappedPhotos = photos.map(el => {
-    //     return(
-    //         <img key={el.photo_id} url={el.url} src={el.url} />
-    //     )
-    // })
+    const hiddenFileInput = React.useRef(null);
+  
+    const handleClick = event => {
+      hiddenFileInput.current.click();
+    };
+
+    const handleChange = event => {
+        const fileUploaded = event.target.files[0];
+    };
 
     return(
-        <form className='photos' >
-            <h1>Add photo</h1>
-            <input type='file' onChange={e => resize(e)} />
-            <button onClick={() => addPhoto(file)} >send</button>
-            {/* {mappedPhotos} */}
-        </form>
+        <>
+            {preview === null ?
+
+            <Button>
+            <input type="file"
+            ref={hiddenFileInput}
+            style={{
+                opacity:'0',
+                position:'absolute',
+                height:'50px',
+                width:'320px',
+            }}
+            onChange={e => resize(e)}
+            />
+            add photo
+            </Button>
+            :
+            <PortraitImage>
+                <img src={preview} />
+                <Button onClick={() => {addPhoto(file)}} >Add</Button>
+                
+            </PortraitImage>}
+        </>
     )
 }
 
