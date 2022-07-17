@@ -27,6 +27,7 @@ app.use(
 app.get('/api/photos/all',photosController.getAll)
 app.post('/api/photos/new',photosController.addPhoto)
 app.delete('/api/photos/delete/:photo_id',photosController.deletePhoto)
+app.delete('/api/photos/delete_withUrl',photosController.deleteWithUrl)
 app.put('/api/photos/update',photosController.updatePhoto)
 
 // --- Recipes --- //
@@ -37,9 +38,12 @@ app.put('/api/recipes/edit', recipeController.updateRecipe)
 app.delete('/api/recipes/delete/:recipe_id', recipeController.deleteRecipe)
 // --- Recipe instructions --- //
 app.get('/api/instructions/:recipe_id', recipeController.getInstructionsByRecipeId)
-
+app.post('/api/instructions/add',recipeController.postInstructionsByRecipeId)
+app.put('/api/instructions/put', recipeController.editInstructionsByInstructionId)
+app.delete('/api/instructions/delete/:instruction_id',recipeController.deleteInstructionsByRecipeId)
 // --- Recipe ingredients --- //
 app.get('/api/ingredients/:recipe_id', recipeController.getIngredientByRecipeId)
+app.post('/api/ingredient/new', recipeController.addNewIngredtient)
 // --------------------------------------------------- //
 
 // --- Server --- //

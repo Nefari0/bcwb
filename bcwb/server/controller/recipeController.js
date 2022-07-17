@@ -31,7 +31,7 @@ module.exports = {
         // -- check if title already exists -- //
         const exists = await db.recipe.get_recipe_by_title([title])
 
-        console.log('exists',exists[0])
+        // console.log('exists',exists[0])
         if (exists[0]){
             return res.status(409).send('This title already exists')
         }
@@ -60,20 +60,32 @@ module.exports = {
         const recipe_id = parseInt(req.params.recipe_id)
         const db = req.app.get('db')
         const instructions = await db.recipe.instructions.get_instructions_by_recipe_id([recipe_id])
-        console.log('hit instructions',instructions)
+        // console.log('hit instructions',instructions)
         return res.status(200).send(instructions)
     },
 
-    editInstructionsByRecipeId: async (req,res) => {
-
+    editInstructionsByInstructionId: async (req,res) => {
+        const { content, recipe_id, instruction_id, step } = req.body
+        const db = req.app.get('db')
+        console.log('hit backend ',req.body)
+        const instruction = await db.recipe.instructions.update_instruction([ content,step,instruction_id ])
+        return res.status(200).send(instruction)
     },
 
     deleteInstructionsByRecipeId: async (req,res) => {
-
+        const { instruction_id } = req.params
+        const db = req.app.get('db')
+        // console.log('hit backend',instruction_id)
+        const instruction = await db.recipe.instructions.delete_instruction([instruction_id])
+        return res.status(200).send(instruction)
     },
 
     postInstructionsByRecipeId: async (req,res) => {
-
+        const db = req.app.get('db')
+        const { recipe_id,step,content } = req.body
+        console.log('back end ',req.body)
+        const instruction = await db.recipe.instructions.add_instruction(recipe_id,step,content)
+        return res.status(200).send(instruction)
     },
 
     // --- Ingredients --- //
@@ -82,5 +94,13 @@ module.exports = {
         const { recipe_id } = req.params
         const ingredients = await db.recipe.ingredients.get_ingredients_by_recipe_id([recipe_id])
         return res.status(200).send(ingredients)
+    },
+
+    addNewIngredtient: async (req,res) => {
+        const db = req.app.get('db')
+        const { recipe_id,content } = req.body
+        const ingredient = await db.recipe.ingredients.add_ingredient([recipe_id,content])
+        // console.log('back end',ingredient)
+        return res.status(200).send(ingredient)
     }
 } 
