@@ -44,6 +44,8 @@ app.delete('/api/instructions/delete/:instruction_id',recipeController.deleteIns
 // --- Recipe ingredients --- //
 app.get('/api/ingredients/:recipe_id', recipeController.getIngredientByRecipeId)
 app.post('/api/ingredient/new', recipeController.addNewIngredtient)
+app.put('/api/ingredient/put',recipeController.editIngredient)
+app.delete('/api/ingredient/delete/:ingredient_id', recipeController.deleteIngredient)
 // --------------------------------------------------- //
 
 // --- Server --- //
