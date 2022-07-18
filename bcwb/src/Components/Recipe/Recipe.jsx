@@ -10,26 +10,49 @@ const Recipe = (props) => {
     const [ instructions,setInstructions ] = useState([]) 
     const [ ingredients,setIngredients ] = useState([])
 
-    useEffect(() => {getItems()},[])
+    useEffect(() => {
+        getContent()
+    },[])
 
-    const getItems = async () => {
-        await axios.get(`/api/recipes/get/recipe/${recipe_id}`).then(res => {
+    const getContent = async () => {
+        await getItems()
+        await grabInstructions()
+        await grabIngredients()
+    }
+
+    const getItems = () => {
+        axios.get(`/api/recipes/get/recipe/${recipe_id}`).then(res => {
             setItems(res.data)
-        })
-        await axios.get(`/api/instructions/${recipe_id}`).then(res => {
-            setInstructions(res.data)
-        })
-        await axios.get(`/api/ingredients/${recipe_id}`).then(res => {
-            setIngredients(res.data)
         })
     }
 
     
 
+    const grabInstructions = () => {
+        axios.get(`/api/instructions/${recipe_id}`).then(res => {
+            setInstructions(res.data)
+        })
+    }    
+
+    const grabIngredients = () => {
+        axios.get(`/api/ingredients/${recipe_id}`).then(res => {
+            setIngredients(res.data)
+        })
+    }
+
     return(
         <main className='recipe-box' >
             {/* <PortraitImage><img /></PortraitImage> */}
-            {items[0] != undefined ? <InstructionContainer items={items} ingredients={ingredients} instructions={instructions} /> : null}
+            {items[0] != undefined ?
+
+            <InstructionContainer
+            items={items} ingredients={ingredients}
+            instructions={instructions}
+            grabIngredients={grabIngredients}
+            grabInstructions={grabInstructions}
+            getItems={getItems}
+
+            /> : null}
         </main>
     )
 }
