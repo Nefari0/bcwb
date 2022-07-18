@@ -5,6 +5,8 @@ import Button from '../../Form/Button'
 import AddPhotos from '../Photos/AddPhotos'
 import axios from 'axios'
 import { ErrorMessage } from '../../ErrorMessage/ErrorMessage'
+import { Route } from 'react-router-dom'
+import { withRouter } from 'react-router'
 
 const defaultState = {
     title:'',
@@ -15,7 +17,7 @@ const defaultState = {
     steps:[]
 }
 
-const CreateRecipe = () => {
+const CreateRecipe = (props) => {
     const [ exists,setExists ] = useState(false)
     const [formFields, setFormFields] = useState(defaultState);
     const { title, description, ingredient, step, category } = formFields;
@@ -48,7 +50,7 @@ const CreateRecipe = () => {
     const addRecipePhoto = async (cover_image_url) => {
         const { description,title,category,published,recipe_id,pintereste_url } = newRecipe[0]
         await axios.put('/api/recipes/edit',{description,title,category,published,cover_image_url,recipe_id,pintereste_url}).then(res => {
-            setRecipe(res.data)
+            props.history.push(`/recipe/${recipe_id}`)
         })
     }
 
@@ -93,38 +95,16 @@ const CreateRecipe = () => {
         )
     }
 
-    const options = () => { // Adding new contents and info after recipe is initialized
-
-        return (
-            <>
-                <Button>Photos</Button>
-                <Button>Instructions</Button>
-                <Button>Ingredients</Button>
-            </>
-        )
-    }
-
     return(
         <main className='CreateRecipe'>
-
-            <h1>Create Recipe</h1>
-        
-            {error ? <ErrorMessage error={error} setError={setError} /> : null}
-            {newRecipe === null ? initRecipe() : <AddPhotos updateDB={addRecipePhoto} />}        
-        {/* <form>
-            <label>Add Ingredient</label>
-            <input type="text" name="ingredient" value={ingredient} onChange={handleChange} />
-            <button>Add</button>
-
-            <label>add instruction</label>
-            <input type="text" name="step" value={step} onChange={handleChange} />
-            <button type="submit" >Add</button>
-            <button>Delete Recipe</button>
-        </form> */}
-        
+                <h1>Create Recipe</h1>
+            
+                {error ? <ErrorMessage error={error} setError={setError} /> : null}
+                {newRecipe === null ? initRecipe() : <AddPhotos updateDB={addRecipePhoto} />}        
+            
         </main>
      
     )
 }
 
-export default CreateRecipe
+export default withRouter(CreateRecipe)
