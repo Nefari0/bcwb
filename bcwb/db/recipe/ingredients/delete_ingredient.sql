@@ -1,0 +1,1 @@
+DELETE FROM ingredient_items WHERE ingredient_id = $1
