@@ -1,0 +1,1 @@
+DELETE FROM instruction WHERE instruction_id = $1
