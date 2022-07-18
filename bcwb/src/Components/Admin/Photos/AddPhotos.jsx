@@ -1,3 +1,10 @@
+// ***************** Using AddPhotos.jsx  ****************** //
+// The updateDB function from props is used to update any datebase an uploaded file might be associated with
+// An example would be adding the new image url to a database element
+// example:
+// axios.call(updateEndPoint,{items + url (from AddPhotos)})()
+// ********************************************************* //
+
 import React, { useState } from 'react'
 import './Photos.css'
 import Resizer from 'react-image-file-resizer'
