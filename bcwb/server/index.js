@@ -25,9 +25,10 @@ app.use(
 // --- Endpoints --- //
 // --- Photos --- //
 app.get('/api/photos/all',photosController.getAll)
+app.post('/api/photos/get/url/',photosController.getWithUrl)
 app.post('/api/photos/new',photosController.addPhoto)
-app.delete('/api/photos/delete/:photo_id',photosController.deletePhoto)
-app.delete('/api/photos/delete_withUrl',photosController.deleteWithUrl)
+// app.delete('/api/photos/delete/:photo_id',photosController.deletePhoto)
+app.post('/api/photos/delete/url',photosController.deleteWithUrl)
 app.put('/api/photos/update',photosController.updatePhoto)
 
 // --- Recipes --- //
