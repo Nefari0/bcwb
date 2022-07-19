@@ -13,7 +13,6 @@ export const PortraitImage = styled.div`
   height:400px;
   width:267px;
   z-index:1;
-  overflow:hidden;
   border-radius:5px;
   margin:auto;
 `;
