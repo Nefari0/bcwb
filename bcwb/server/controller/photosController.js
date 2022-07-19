@@ -6,18 +6,49 @@ module.exports = {
         return res.status(200).send(photos)
     },
 
-    addPhoto: async (req,res) => {
+    getWithUrl: async (req,res) => {
         const db = req.app.get('db')
-        const { url,title,album } = req.body
-        const photo = await db.photos.add_photo([url,title,album])
+        const { url } = req.body
+        // const url = cover_photo_url
+        console.log('hit get photo with url',req.body)
+        const photo = await db.photos.get_with_url([url])
+
+        if(photo[0] === undefined) {
+            return res.status(404).send('not found')
+        }
+
         return res.status(200).send(photo)
     },
 
-    deletePhoto: async (req,res) => {
+    addPhoto: async (req,res) => {
         const db = req.app.get('db')
-        const { photo_id } = req.params
-        const photo = await db.photos.delete_photo([photo_id])
+        const { url,title,album,style_left,style_top,style_width } = req.body
+        // const style_left = styling.left
+        // const style_top = styling.top
+        console.log('hit add photo',style_width)
+        const photo = await db.photos.add_photo([url,title,album,style_top,style_left,style_width])
         return res.status(200).send(photo)
+    },
+
+    // deletePhoto: async (req,res) => {
+    //     const db = req.app.get('db')
+    //     const { photo_id } = req.params
+    //     const photo = await db.photos.delete_photo([photo_id])
+    //     return res.status(200).send(photo)
+    // },
+
+    deleteWithUrl: async (req,res) => {
+        const db = req.app.get('db')
+        const { url } = req.body
+        const existingPhoto = await db.photos.get_with_url([url])
+
+        if (!existingPhoto[0]) {
+            return res.status(404).send('not found')
+        }
+
+        const deletedPhoto = await db.photos.delete_with_url([url])
+
+        return res.status(200).send(deletedPhoto)
     },
 
     updatePhoto: async (req,res) => {
