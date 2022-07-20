@@ -3,12 +3,23 @@ import {InstructionMain} from "./Instructions.styles"
 import { InstructionHead } from './Head/InstructionHead.component'
 
 const InstructionContainer = (props) => {
-    const { instructions,ingredients,items } = props 
+    const { instructions,ingredients,items,grabInstructions,grabIngredients,getItems } = props 
 
     return(
         <InstructionMain>
-            <InstructionHead items={items} />
-            <InstructionBody items={items} ingredients={ingredients} instructions={instructions} />
+            <InstructionHead
+            items={items}
+            getItems={getItems}
+            />
+
+            <InstructionBody
+            items={items}
+            ingredients={ingredients}
+            instructions={instructions}
+            grabInstructions={grabInstructions}
+            grabIngredients={grabIngredients}
+            />
+
         </InstructionMain>
 
     )
