@@ -10,6 +10,7 @@
 
 # production
 /src/base.js
+/src/access.js
 
 # misc
 .DS_Store
