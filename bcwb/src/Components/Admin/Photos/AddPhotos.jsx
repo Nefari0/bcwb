@@ -3,6 +3,8 @@
 // An example would be adding the new image url to a database element
 // example:
 // axios.call(updateEndPoint,{items + url (from AddPhotos)})()
+
+// Any parameters with no data must be declared as null
 // ********************************************************* //
 
 import React, { useState } from 'react'
@@ -13,26 +15,56 @@ import { app } from '../../../base'
 import { PortraitImage } from '../../StyledComponents.styles'
 import { getStorage,ref,uploadBytesResumable,getDownloadURL } from 'firebase/storage'
 import Button from '../../Form/Button'
+import { PositionPhoto } from './PositionPhoto'
+import { MainImage } from '../../Recipe/Instructions/Head/InstructionHead.styles'
 const storage = getStorage(app)
  
 const Photos = (props) => {
 
-    const { title,album,updateDB } = props
+    const { title,album,updateDB,label } = props
 
     const path = `bcwb/images` // Location of images on cloud
     const [ preview,setPreview ] = useState(null)
     const [ file,setFile ] = useState([])
-    const [ photos,setPhotos ] = useState([])
 
-    const [ state,setState ] = useState({
-        title:'',
-        album:'',
-        file:[],
-        photos:[],
-        preview:null,
-
-        
+    const [ position,setPosition ] = useState({
+        left:0,
+        top:0,
+        width:300
     })
+
+    const move = (e,value,direction) => {
+        e.preventDefault()
+        const { left,top,width } = position
+        switch (direction) {
+            case 'left':
+                console.log('hit left',value,position)
+                // return 
+                setPosition({
+                    left:left+value,
+                    top:top,
+                    width:width
+                })
+                break;
+            case 'top':
+                console.log('hit top',value,position)
+                setPosition({
+                    left:left,
+                    top:top+value,
+                    width:width
+                })
+                break;
+            
+            case 'zoom':
+                console.log('hit zoom',value,position)
+                setPosition({
+                    left:left,
+                    top:top,
+                    width:value+width
+                })
+        }
+        return
+    }
 
     const resize = async (e) => {
         var fileInput = false;
@@ -82,27 +114,23 @@ const Photos = (props) => {
 
         // update cover photo if applicable
         if(updateDB != null){await updateDB(dlUrl)}
-
+        await setPreview(null)
     }
 
     // --- This function will be phased out - api calls will come from parent component
     const addToDb = async (url) => {
-        const title = 'title' // for testing
-        const album = 'album' // for testing
-        await axios.post('/api/photos/new',{url,title,album}).then(res => {
+        const { top,left,width } = position
+        const style_left = left
+        const style_top = top
+        const style_width = width
+
+        await axios.post('/api/photos/new',{url,title,album,style_left,style_top,style_width}).then(res => {
             console.log('added to db')
         })
     }
 
     const hiddenFileInput = React.useRef(null);
   
-    const handleClick = event => {
-      hiddenFileInput.current.click();
-    };
-
-    const handleChange = event => {
-        const fileUploaded = event.target.files[0];
-    };
 
     return(
         <>
@@ -119,14 +147,18 @@ const Photos = (props) => {
             }}
             onChange={e => resize(e)}
             />
-            add photo
+            {label}
             </Button>
             :
-            <PortraitImage>
-                <img src={preview} />
-                <Button onClick={() => {addPhoto(file)}} >Add</Button>
-                
-            </PortraitImage>}
+            <>
+            <MainImage>
+                <img src={preview} style={{position:'absolute',left:`${position.left}px`,top:`${position.top}px`,width:`${position.width}px`}} />
+            </MainImage>
+                <Button onClick={() => {addPhoto(file)}} style={{position:'absolute',top:'-50px'}} >Add</Button>
+                <Button style={{position:'absolute',top:'-50px',right:'60px'}} >cancel</Button>
+                <PositionPhoto move={move}/>
+            </>
+            }
         </>
     )
 }
