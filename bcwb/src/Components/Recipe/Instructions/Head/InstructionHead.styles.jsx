@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 export const InstructionHeader = styled.header`
   height:350px;
   width: 550px;
+  padding-right:20px;
   background-color:#003300;
   border: solid 1px #003300;
   border-radius: 20px 20px 0px 0px;
@@ -28,6 +29,7 @@ export const Row = styled.div`
   display:flex;
   flex-wrap:wrap;
   margin:10px;
+  width:100%;
 `
 
 // --- Render additional information --- //
