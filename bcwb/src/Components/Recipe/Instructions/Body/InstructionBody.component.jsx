@@ -1,9 +1,10 @@
-import { async } from "@firebase/util";
+
 import axios from "axios";
 import { useState,useEffect } from "react";
 import { InstructionList } from "./InstructionBody.styles";
 import Instruction from "./Instruction";
 import Ingredient from "./Ingredient";
+import { RECIPES } from "../../../../endpoints";
 
 export const InstructionBody = (props) => {
     const { instructions,ingredients,items,grabIngredients,grabInstructions } = props
@@ -13,16 +14,8 @@ export const InstructionBody = (props) => {
         recipe_id:items[0].recipe_id
     }
     const [ formFields,setFormFields ] = useState(defaultState)
-    const { content,step,recipe_id } = formFields
+    const { content,step } = formFields
 
-    // -- Instruction End Points -- //
-    const postInstructionEndPoint = '/api/instructions/add'
-    const deleteInstructionEndPoint = '/api/instructions/delete/'
-    const putInstructionEndPoint = '/api/instructions/put'
-    // -- Ingredient End Points -- //
-    const POST_INGREDIENT = '/api/ingredient/new'
-    const PUT_INGREDIENT= '/api/ingredient/put'
-    const DELETE_INGREDIENT = '/api/ingredient/delete/'
 
     // -- FOR TESTING ONLY -- //
     const [ isAdmin,setIsAdmin ] = useState(true)
@@ -45,23 +38,16 @@ export const InstructionBody = (props) => {
     const deleteItem = async (e,endPoint,items,updatePage) => {
         e.preventDefault()
         axios.delete(`${endPoint}${items}`).then(() => updatePage())
-        // setFormFields('')
     }
-
-    // -- Will be used to add / change cover image -- /
-    const updateImage = () => {}
 
     // -- Input handler
     const handleChange = (event) => {
-        console.log('hit handle change',event)
         const { name, value } = event.target;
         setFormFields({ ...formFields, [name]: value });
       };
 
 
-    // ************** MOVING THIS ITEM TO EXTERNAL CONPONENT ********************* //
     const mappedIngredients = ingredients.map(el => {
-        // return <li key={el.ingredient_id} >{el.content}</li>
         return <Ingredient
         key={el.ingredient_id}
         ingredient_id={el.ingredient_id}
@@ -69,32 +55,11 @@ export const InstructionBody = (props) => {
         isAdmin={isAdmin}
         deleteItem={deleteItem}
         putItem={putItem}
-        DELETE_INGREDIENT={DELETE_INGREDIENT} // Delete item 
-        PUT_INGREDIENT={PUT_INGREDIENT} // Edit item
+        DELETE_INGREDIENT={RECIPES.DELETE_INGREDIENT} // Delete item 
+        PUT_INGREDIENT={RECIPES.PUT_INGREDIENT} // Edit item
         grabIngredients={grabIngredients}
          />
     })
-    // ************* phasing out above code *****************//
-
-    // ************** MOVING THIS ITEM TO EXTERNAL CONPONENT ********************* //
-    // const mappedInstructions_ = instructions.map(el => {
-    //     return <li key={el.instruction_id} >
-    //         {!isAdmin ? el.content : null}
-    //         {isAdmin ?
-    //         <form>
-             
-    //             <input style={{width:'15px'}} type='number' value={el.step} name="step" onChange={(e) => handleChange(e)} />
-
-    //             <input type='text' value={el.content} name="content" onChange={handleChange} />
-
-                
-    //             <button>update item</button>
-    //             <button onClick={(e) => deleteItem(e,deleteInstructionEndPoint,el.instruction_id,grabInstructions)} >
-    //                 delete
-    //             </button>
-    //         </form> : null}</li>
-    // })
-    // ************* phasing out above code *****************//
 
     const mappedInstructions = instructions.map(el => {
         return <Instruction
@@ -105,19 +70,14 @@ export const InstructionBody = (props) => {
             content={el.content}
             deleteItem={deleteItem}
             putItem={putItem}
-            deleteInstructionEndPoint={deleteInstructionEndPoint} // Delete item 
-            putInstructionEndPoint={putInstructionEndPoint} // Edit item
+            DELETE_INSTRUCTION={RECIPES.DELETE_INSTRUCTION} // Delete item 
+            PUT_INSTRUCTION={RECIPES.PUT_INSTRUCTION} // Edit item
             grabInstructions={grabInstructions}
         />
     })
     
     return (
         <InstructionList>
-            <ul>
-                <li>Equiptment</li>
-                <li>mixer</li>
-                {isAdmin ? <form><input /><button>add equiptment</button></form> : null}
-            </ul>
 
             <ul>
                 <li className="first-li">Ingredients</li>
@@ -130,7 +90,7 @@ export const InstructionBody = (props) => {
                     onChange={handleChange}
                     value={content}
                     />
-                    <button onClick={(e) => {postItem(e,POST_INGREDIENT,formFields,grabIngredients)}} >add Ingredient</button>
+                    <button onClick={(e) => {postItem(e,RECIPES.POST_INGREDIENT,formFields,grabIngredients)}} >add Ingredient</button>
                 </form> : null}
             </ul>
 
@@ -156,7 +116,7 @@ export const InstructionBody = (props) => {
                     />
 
                     <button
-                    onClick={(e) =>postItem(e,postInstructionEndPoint,formFields,grabInstructions)}
+                    onClick={(e) =>postItem(e,RECIPES.POST_INSTRUCTION,formFields,grabInstructions)}
                     >
                         add Instruction
                     </button>
