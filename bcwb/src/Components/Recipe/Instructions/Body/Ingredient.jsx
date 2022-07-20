@@ -11,7 +11,6 @@ const Ingredient = (props) => {
         DELETE_INGREDIENT,
         PUT_INGREDIENT } = props
 
-
     const [ formFields,setFormFields ] = useState({
         content:content,
         ingredient_id:ingredient_id
