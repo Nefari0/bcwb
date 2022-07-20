@@ -1,0 +1,1 @@
+SELECT * FROM bcwb_photos WHERE url = $1
