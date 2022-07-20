@@ -11,3 +11,10 @@ export const PositionController = styled.form`
   display:flex;
   flex-wrap:wrap;
 `
+
+export const KeyStyling = styled.button`
+  width:25px;
+  height:25px;
+  fontSize:8px;
+  padding:0px;
+`
