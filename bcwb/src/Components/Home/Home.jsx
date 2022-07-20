@@ -1,12 +1,9 @@
 import './Home.scss'
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
 import LatestRecipes from './LatestRecipes/LatestRecipes'
 import FindRecipes from './FindRecipes/FindRecipes'
+import { Footer } from '../Footer/Footer'
 
 const Home = () => {    
-
-    const [item,setItem] = useState([])
 
     return(
         <main className='home'>
@@ -14,12 +11,7 @@ const Home = () => {
             <LatestRecipes />
             <h1>Find Recipes For...</h1>
             <FindRecipes />
-            {/* <Photos /> */}
-            {/* <Pinterest /> */}
-            <footer>
-                <Link to="/admin" ><h1>admin</h1></Link>
-                <h1>footer</h1>
-            </footer>
+            <Footer />
         </main>
     )
 }
