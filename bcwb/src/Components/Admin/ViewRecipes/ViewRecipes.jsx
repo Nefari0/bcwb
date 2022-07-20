@@ -18,7 +18,7 @@ export const ViewRecipes = () => {
 
     const mappedItems = items.map(el => {
         return (
-            <Link to={`/recipe/${el.recipe_id}`} ><RecipeListItem key={el.recipe_id} items={el} /></Link>
+            <Link key={el.recipe_id} to={`/recipe/${el.recipe_id}`} ><RecipeListItem  items={el} /></Link>
         )
     })
 
