@@ -3,6 +3,7 @@ import { useState,useEffect } from 'react'
 import axios from 'axios'
 import { PortraitImage } from '../StyledComponents.styles'
 import InstructionContainer from './Instructions/InstructionContainer'
+import Button from '../Form/Button'
 
 const Recipe = (props) => {
     const { recipe_id } = props.match.params
@@ -47,6 +48,7 @@ const Recipe = (props) => {
     return(
         <main className='recipe-box' >
             {/* <PortraitImage><img /></PortraitImage> */}
+            <Button onClick={() => setIsAdmin(!isAdmin)} >Enter / Exit Admin View</Button>
             {items[0] != undefined ?
 
             <InstructionContainer
