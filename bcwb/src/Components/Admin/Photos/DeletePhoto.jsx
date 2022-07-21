@@ -8,7 +8,7 @@
 // ********************************************************* //
 
 import { app } from '../../../base'
-import { getStorage,ref,uploadBytesResumable,getDownloadURL,deleteObject } from 'firebase/storage'
+import { getStorage,ref,deleteObject } from 'firebase/storage'
 import Button from '../../Form/Button'
 import axios from 'axios'
 const storage = getStorage(app)
@@ -38,7 +38,7 @@ const DeletePhoto = (props) => {
     }
 
     return(
-        <div style={{zIndex:'10000',position:'absolute',right:'0px'}} ><Button onClick={(e) => deleteFile(e,url)} >delete photo</Button></div>
+        <div style={{zIndex:'10000',margin:'5px',right:'0px'}} ><Button onClick={(e) => deleteFile(e,url)} >delete photo</Button></div>
     )
 }
 
