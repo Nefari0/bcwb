@@ -25,7 +25,7 @@ const Photos = (props) => {
 
     const path = `bcwb/images` // Location of images on cloud
     const [ preview,setPreview ] = useState(null)
-    const [ file,setFile ] = useState([])
+    const [ file,setFile ] = useState(null)
 
     const [ position,setPosition ] = useState({
         left:0,
@@ -83,7 +83,6 @@ const Photos = (props) => {
                     50,
                     0,
                     (uri) => {
-                        console.log(uri,'uri')
                         const objUrl = URL.createObjectURL(uri)
                         setPreview(objUrl)
                         setFile(uri)
@@ -96,6 +95,11 @@ const Photos = (props) => {
                 console.log(err)
             }
         }
+    }
+
+    const clearPhoto = () => {
+        setPreview(null)
+        setFile(null)
     }
 
     const addPhoto = async (url) => {
@@ -150,14 +154,14 @@ const Photos = (props) => {
             {label}
             </Button>
             :
-            <>
+            <div className='photos'>
             <MainImage>
                 <img src={preview} style={{position:'absolute',left:`${position.left}px`,top:`${position.top}px`,width:`${position.width}px`}} />
             </MainImage>
-                <Button onClick={() => {addPhoto(file)}} style={{position:'absolute',top:'-50px'}} >Add</Button>
-                <Button style={{position:'absolute',top:'-50px',right:'60px'}} >cancel</Button>
+                <Button onClick={() => {addPhoto(file)}} style={{position:'absolute',top:'90px'}} >Add</Button>
+                <Button style={{position:'absolute',top:'160px',left:'0px'}} onClick={clearPhoto} >cancel</Button>
                 <PositionPhoto move={move}/>
-            </>
+            </div>
             }
         </>
     )
