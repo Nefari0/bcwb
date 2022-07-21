@@ -10,9 +10,9 @@ const defaultState = {
     title:'',
     description:'',
     category:'',
-    ingredient:'',
-    step:'',
-    steps:[]
+    prep_time:0,
+    servings:0,
+    author:'',
 }
 
 const CreateRecipe = (props) => {
