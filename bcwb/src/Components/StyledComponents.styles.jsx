@@ -30,3 +30,13 @@ export const ThumbnailImage = styled.div`
   width:50px;
   border-radius:50%;
 `
+
+export const DescriptionText = styled.p`
+  color:#555;
+  font-family: 'Cedarville Cursive', cursive;
+  // margin:auto;
+  // font-weight:100;
+  font-style:italic;
+  font-size: 1.8rem;
+  line-height: 1.8;
+`
