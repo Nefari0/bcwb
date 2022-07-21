@@ -1,9 +1,9 @@
 .hamburger {
     display: none;
-    height: 24px;
+    width: 75px;
     position: relative;
 }
 
-@media (max-width:1200px) {
+@media (max-width:1000px) {
     .hamburger {display: inline;}
 }
