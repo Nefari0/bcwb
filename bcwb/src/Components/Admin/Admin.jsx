@@ -13,9 +13,9 @@ const Admin = () => {
     return(
         <main className="admin">
             <button onClick={resetAccess} >logout admin</button>
+            <CreateRecipe />
             <ViewRecipes />
             {/* <AddPhotos updateDB={null} label={'add photo'}/> */}
-            <CreateRecipe />
         </main>
     )
 }
