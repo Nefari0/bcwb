@@ -34,8 +34,6 @@ export const ThumbnailImage = styled.div`
 export const DescriptionText = styled.p`
   color:#555;
   font-family: 'Cedarville Cursive', cursive;
-  // margin:auto;
-  // font-weight:100;
   font-style:italic;
   font-size: 1.8rem;
   line-height: 1.8;
