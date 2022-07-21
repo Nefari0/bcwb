@@ -6,7 +6,7 @@
     line-height: 50px;
     padding: 0 35px 0 35px;
     font-size: 15px;
-    background-color: black;
+    background-color: #003300;
     color: white;
     text-transform: uppercase;
     font-family: 'Open Sans Condensed';
@@ -18,8 +18,8 @@
   
     &:hover {
       background-color: white;
-      color: black;
-      border: 1px solid black;
+      color: #003300;
+      border: 1px solid #003300;
     }
   
     &.google-sign-in {
@@ -34,11 +34,11 @@
   
     &.inverted {
       background-color: white;
-      color: black;
-      border: 1px solid black;
+      color: #003300;
+      border: 1px solid #003300;
   
       &:hover {
-        background-color: black;
+        background-color: #003300;
         color: white;
         border: none;
       }
