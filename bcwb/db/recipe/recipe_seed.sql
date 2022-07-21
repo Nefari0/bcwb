@@ -2,7 +2,13 @@ CREATE TABLE recipe (
     recipe_id SERIAL PRIMARY KEY,
     title TEXT,
     description TEXT,
-    pinterest_url: TEXT
+    pinterest_url: TEXT,
+    published BOOLEAN,
+    category TEXT,
+    servings TEXT,
+    prep_time TEXT,
+    author TEXT,
+    cover_image_url TEXT
 )
 
 INSERT INTO recipe (title,description,pinterest_url)
