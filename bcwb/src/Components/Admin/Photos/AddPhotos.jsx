@@ -8,7 +8,6 @@
 // ********************************************************* //
 
 import React, { useState } from 'react'
-import './Photos.css'
 import Resizer from 'react-image-file-resizer'
 import axios from 'axios'
 import { app } from '../../../base'
@@ -156,9 +155,9 @@ const Photos = (props) => {
             </Button>
             :
             <AddPhotoContainer>
-            <MainImage>
-                <img src={preview} style={{position:'absolute',left:`${position.left}px`,top:`${position.top}px`,width:`${position.width}px`}} />
-            </MainImage>
+                <MainImage>
+                    <img src={preview} style={{position:'absolute',left:`${position.left}px`,top:`${position.top}px`,width:`${position.width}px`}} />
+                </MainImage>
                 <Button onClick={() => {addPhoto(file)}} style={{position:'absolute',top:'90px'}} >Add</Button>
                 <Button style={{position:'absolute',top:'160px',left:'0px'}} onClick={clearPhoto} >cancel</Button>
                 <PositionPhoto move={move}/>
