@@ -10,6 +10,10 @@ const Recipe = (props) => {
     const [ instructions,setInstructions ] = useState([]) 
     const [ ingredients,setIngredients ] = useState([])
 
+    // ******** testing only ********** //
+    const [ isAdmin,setIsAdmin ] = useState(true)
+    // ******** testing only ********** //
+
     useEffect(() => {
         getContent()
     },[])
@@ -48,6 +52,7 @@ const Recipe = (props) => {
             <InstructionContainer
             items={items} ingredients={ingredients}
             instructions={instructions}
+            isAdmin={isAdmin}
             grabIngredients={grabIngredients}
             grabInstructions={grabInstructions}
             getItems={getItems}
