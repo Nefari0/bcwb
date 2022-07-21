@@ -1,9 +1,6 @@
 
-.hero {
-    width: 100vw;
-    height: 200px;
-    background-color: red;
-}
+
+html { font-size: 62.5%;}
 
 ::-webkit-scrollbar {
   width: 20px;
@@ -41,7 +38,8 @@ h3 {
 
 h4 {
   font-size: 20px;
-  text-transform: uppercase;
+  font-family: 'Cedarville Cursive', cursive;
+  font-weight: 100;
   text-align: center;
   margin-bottom: 30px;
 }
@@ -69,9 +67,4 @@ li:first-child {
   margin-bottom: 0;
   margin-left: -80px;
   list-style-type: none;
-}
-
-/* --- MEDIA QUERIES --- */
-@media (max-width:1200px) {
-    .hero {display: none;}
 }
