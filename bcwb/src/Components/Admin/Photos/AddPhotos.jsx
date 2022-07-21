@@ -17,6 +17,7 @@ import { getStorage,ref,uploadBytesResumable,getDownloadURL } from 'firebase/sto
 import Button from '../../Form/Button'
 import { PositionPhoto } from './PositionPhoto'
 import { MainImage } from '../../Recipe/Instructions/Head/InstructionHead.styles'
+import { AddPhotoContainer } from './Photos.styles'
 const storage = getStorage(app)
  
 const Photos = (props) => {
@@ -154,14 +155,14 @@ const Photos = (props) => {
             {label}
             </Button>
             :
-            <div className='photos'>
+            <AddPhotoContainer>
             <MainImage>
                 <img src={preview} style={{position:'absolute',left:`${position.left}px`,top:`${position.top}px`,width:`${position.width}px`}} />
             </MainImage>
                 <Button onClick={() => {addPhoto(file)}} style={{position:'absolute',top:'90px'}} >Add</Button>
                 <Button style={{position:'absolute',top:'160px',left:'0px'}} onClick={clearPhoto} >cancel</Button>
                 <PositionPhoto move={move}/>
-            </div>
+            </AddPhotoContainer>
             }
         </>
     )

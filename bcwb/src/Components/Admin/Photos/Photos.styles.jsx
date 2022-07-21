@@ -17,3 +17,10 @@ export const KeyStyling = styled.button`
   font-size:12px;
   padding:0px;
 `
+
+export const AddPhotoContainer = styled.div`
+  height: 300px;
+  width: 100%;
+  position: relative;
+  background-color: #FFFBCE;
+`
