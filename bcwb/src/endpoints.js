@@ -13,5 +13,6 @@ export const RECIPES = {
 }
 
 export const PHOTOS = {
-    GET_PHOTOS_WITH_URL:'/api/photos/get/url/'
+    GET_PHOTOS_WITH_URL:'/api/photos/get/url/',
+    EDIT_PHOTO:'/api/photos/update'
 }
