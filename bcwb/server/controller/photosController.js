@@ -46,8 +46,8 @@ module.exports = {
 
     updatePhoto: async (req,res) => {
         const db = req.app.get('db')
-        const { url,album,title,photo_id } = req.body
-        const photo = await db.photos.update_photo([url,title,album,photo_id])
+        const { url,album,title,photo_id,style_left,style_top,style_width } = req.body
+        const photo = await db.photos.update_photo([url,title,album,style_left,style_top,style_width,photo_id])
         return res.status(200).send(photo)
     }
 }
