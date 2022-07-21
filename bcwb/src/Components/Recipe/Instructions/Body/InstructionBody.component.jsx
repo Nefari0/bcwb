@@ -7,7 +7,7 @@ import Ingredient from "./Ingredient";
 import { RECIPES } from "../../../../endpoints";
 
 export const InstructionBody = (props) => {
-    const { instructions,ingredients,items,grabIngredients,grabInstructions } = props
+    const { instructions,ingredients,items,grabIngredients,grabInstructions,isAdmin } = props
     const defaultState = {
         content:'',
         step:0,
@@ -15,11 +15,6 @@ export const InstructionBody = (props) => {
     }
     const [ formFields,setFormFields ] = useState(defaultState)
     const { content,step } = formFields
-
-
-    // -- FOR TESTING ONLY -- //
-    const [ isAdmin,setIsAdmin ] = useState(true)
-    // --------------------- //
 
     const postItem = async (e,endPoint,items,updatePage) => {
         e.preventDefault();
@@ -49,31 +44,31 @@ export const InstructionBody = (props) => {
 
     const mappedIngredients = ingredients.map(el => {
         return <Ingredient
-        key={el.ingredient_id}
-        ingredient_id={el.ingredient_id}
-        content={el.content}
-        isAdmin={isAdmin}
-        deleteItem={deleteItem}
-        putItem={putItem}
-        DELETE_INGREDIENT={RECIPES.DELETE_INGREDIENT} // Delete item 
-        PUT_INGREDIENT={RECIPES.PUT_INGREDIENT} // Edit item
-        grabIngredients={grabIngredients}
-         />
+                    key={el.ingredient_id}
+                    ingredient_id={el.ingredient_id}
+                    content={el.content}
+                    isAdmin={isAdmin}
+                    deleteItem={deleteItem}
+                    putItem={putItem}
+                    DELETE_INGREDIENT={RECIPES.DELETE_INGREDIENT} // Delete item 
+                    PUT_INGREDIENT={RECIPES.PUT_INGREDIENT} // Edit item
+                    grabIngredients={grabIngredients}
+                />
     })
 
     const mappedInstructions = instructions.map(el => {
         return <Instruction
-            key={el.instruction_id}
-            instruction_id={el.instruction_id}
-            step={el.step}
-            isAdmin={isAdmin}
-            content={el.content}
-            deleteItem={deleteItem}
-            putItem={putItem}
-            DELETE_INSTRUCTION={RECIPES.DELETE_INSTRUCTION} // Delete item 
-            PUT_INSTRUCTION={RECIPES.PUT_INSTRUCTION} // Edit item
-            grabInstructions={grabInstructions}
-        />
+                    key={el.instruction_id}
+                    instruction_id={el.instruction_id}
+                    step={el.step}
+                    isAdmin={isAdmin}
+                    content={el.content}
+                    deleteItem={deleteItem}
+                    putItem={putItem}
+                    DELETE_INSTRUCTION={RECIPES.DELETE_INSTRUCTION} // Delete item 
+                    PUT_INSTRUCTION={RECIPES.PUT_INSTRUCTION} // Edit item
+                    grabInstructions={grabInstructions}
+                />
     })
     
     return (
