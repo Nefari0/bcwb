@@ -11,6 +11,7 @@ import axios from "axios"
 import Button from "../../../Form/Button"
 import FormInput from "../../../Form/FormInput"
 import { TextEditor } from "../../../Form/TextEditor"
+import Pinterest from "../../../Pinterest/Pinterest"
 
 export const InstructionHead = (props) => {
     const { cover_image_url,title,description,pinterest_url,category,published,recipe_id,servings,prep_time,author } = props.items[0]
@@ -51,7 +52,7 @@ export const InstructionHead = (props) => {
         }).catch(err => console.log(err,'styling not found not found'))}
     }
 
-    // --- Adjust styling/position of photo --- //
+    // --- Adjust styling/position of photo - Utilized as props in PositionPhoto.jsx --- //
     const repositionPhoto = (e,value,direction) => {
         e.preventDefault()
         switch (direction) {
@@ -96,6 +97,16 @@ export const InstructionHead = (props) => {
             props.getItems()
         })
         return
+    }
+
+    const copy = () => {
+        const el = document.createElement('input');
+        el.value = window.location.href;
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
+        alert('Link copied to clipboard')
     }
 
     return(
@@ -205,9 +216,7 @@ export const InstructionHead = (props) => {
             {!isAdmin ? 
             <>
                 <DetailGrid formFields={formFields} setFormFields={setFormFields} handleChange={handleChange} isAdmin={isAdmin} />
-                <LongRow>
-                    <DescriptionText>{formFields.description}</DescriptionText>
-                </LongRow>
+                <DescriptionText>{formFields.description}</DescriptionText>
             </>
             :
             <>
@@ -222,22 +231,26 @@ export const InstructionHead = (props) => {
                 </Button>
             </>
             }
+            
 
             <LongRow >
-                <Button>print</Button>
-                <Button>pin</Button>
-                <Button>follow</Button>
+                <Button onClick={copy} >share</Button>
+                <Pinterest />
+                <Button>save recipe</Button>
             </LongRow>
 
             <MainImage>
                 <img
                 src={cover_image_url}
-                style={{
-                    position:'absolute',
-                    left:`${photoPositions.style_left}px`,
-                    top:`${photoPositions.style_top}px`,
-                    width:`${photoPositions.style_width}px`
-                }}
+
+                style={photoPositions}
+                
+                // style={{
+                //     position:'absolute',
+                //     left:`${photoPositions.style_left}px`,
+                //     top:`${photoPositions.style_top}px`,
+                //     width:`${photoPositions.style_width}px`
+                // }}
                 />
             </MainImage>
 
