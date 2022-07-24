@@ -1,4 +1,5 @@
-import { InstructionHeader,MainImage,ShortRow,LongRow } from "./InstructionHead.styles"
+import { InstructionHeader } from "./InstructionHead.styles"
+import { ShortRow,LongRow,MainImage } from '../../../StyledComponents.styles'
 import { DescriptionText } from "../../../StyledComponents.styles"
 import { useState,useEffect } from "react"
 import DeletePhoto from "../../../Admin/Photos/DeletePhoto"
@@ -118,40 +119,75 @@ export const InstructionHead = (props) => {
                 <>
                     <DeletePhoto
                     url={cover_image_url}
-                    updateDB={updateCoverImage}
+                    updateDB={() => updateCoverImage(null,null)}
                     />
               
-                        <button onClick={(e) => putItem(PHOTOS.EDIT_PHOTO,photoPositions)} >Submit Photo Updates</button>
-                        <PositionPhoto move={repositionPhoto} />
-      
+                    <button onClick={(e) => putItem(PHOTOS.EDIT_PHOTO,photoPositions)} >Submit Photo Updates</button>
+                    <PositionPhoto move={repositionPhoto} />
                 </>
                 }
 
             </ShortRow> : null}
 
             {/* -- DISPPLAY OR EDIT TITLE -- */}
-            <ShortRow>
-                { !isAdmin ?
-                <h3 style={{color:'',margin:'auto',fontWeight:'600'}}>{title}</h3>
-                :
-                <form>
+            {/* <ShortRow> */}
+            { !isAdmin ?
+            <>
+                <h3 style={{width:'65%'}}>{title}</h3>
+                <h4 >{formFields.author}</h4>
+            </>
+            :
+            <form>
 
-                    <FormInput
+                <FormInput
                     type="text"
                     name="title"
                     text="text"
                     label="Title"
                     value={formFields.title}
                     onChange={handleChange}
-                    />
+                />
 
-                </form>
-                }
-            </ShortRow>
+                <FormInput
+                    type="text"
+                    name="author"
+                    text="text"
+                    label="Author"
+                    value={formFields.author}
+                    onChange={handleChange}
+                />
+
+                <FormInput
+                    type="text"
+                    name="category"
+                    label="Category"
+                    value={formFields.category}
+                    onChange={handleChange}
+                />
+                <FormInput
+                    type="number"
+                    name="prep_time"
+                    label="Prep time"
+                    value={formFields.prep_time}
+                    onChange={handleChange}
+                />
+                <FormInput
+                    type="number"
+                    name="servings"
+                    label="Servings"
+                    value={formFields.servings}
+                    onChange={handleChange}
+                />
+
+                
+
+            </form>
+            }
+            {/* </ShortRow> */}
 
             
-            <ShortRow>
-                {!isAdmin ? <h4 style={{color:'#555',margin:'auto',fontWeight:''}}>{formFields.author}</h4>:
+            {/* <ShortRow> */}
+                {/* {!isAdmin ? null:
                 <form>
                     <FormInput
                     type="text"
@@ -161,15 +197,18 @@ export const InstructionHead = (props) => {
                     value={formFields.author}
                     onChange={handleChange}
                     />
-                </form>}
-            </ShortRow>
+                </form>
+                } */}
+            {/* </ShortRow> */}
 
-            <DetailGrid formFields={formFields} setFormFields={setFormFields} handleChange={handleChange} isAdmin={isAdmin} />
 
             {!isAdmin ? 
-            <LongRow>
-                <DescriptionText>{formFields.description}</DescriptionText>
-            </LongRow>
+            <>
+                <DetailGrid formFields={formFields} setFormFields={setFormFields} handleChange={handleChange} isAdmin={isAdmin} />
+                <LongRow>
+                    <DescriptionText>{formFields.description}</DescriptionText>
+                </LongRow>
+            </>
             :
             <>
                 <TextEditor
