@@ -243,14 +243,14 @@ export const InstructionHead = (props) => {
                 <img
                 src={cover_image_url}
 
-                style={photoPositions}
+                // style={photoPositions}
                 
-                // style={{
-                //     position:'absolute',
-                //     left:`${photoPositions.style_left}px`,
-                //     top:`${photoPositions.style_top}px`,
-                //     width:`${photoPositions.style_width}px`
-                // }}
+                style={{
+                    position:'absolute',
+                    left:`${photoPositions.style_left}px`,
+                    top:`${photoPositions.style_top}px`,
+                    width:`${photoPositions.style_width}px`
+                }}
                 />
             </MainImage>
 
