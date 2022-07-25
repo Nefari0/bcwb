@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import './Instructions.scss'
 
 const Instruction = (props) => {
     const { isAdmin,instruction_id,step,content,grabInstructions,deleteItem,DELETE_INSTRUCTION,PUT_INSTRUCTION,putItem  } = props
