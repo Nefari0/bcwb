@@ -36,7 +36,7 @@ app.get('/api/recipes/get/all', recipeController.getAllRecipes)
 app.get('/api/recipes/get/recipe/:recipe_id', recipeController.getRecipeById)
 app.post('/api/recipes/create', recipeController.createRecipe)
 app.put('/api/recipes/edit', recipeController.updateRecipe)
-app.delete('/api/recipes/delete/:recipe_id', recipeController.deleteRecipe)
+app.post('/api/recipes/delete', recipeController.deleteRecipe)
 // --- Recipe instructions --- //
 app.get('/api/instructions/:recipe_id', recipeController.getInstructionsByRecipeId)
 app.post('/api/instructions/add',recipeController.postInstructionsByRecipeId)
