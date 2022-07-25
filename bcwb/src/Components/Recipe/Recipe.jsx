@@ -3,8 +3,9 @@ import { useState,useEffect } from 'react'
 import axios from 'axios'
 import InstructionContainer from './Instructions/InstructionContainer'
 import Button from '../Form/Button'
-import { LongRow,ShortRow } from '../StyledComponents.styles'
+import { LongRow } from '../StyledComponents.styles'
 import { RECIPES } from '../../endpoints'
+import { deleteFromFB } from '../Admin/Photos/deleteFromFB'
 
 const Recipe = (props) => {
     const { recipe_id } = props.match.params
@@ -16,9 +17,7 @@ const Recipe = (props) => {
     const [ isAdmin,setIsAdmin ] = useState(false)
     // ******** testing only ********** //
 
-    useEffect(() => {
-        getContent()
-    },[])
+    useEffect(() => {getContent()},[])
 
     const getContent = async () => {
         await getItems()
@@ -46,9 +45,11 @@ const Recipe = (props) => {
         })
     }
 
-    const executeDeleteRecipe = () => {
+    const executeDeleteRecipe = async () => {
+        const { cover_image_url } = items[0]
+        await deleteFromFB(cover_image_url,null)
         axios.post(RECIPES.DELETE_RECIPE,items).then(() => {
-            // alert(' recipe deleted ')
+            props.history.push('/')
             
         })
     }
@@ -59,6 +60,7 @@ const Recipe = (props) => {
             <LongRow>
                 <Button onClick={() => setIsAdmin(!isAdmin)} >Enter / Exit Admin View</Button>
                 <Button onClick={executeDeleteRecipe} >Delete Recipe</Button>
+                {/* <DeleteRecipe items={items[0]}/> */}
             </LongRow>
 
             {items[0] != undefined ?
