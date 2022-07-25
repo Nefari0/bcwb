@@ -1,9 +1,10 @@
 import './Recipe.scss'
 import { useState,useEffect } from 'react'
 import axios from 'axios'
-import { PortraitImage } from '../StyledComponents.styles'
 import InstructionContainer from './Instructions/InstructionContainer'
 import Button from '../Form/Button'
+import { LongRow,ShortRow } from '../StyledComponents.styles'
+import { RECIPES } from '../../endpoints'
 
 const Recipe = (props) => {
     const { recipe_id } = props.match.params
@@ -12,7 +13,7 @@ const Recipe = (props) => {
     const [ ingredients,setIngredients ] = useState([])
 
     // ******** testing only ********** //
-    const [ isAdmin,setIsAdmin ] = useState(true)
+    const [ isAdmin,setIsAdmin ] = useState(false)
     // ******** testing only ********** //
 
     useEffect(() => {
@@ -45,12 +46,22 @@ const Recipe = (props) => {
         })
     }
 
+    const executeDeleteRecipe = () => {
+        axios.post(RECIPES.DELETE_RECIPE,items).then(() => {
+            // alert(' recipe deleted ')
+            
+        })
+    }
+
     return(
         <main className='recipe-box' >
-            {/* <PortraitImage><img /></PortraitImage> */}
-            <Button onClick={() => setIsAdmin(!isAdmin)} >Enter / Exit Admin View</Button>
-            {items[0] != undefined ?
 
+            <LongRow>
+                <Button onClick={() => setIsAdmin(!isAdmin)} >Enter / Exit Admin View</Button>
+                <Button onClick={executeDeleteRecipe} >Delete Recipe</Button>
+            </LongRow>
+
+            {items[0] != undefined ?
             <InstructionContainer
             items={items} ingredients={ingredients}
             instructions={instructions}
@@ -58,8 +69,8 @@ const Recipe = (props) => {
             grabIngredients={grabIngredients}
             grabInstructions={grabInstructions}
             getItems={getItems}
-
             /> : null}
+
         </main>
     )
 }
