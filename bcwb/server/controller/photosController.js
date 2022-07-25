@@ -36,6 +36,7 @@ module.exports = {
         const existingPhoto = await db.photos.get_with_url([url])
 
         if (!existingPhoto[0]) {
+            await db.photos.reset_photo_url([url])
             return res.status(404).send('not found')
         }
 
