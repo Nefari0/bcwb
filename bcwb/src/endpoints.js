@@ -2,6 +2,8 @@
 export const RECIPES = {
     // -- Recipe -- //
     EDIT_RECIPE:'/api/recipes/edit',
+    GET_RECIPES:'/api/recipes/get/all',
+    DELETE_RECIPE:'/api/recipes/delete',
     // -- Instruction End Points -- //
     POST_INSTRUCTION:'/api/instructions/add',
     DELETE_INSTRUCTION:'/api/instructions/delete/',
