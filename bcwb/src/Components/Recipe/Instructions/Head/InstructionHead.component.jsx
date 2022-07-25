@@ -38,11 +38,11 @@ export const InstructionHead = (props) => {
     // --- Get styling/position parameters of photo by url --- //
     const getPosititions = async (url) => {
         if (url != null) {await axios.post(PHOTOS.GET_PHOTOS_WITH_URL,{url}).then(res => {
-            const { style_left,style_top,style_width,photo_id,url,title,album } = res.data[0]
+            const { x,y,z,photo_id,url,title,album } = res.data[0]
             setPhotoPositions({
-                style_left:style_left,
-                style_top:style_top,
-                style_width:style_width,
+                x:x,
+                y:y,
+                z:z,
                 title:title,
                 album:album,
                 photo_id:photo_id,
@@ -55,19 +55,19 @@ export const InstructionHead = (props) => {
     const repositionPhoto = (e,value,direction) => {
         e.preventDefault()
         switch (direction) {
-            case 'left':
-                var newValue = photoPositions.style_left + value
-                setPhotoPositions({...photoPositions,['style_left']:newValue,})
+            case 'x':
+                var newValue = photoPositions.x + value
+                setPhotoPositions({...photoPositions,['x']:newValue,})
                 break;
 
-            case 'top':
-                var newValue = photoPositions.style_top + value
-                setPhotoPositions({...photoPositions,['style_top']:newValue})
+            case 'y':
+                var newValue = photoPositions.y + value
+                setPhotoPositions({...photoPositions,['y']:newValue})
                 break;
             
-            case 'zoom':
-                var newValue = photoPositions.style_width + value
-                setPhotoPositions({...photoPositions, ['style_width']:newValue})
+            case 'z':
+                var newValue = photoPositions.z + value
+                setPhotoPositions({...photoPositions, ['z']:newValue})
                 break;
         }
         return
@@ -245,9 +245,9 @@ export const InstructionHead = (props) => {
                 
                 style={{
                     position:'absolute',
-                    left:`${photoPositions.style_left}px`,
-                    top:`${photoPositions.style_top}px`,
-                    width:`${photoPositions.style_width}px`
+                    left:`${photoPositions.x}px`,
+                    top:`${photoPositions.y}px`,
+                    width:`${photoPositions.z}px`
                 }}
                 />
             </MainImage>
