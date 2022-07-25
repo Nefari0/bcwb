@@ -10,11 +10,12 @@ export const Error = styled.div`
 `;
 
 export const PortraitImage = styled.div`
+  margin:10px;
   height:400px;
   width:267px;
-  z-index:1;
-  border-radius:5px;
-  margin:auto;
+  border-radius:10px;
+  position:relative;
+  overflow:hidden;
 `;
 
 export const LandscapeImage = styled.div`
@@ -26,9 +27,21 @@ export const LandscapeImage = styled.div`
   margin:auto;
 `
 export const ThumbnailImage = styled.div`
-  height:50px;
-  width:50px;
+  height:200px;
+  width:200px;
   border-radius:50%;
+  overflow:hidden;
+  z-index:1000;
+`
+
+export const MainImage = styled.div`
+  position:absolute;
+  top:30px;
+  right:20px;
+  height:200px;
+  width:175px;
+  overflow:hidden;
+  border-radius:5px;
 `
 
 export const DescriptionText = styled.p`
@@ -37,4 +50,31 @@ export const DescriptionText = styled.p`
   font-style:italic;
   font-size: 1.8rem;
   line-height: 1.8;
+  text-align:left;
+`
+
+export const ImageTag = styled.h4`
+  position:absolute;
+  bottom:0px;
+  width:100%;
+  color:#fff
+  background: rgba(0.863,0.982,0.839,.1);
+  backdrop-filter: blur(12px);
+  border-top: solid 2px #003300;
+  border-bottom: solid 2px #003300; 
+  z-index:0;
+`
+export const ShortRow = styled.div`
+  display:flex;
+  align-items:center;
+  margin:20px;
+  width:65%;
+`
+export const LongRow = styled.div`
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin:20px;
+  // background-color:blue;
+  min-width:95%;
 `
