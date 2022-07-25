@@ -34,6 +34,7 @@ app.put('/api/photos/update',photosController.updatePhoto)
 // --- Recipes --- //
 app.get('/api/recipes/get/all', recipeController.getAllRecipes)
 app.get('/api/recipes/get/recipe/:recipe_id', recipeController.getRecipeById)
+app.get('/api/recipes/get/published',recipeController.getPublishedRecipes)
 app.post('/api/recipes/create', recipeController.createRecipe)
 app.put('/api/recipes/edit', recipeController.updateRecipe)
 app.post('/api/recipes/delete', recipeController.deleteRecipe)

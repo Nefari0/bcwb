@@ -20,6 +20,13 @@ module.exports = {
         return res.status(200).send(recipe)
     },
 
+    getPublishedRecipes: async (req,res) => {
+        const db = req.app.get('db')
+        console.log('hit backend')
+        const recipes = await db.recipe.get_published_recipes()
+        return res.status(200).send(recipes)
+    },
+
     createRecipe: async (req,res) => {
         const { title,description,category,servings,prep_time,author} = req.body
         const published = false

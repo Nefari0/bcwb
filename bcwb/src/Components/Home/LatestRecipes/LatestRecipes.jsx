@@ -21,7 +21,7 @@ const LatestRecipes = () => {
 
 
     const getDB = async () => {
-        await axios.get(RECIPES.GET_RECIPES).then(res => {
+        await axios.get(RECIPES.GET_PUBLISHED_RECIPES).then(res => {
             setItems(res.data)
         })
     }

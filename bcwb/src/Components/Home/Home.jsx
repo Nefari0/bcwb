@@ -1,6 +1,6 @@
 import './Home.scss'
 import LatestRecipes from './LatestRecipes/LatestRecipes'
-// import FindRecipes from './FindRecipes/FindRecipes'
+import FindRecipes from './FindRecipes/FindRecipes'
 import { Footer } from '../Footer/Footer'
 // import SignIn from '../SignIn/SignIn'
 

@@ -80,6 +80,12 @@ export const InstructionHead = (props) => {
         setFormFields({ ...formFields, [name]:value})
     }
 
+    const handleClick = (e,name,val) => {
+        console.log('hit publish',name,val)
+        e.preventDefault()
+        setFormFields({ ...formFields, [name]:val})
+    }
+
     // -- Updates the cover_photo_url according to the AddPhotos.jsx update function requirements -- //
     const updateCoverImage = async (cover_image_url,styling) => {
 
@@ -147,6 +153,8 @@ export const InstructionHead = (props) => {
             </>
             :
             <form>
+
+                <button onClick={(e) => handleClick(e,'published',!formFields.published)}>click to {formFields.published ? 'un-publish' : 'publish'}</button>
 
                 <FormInput
                     type="text"
