@@ -1,15 +1,15 @@
+import axios from "axios"
 import { ShortRow,LongRow,MainImage } from '../../../StyledComponents.styles'
 import { DescriptionText } from "../../../StyledComponents.styles"
 import { useState,useEffect } from "react"
-import DeletePhoto from "../../../Admin/Photos/DeletePhoto"
-import AddPhoto from "../../../Admin/Photos/AddPhotos"
+import { deleteFromFB } from '../../../Admin/Photos/deleteFromFB'
+import { TextEditor } from "../../../Form/TextEditor"
 import { DetailGrid } from "./DetailGrid"
 import { PositionPhoto } from "../../../Admin/Photos/PositionPhoto"
 import { RECIPES,PHOTOS } from "../../../../endpoints"
-import axios from "axios"
+import AddPhoto from "../../../Admin/Photos/AddPhotos"
 import Button from "../../../Form/Button"
 import FormInput from "../../../Form/FormInput"
-import { TextEditor } from "../../../Form/TextEditor"
 import Pinterest from "../../../Pinterest/Pinterest"
 
 export const InstructionHead = (props) => {
@@ -127,10 +127,9 @@ export const InstructionHead = (props) => {
                 :
 
                 <>
-                    <DeletePhoto
-                    url={cover_image_url}
-                    updateDB={() => updateCoverImage(null,null)}
-                    />
+                    <button onClick={() => deleteFromFB(cover_image_url,updateCoverImage(null,null))} >
+                        delete photo
+                    </button>
               
                     <button onClick={(e) => putItem(PHOTOS.EDIT_PHOTO,photoPositions)} >Submit Photo Updates</button>
                     <PositionPhoto move={repositionPhoto} />
