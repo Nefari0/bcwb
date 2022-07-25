@@ -1,7 +1,6 @@
 
 import axios from "axios";
-import { useState,useEffect } from "react";
-import { InstructionList } from "./InstructionBody.styles";
+import { useState } from "react";
 import Instruction from "./Instruction";
 import Ingredient from "./Ingredient";
 import { RECIPES } from "../../../../endpoints";
@@ -72,7 +71,7 @@ export const InstructionBody = (props) => {
     })
     
     return (
-        <InstructionList>
+        <>
 
             <ul>
                 <li className="first-li">Ingredients</li>
@@ -118,7 +117,7 @@ export const InstructionBody = (props) => {
 
                 </form> : null}
             </ol>
-        </InstructionList>
+        </>
         
     )
 }
