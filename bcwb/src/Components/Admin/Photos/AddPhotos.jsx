@@ -11,11 +11,10 @@ import React, { useState } from 'react'
 import Resizer from 'react-image-file-resizer'
 import axios from 'axios'
 import { app } from '../../../base'
-import { PortraitImage } from '../../StyledComponents.styles'
+import { PortraitImage, MainImage } from '../../StyledComponents.styles'
 import { getStorage,ref,uploadBytesResumable,getDownloadURL } from 'firebase/storage'
 import Button from '../../Form/Button'
 import { PositionPhoto } from './PositionPhoto'
-import { MainImage } from '../../Recipe/Instructions/Head/InstructionHead.styles'
 import { AddPhotoContainer } from './Photos.styles'
 const storage = getStorage(app)
  
