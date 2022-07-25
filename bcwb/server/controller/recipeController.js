@@ -41,13 +41,22 @@ module.exports = {
     updateRecipe: async (req,res) => {
         const { title,description,pinterest_url,category,published,servings,prep_time,author,cover_image_url,recipe_id } = req.body 
         const db = req.app.get('db')
+
         const recipe = await db.recipe.update_recipe([title,description,pinterest_url,category,published,cover_image_url,servings,prep_time,author,recipe_id])
         return res.status(200).send(recipe)
     },
 
     deleteRecipe: async (req,res) => {
-        const { recipe_id } = req.params
+        const { recipe_id,cover_image_url } = req.body[0]
         const db = req.app.get('db')
+        const url = cover_image_url
+        console.log('hit controller',url,recipe_id)
+        // delete recipe photos
+        // await db.photos.delete_with_url([url])
+        // delete recipe intructions
+        await db.recipe.instructions.delete_instruction_by_recipe_id([recipe_id])
+        // delete recipe ingredients
+        await db.recipe.ingredients.delete_ingredients_by_recipe_id([recipe_id])
         const recipe = await db.recipe.delete_recipe([recipe_id])
         return res.status(200).send(recipe)
     },
