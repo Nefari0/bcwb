@@ -1,0 +1,1 @@
+DELETE FROM instruction WHERE recipe_id = $1
