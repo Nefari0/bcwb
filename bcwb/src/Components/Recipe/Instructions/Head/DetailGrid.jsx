@@ -13,7 +13,7 @@ export const DetailGrid = (props) => {
 
     return(
         <>
-            {!isAdmin ? 
+          
             <Table>
                 <TableItem style={itemStyles} >
                     <i>Prep time:</i>
@@ -33,30 +33,7 @@ export const DetailGrid = (props) => {
                     <SmallText>{category}</SmallText>
                 </TableItem>
             </Table>
-            :
-            <form style={{width:'50%'}}>
-                <FormInput
-                    type="text"
-                    name="category"
-                    label="Category"
-                    value={category}
-                    onChange={handleChange}
-                 />
-                <FormInput
-                    type="number"
-                    name="prep_time"
-                    label="Prep time"
-                    value={prep_time}
-                    onChange={handleChange}
-                 />
-                <FormInput
-                    type="number"
-                    name="servings"
-                    label="Servings"
-                    value={servings}
-                    onChange={handleChange}
-                 />
-            </form>}
+
         </>
     )
 }
