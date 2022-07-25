@@ -1,7 +1,11 @@
 import '../Home.scss'
 import axios from "axios";
 import { useEffect,useState } from "react";
-import Content from '../Content/Content';
+// import Content from '../Content/Content';
+import { PortraitImage } from '../../StyledComponents.styles';
+import { LatestRecipeItem } from './LatestRecipeItem';
+import { RECIPES } from '../../../endpoints';
+import { Link } from 'react-router-dom'
 
 const style = { // Styling for Content.js
     width:'50px',
@@ -17,13 +21,13 @@ const LatestRecipes = () => {
 
 
     const getDB = async () => {
-        await axios.get('/api/photos/all').then(res => {
+        await axios.get(RECIPES.GET_RECIPES).then(res => {
             setItems(res.data)
         })
     }
 
     const mappedItems = items.map(el => {
-        return <Content key={el.photo_id} img={el.url} text={null} style={style} />
+        return <Link to={`/recipe/${el.recipe_id}`} key={el.recipe_id} ><LatestRecipeItem  img={el.cover_image_url} id={el.id} title={el.title} /></Link>
     })
 
     return(
