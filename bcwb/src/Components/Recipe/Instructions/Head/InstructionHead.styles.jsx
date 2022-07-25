@@ -1,40 +1,5 @@
 import styled, { css } from 'styled-components';
 
-export const InstructionHeader = styled.header`
-  min-height:350px;
-  width: 550px;
-  padding-right:20px;
-  padding-left:20px;
-  background-color:#EFFDEC;
-  border: solid 1.5px #003300;
-  display:flex;
-  flex-direction:column;
-`
-
-export const MainImage = styled.div`
-  position:absolute;
-  top:30px;
-  right:20px;
-  height:200px;
-  width:175px;
-  overflow:hidden;
-  border-radius:5px;
-`
-
-export const ShortRow = styled.div`
-  display:flex;
-  align-items:center;
-  margin:20px;
-  width:65%;
-`
-export const LongRow = styled.div`
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin:20px;
-  width:95%;
-`
-
 export const Table = styled.div`
   margin: 0px;
   z-index:10000;

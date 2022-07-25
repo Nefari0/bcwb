@@ -1,4 +1,3 @@
-import { InstructionHeader } from "./InstructionHead.styles"
 import { ShortRow,LongRow,MainImage } from '../../../StyledComponents.styles'
 import { DescriptionText } from "../../../StyledComponents.styles"
 import { useState,useEffect } from "react"
@@ -110,7 +109,7 @@ export const InstructionHead = (props) => {
     }
 
     return(
-        <InstructionHeader>
+        <>
 
             {/* -- ADMINS CAN ADD / DELETE PHOTOS -- */}
             {isAdmin ?
@@ -255,6 +254,6 @@ export const InstructionHead = (props) => {
             </MainImage>
 
             
-        </InstructionHeader>
+        </>
     )
 }
