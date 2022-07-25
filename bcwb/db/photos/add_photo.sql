@@ -1,2 +1,2 @@
-INSERT INTO bcwb_photos (url,title,album,style_top,style_left,style_width)
+INSERT INTO bcwb_photos (url,title,album,y,x,z)
 VALUES ($1,$2,$3,$4,$5,$6)

@@ -14,12 +14,12 @@ export const PositionPhoto = ({move}) => {
     return(
         <PositionController>
 
-            {ControlNob('left','left',-10)}
-            {ControlNob('right','left',10)}
-            {ControlNob('down','top',10)}
-            {ControlNob('up','top',-10)}
-            {ControlNob('+','zoom',10)}
-            {ControlNob('-','zoom',-10)}
+            {ControlNob('left','x',-10)}
+            {ControlNob('right','x',10)}
+            {ControlNob('down','y',10)}
+            {ControlNob('up','y',-10)}
+            {ControlNob('+','z',10)}
+            {ControlNob('-','z',-10)}
 
         </PositionController>
     )

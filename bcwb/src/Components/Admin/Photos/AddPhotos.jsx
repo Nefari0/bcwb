@@ -27,39 +27,39 @@ const Photos = (props) => {
     const [ file,setFile ] = useState(null)
 
     const [ position,setPosition ] = useState({
-        left:0,
-        top:0,
-        width:300
+        x:0,
+        y:0,
+        z:300
     })
 
     const move = (e,value,direction) => {
         e.preventDefault()
-        const { left,top,width } = position
+        const { x,y,z } = position
         switch (direction) {
-            case 'left':
-                console.log('hit left',value,position)
+            case 'x':
+                // console.log('hit left',value,position)
                 // return 
                 setPosition({
-                    left:left+value,
-                    top:top,
-                    width:width
+                    x:x+value,
+                    y:y,
+                    z:z
                 })
                 break;
-            case 'top':
-                console.log('hit top',value,position)
+            case 'y':
+                // console.log('hit top',value,position)
                 setPosition({
-                    left:left,
-                    top:top+value,
-                    width:width
+                    x:x,
+                    y:y+value,
+                    z:z
                 })
                 break;
             
-            case 'zoom':
-                console.log('hit zoom',value,position)
+            case 'z':
+                // console.log('hit zoom',value,position)
                 setPosition({
-                    left:left,
-                    top:top,
-                    width:value+width
+                    x:x,
+                    y:y,
+                    z:value+z
                 })
         }
         return
@@ -122,12 +122,12 @@ const Photos = (props) => {
 
     // --- This function will be phased out - api calls will come from parent component
     const addToDb = async (url) => {
-        const { top,left,width } = position
-        const style_left = left
-        const style_top = top
-        const style_width = width
+        const { x,y,z } = position
+        // const style_left = left
+        // const style_top = top
+        // const style_width = width
 
-        await axios.post('/api/photos/new',{url,title,album,style_left,style_top,style_width}).then(res => {
+        await axios.post('/api/photos/new',{url,title,album,x,y,z}).then(res => {
             console.log('added to db')
         })
     }
@@ -155,7 +155,7 @@ const Photos = (props) => {
             :
             <AddPhotoContainer>
                 <MainImage>
-                    <img src={preview} style={{position:'absolute',left:`${position.left}px`,top:`${position.top}px`,width:`${position.width}px`}} />
+                    <img src={preview} style={{position:'absolute',left:`${position.x}px`,top:`${position.y}px`,width:`${position.z}px`}} />
                 </MainImage>
                 <Button onClick={() => {addPhoto(file)}} style={{position:'absolute',top:'90px'}} >Add</Button>
                 <Button style={{position:'absolute',top:'160px',left:'0px'}} onClick={clearPhoto} >cancel</Button>
