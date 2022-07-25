@@ -1,6 +1,6 @@
-import './Pinterest.css'
-import { useEffect,useState } from 'react'
-import pinterest from '../../Assets/pinterest.png'
+import './Pinterest.scss'
+import { useEffect } from 'react'
+import Button from '../Form/Button'
 const url = 'https://www.pinterest.com/pin/203436108160231221/'
 
 const Pinterest= () => {
@@ -16,11 +16,10 @@ const Pinterest= () => {
     },[])
 
     return(
-        <div className='pinterest'>
+        <div >
             <a data-pin-do="embedPin" data-pin-build="doBuild" href={url}>
-        {url}
-      </a>
-
+                <Button>pin</Button>
+            </a>
         </div>
     )
 }
