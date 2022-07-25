@@ -10,10 +10,14 @@ html { font-size: 62.5%;}
 
 
 /* SMALLER ELEMENTS */
+/* 24 / 30 / 36 -- approved font sizes*/ 
 h1,
 h2,
-h3 {
-  color: #555;  
+h3,
+h4,
+h5 {
+  color: #555; 
+  width:65%; 
 }
 
 h1 {
@@ -27,7 +31,6 @@ h2 {
   margin-bottom: 48px;
   font-size: 36px;
   letter-spacing: -0.5px;
-  /* 24 / 30 / 36 -- approved font sizes*/ 
 }
 
 h3 {
@@ -63,6 +66,7 @@ li {
 }
 
 li:first-child {
+  width: 100%;
   font-weight: bold;
   margin-bottom: 0;
   margin-left: -80px;
