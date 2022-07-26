@@ -18,7 +18,7 @@ const Instruction = (props) => {
           };
 
     return(
-    <li key={instruction_id} >
+    <li>
         {!isAdmin ? content : null}
         {isAdmin ?
         <form>
