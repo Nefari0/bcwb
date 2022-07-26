@@ -4,6 +4,7 @@ import { useState } from "react";
 import Instruction from "./Instruction";
 import Ingredient from "./Ingredient";
 import { RECIPES } from "../../../../endpoints";
+import { ErrorMessage } from "../../../ErrorMessage/ErrorMessage";
 
 export const InstructionBody = (props) => {
     const { instructions,ingredients,items,grabIngredients,grabInstructions,isAdmin } = props
@@ -13,20 +14,27 @@ export const InstructionBody = (props) => {
         recipe_id:items[0].recipe_id
     }
     const [ formFields,setFormFields ] = useState(defaultState)
-    const { content,step } = formFields
+    const { content,step,recipe_id } = formFields
+    const [ error,setError ] = useState(null)
 
     const postItem = async (e,endPoint,items,updatePage) => {
         e.preventDefault();
 
-        await axios.post(endPoint,items).then(res => {
+        await axios.post(endPoint,items)
+        .then(res => {
             updatePage()
+            setFormFields(defaultState)
         })
-        await setFormFields(defaultState)
+        .catch(err => {
+            return setError(err.response.data)
+        })
     }
 
     const putItem = (e,endPoint,items,updatePage) => {
         e.preventDefault()
-        axios.put(`${endPoint}`,items).then(() => updatePage)
+        axios.put(`${endPoint}`,items)
+        .then(() => updatePage)
+        .catch(err => setError(err.response.data))
     }
 
     const deleteItem = async (e,endPoint,items,updatePage) => {
@@ -60,6 +68,7 @@ export const InstructionBody = (props) => {
                     key={el.instruction_id}
                     instruction_id={el.instruction_id}
                     step={el.step}
+                    recipe_id={recipe_id}
                     isAdmin={isAdmin}
                     content={el.content}
                     deleteItem={deleteItem}
@@ -72,7 +81,7 @@ export const InstructionBody = (props) => {
     
     return (
         <>
-
+           {error === null ? null :<ErrorMessage error={error} setError={setError}/>}
             <ul>
                 <li className="first-li">Ingredients<span></span></li>
                 {mappedIngredients}
