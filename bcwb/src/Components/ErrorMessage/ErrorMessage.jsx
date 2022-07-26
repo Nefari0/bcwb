@@ -7,7 +7,7 @@ export const ErrorMessage = (props) => {
 
     return (
         <Error>
-            <h1>{error}</h1>
+        <p style={{color:'#fff'}}>{error}</p>
             <Button onClick={() => {setError(null)}} >ok</Button>
         </Error>
     )
