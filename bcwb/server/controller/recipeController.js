@@ -94,7 +94,7 @@ module.exports = {
 
         // --- Check if step value already exist --- //
         const existingStep = await db.recipe.instructions.existing_step([recipe_id,step])
-        console.log('here is existing step',step)
+
         if(existingStep[0]) {
             // --- If the existing step does not have the same id as the step being edited --- //
             if(existingStep[0].instruction_id != instruction_id) {                
@@ -121,16 +121,12 @@ module.exports = {
     postInstructionsByRecipeId: async (req,res) => {
         const db = req.app.get('db')
         const { recipe_id,step,content } = req.body
-        console.log('hit post item in recipe controller',step)
 
-        // Is step an integer?
-        // if (Number.isInteger(step) != true){
-        //     return res.status(400).send('Please choose a valid number to indicate the current step for this item')
-        // }
         // --- Is step greater than zero? --- //
         if(parseInt(step) < 1) {
             return res.status(400).send('The step must be a number greater than 0')
         }
+
         // --- Is step a valid integer? --- //
         if (typeof(step) != 'number'){
             if(step.split('').length <= 0) {
@@ -140,7 +136,7 @@ module.exports = {
 
         // --- Check if step value already exist --- //
         const existingStep = await db.recipe.instructions.existing_step([recipe_id,step])
-        console.log('here is existing step',step)
+
         if(existingStep[0]) {
             return res.status(409).send(`Instruction with step ${step} already exists. Please edit or delete the instruction in step ${step} instead`)
         }
