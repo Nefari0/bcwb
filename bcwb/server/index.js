@@ -48,6 +48,12 @@ app.get('/api/ingredients/:recipe_id', recipeController.getIngredientByRecipeId)
 app.post('/api/ingredient/new', recipeController.addNewIngredtient)
 app.put('/api/ingredient/put',recipeController.editIngredient)
 app.delete('/api/ingredient/delete/:ingredient_id', recipeController.deleteIngredient)
+// --- Notes --- //
+app.get('/api/notes/get/:recipe_id',recipeController.getRecipeNotes)
+app.delete('/api/notes/delete/one/:note_id',recipeController.deleteNote)
+app.delete('/api/notes/delete/all/:recipe_id',recipeController.deleteRecipeNotes)
+app.put('/api/notes/edit',recipeController.editNote)
+app.post('/api/notes/create',recipeController.createNote)
 // --------------------------------------------------- //
 
 // --- Server --- //
