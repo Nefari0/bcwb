@@ -1,12 +1,13 @@
 import { useState } from 'react';
 
 const Instruction = (props) => {
-    const { isAdmin,instruction_id,step,content,grabInstructions,deleteItem,DELETE_INSTRUCTION,PUT_INSTRUCTION,putItem  } = props
+    const { isAdmin,instruction_id,recipe_id,step,content,grabInstructions,deleteItem,DELETE_INSTRUCTION,PUT_INSTRUCTION,putItem  } = props
 
     const [ formFields,setFormFields ] = useState({
         content:content,
         step:step,
-        instruction_id:instruction_id
+        instruction_id:instruction_id,
+        recipe_id:recipe_id,
     })
 
     // -- Input handler
