@@ -1,9 +1,11 @@
 import styled, { css } from 'styled-components';
 
 export const Error = styled.div`
-  position: absolute;
+  position:fixed;
+  top:40%;
   width:500px;
   background-color:grey;
+  color:#fff;
   z-index:1;
   border-radius:5px;
   box-shadow: 0px 5px 20px -7px #000000;
