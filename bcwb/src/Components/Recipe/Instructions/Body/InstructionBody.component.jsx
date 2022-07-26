@@ -74,7 +74,7 @@ export const InstructionBody = (props) => {
         <>
 
             <ul>
-                <li className="first-li">Ingredients</li>
+                <li className="first-li">Ingredients<span></span></li>
                 {mappedIngredients}
                 {isAdmin ?
                 <form>
@@ -89,7 +89,8 @@ export const InstructionBody = (props) => {
             </ul>
 
             <ol>
-                <li value={0}>instructions</li>
+                <li value={0}>instructions<span></span></li>
+                
                 {mappedInstructions}
                 {isAdmin ?
                 <form>
