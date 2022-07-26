@@ -57,13 +57,13 @@ module.exports = {
         const { recipe_id,cover_image_url } = req.body[0]
         const db = req.app.get('db')
         const url = cover_image_url
-        console.log('hit controller',url,recipe_id)
-        // delete recipe photos
-        // await db.photos.delete_with_url([url])
         // delete recipe intructions
         await db.recipe.instructions.delete_instruction_by_recipe_id([recipe_id])
         // delete recipe ingredients
         await db.recipe.ingredients.delete_ingredients_by_recipe_id([recipe_id])
+        // delete recipe notes
+        await db.recipe.notes.delete_recipe_notes([recipe_id])
+
         const recipe = await db.recipe.delete_recipe([recipe_id])
         return res.status(200).send(recipe)
     },
@@ -177,5 +177,44 @@ module.exports = {
         const { ingredient_id } = req.params
         const ingredient = await db.recipe.ingredients.delete_ingredient([ingredient_id])
         return res.status(200).send(ingredient)
+    },
+
+    // --- NOTES --- //
+    getRecipeNotes: async (req,res) => {
+        const db = req.app.get('db')
+        const { recipe_id } = req.params
+        const notes = await db.recipe.notes.get_notes_by_recipe_id([recipe_id])
+        return res.status(200).send(notes)
+    },
+
+    createNote: async (req,res) => {
+        const db = req.app.get('db')
+        const { recipe_id,note_body } = req.body
+        if(note_body.split('').length < 1) {
+            return res.status(400).send('Please fill out the required text field')
+        }
+        const note = await db.recipe.notes.create_note([recipe_id,note_body])
+        return res.status(200).send(note)
+    },
+
+    editNote: async (req,res) => {
+        const db = req.app.get('db')
+        const { note_id,note_body } = req.body
+        const note = await db.recipe.notes.edit_note([note_body,note_id])
+        return res.status(200).send(note)
+    },
+
+    deleteNote: async (req,res) => {
+        const db = req.app.get('db')
+        const { note_id } = req.params
+        const note = await db.recipe.notes.delete_note([note_id])
+        return res.status(200).send(note)
+    },
+
+    deleteRecipeNotes: async (req,res) => {
+        const db = req.app.get('db')
+        const { recipe_id } = req.params
+        const notes = await db.recipe.notes.delete_recipe_notes([recipe_id])
+        return res.status(200).send(notes)
     }
 } 
