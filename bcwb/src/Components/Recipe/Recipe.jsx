@@ -12,6 +12,7 @@ const Recipe = (props) => {
     const [ items,setItems ] = useState([])
     const [ instructions,setInstructions ] = useState([]) 
     const [ ingredients,setIngredients ] = useState([])
+    const [ notes,setNotes ] = useState([])
 
     // ******** testing only ********** //
     const [ isAdmin,setIsAdmin ] = useState(false)
@@ -23,6 +24,7 @@ const Recipe = (props) => {
         await getItems()
         await grabInstructions()
         await grabIngredients()
+        await grabNotes()
     }
 
     const getItems = () => {
@@ -42,6 +44,12 @@ const Recipe = (props) => {
     const grabIngredients = () => {
         axios.get(`/api/ingredients/${recipe_id}`).then(res => {
             setIngredients(res.data)
+        })
+    }
+
+    const grabNotes = () => {
+        axios.get(`${RECIPES.GET_NOTES}${recipe_id}`).then(res => {
+            setNotes(res.data)
         })
     }
 
@@ -67,9 +75,11 @@ const Recipe = (props) => {
             <InstructionContainer
             items={items} ingredients={ingredients}
             instructions={instructions}
+            notes={notes}
             isAdmin={isAdmin}
             grabIngredients={grabIngredients}
             grabInstructions={grabInstructions}
+            grabNotes={grabNotes}
             getItems={getItems}
             /> : null}
 
