@@ -3,18 +3,20 @@ import axios from "axios";
 import { useState } from "react";
 import Instruction from "./Instruction";
 import Ingredient from "./Ingredient";
+import { Note } from "./Note";
 import { RECIPES } from "../../../../endpoints";
 import { ErrorMessage } from "../../../ErrorMessage/ErrorMessage";
 
 export const InstructionBody = (props) => {
-    const { instructions,ingredients,items,grabIngredients,grabInstructions,isAdmin } = props
+    const { instructions,ingredients,items,grabIngredients,grabInstructions,isAdmin,notes,grabNotes } = props
     const defaultState = {
         content:'',
+        note_body:'',
         step:0,
         recipe_id:items[0].recipe_id
     }
     const [ formFields,setFormFields ] = useState(defaultState)
-    const { content,step,recipe_id } = formFields
+    const { content,step,recipe_id,note_body } = formFields
     const [ error,setError ] = useState(null)
 
     const postItem = async (e,endPoint,items,updatePage) => {
@@ -78,12 +80,17 @@ export const InstructionBody = (props) => {
                     grabInstructions={grabInstructions}
                 />
     })
+
+    const mappedNotes = notes.map(el => {
+        return <Note key={el.note_id} note_id={el.note_id} note_body={el.note_body} putItem={putItem} deleteItem={deleteItem} grabNotes={grabNotes} isAdmin={isAdmin} />
+    })
     
     return (
         <>
            {error === null ? null :<ErrorMessage error={error} setError={setError}/>}
+           
             <ul>
-                <li className="first-li">Ingredients<span></span></li>
+                {ingredients.length < 1 ? null : <li className="first-li">Ingredients<span></span></li>}
                 {mappedIngredients}
                 {isAdmin ?
                 <form>
@@ -98,9 +105,10 @@ export const InstructionBody = (props) => {
             </ul>
 
             <ol>
-                <li value={0}>instructions<span></span></li>
+                {instructions.length < 1 ? null :  <li value={0}>instructions<span></span></li>}
                 
                 {mappedInstructions}
+
                 {isAdmin ?
                 <form>
 
@@ -127,6 +135,20 @@ export const InstructionBody = (props) => {
 
                 </form> : null}
             </ol>
+
+            <ul>
+                {notes.length < 1 ? null : <li>notes<span></span></li>}
+                {mappedNotes}
+            <input
+                    type="text"
+                    placeholder="enter text"
+                    name="note_body"
+                    onChange={handleChange}
+                    value={note_body}
+            />
+            <button
+            onClick={(e) => postItem(e,RECIPES.CREATE_NOTE,formFields,grabNotes)}>add note</button>
+            </ul>
         </>
         
     )
