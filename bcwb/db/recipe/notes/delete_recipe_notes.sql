@@ -1,0 +1,1 @@
+DELETE FROM notes WHERE recipe_id = $1

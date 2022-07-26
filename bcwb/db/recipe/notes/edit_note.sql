@@ -1,0 +1,1 @@
+UPDATE notes SET note_body = $1 WHERE note_id = $2
