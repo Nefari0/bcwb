@@ -55,20 +55,34 @@ p {
 
 ul,
 ol {
-  margin-left: 50px;
   margin-bottom: 20px;
   position: relative;
+  max-width: 90%;
+  color: #555;
 }
 
 li {
   font-size: 20px;
   margin-bottom: 10px;
+  text-align: left;
+  max-width: 95%;
 }
 
 li:first-child {
   width: 100%;
   font-weight: bold;
   margin-bottom: 0;
-  margin-left: -80px;
+  margin-left: -40px;
   list-style-type: none;
+  text-transform: uppercase;
+  position: relative;
+}
+
+li span {
+  width: 77%;
+  height: 2px;
+  margin-left: 20px;
+  top: 15px;
+  border-top: solid 1.5px #555;
+  position: absolute;
 }

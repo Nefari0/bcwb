@@ -1,4 +1,4 @@
-import './App.css';
+import './App.scss';
 import Nav from './Components/Nav/Nav';
 import routes from './routes';
 import { HashRouter } from 'react-router-dom'
