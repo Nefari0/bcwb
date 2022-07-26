@@ -12,7 +12,13 @@ export const RECIPES = {
     // -- Ingredient End Points -- //
     POST_INGREDIENT:'/api/ingredient/new',
     PUT_INGREDIENT:'/api/ingredient/put',
-    DELETE_INGREDIENT:'/api/ingredient/delete/'
+    DELETE_INGREDIENT:'/api/ingredient/delete/',
+    // -- Notes -- //
+    GET_NOTES:'/api/notes/get/',
+    DELETE_NOTE:'/api/notes/delete/one/',
+    PUT_NOTE:'/api/notes/edit',
+    CREATE_NOTE:'/api/notes/create',
+
 }
 
 export const PHOTOS = {
