@@ -204,32 +204,17 @@ export const InstructionHead = (props) => {
 
             </form>
             }
-            {/* </ShortRow> */}
-
-            
-            {/* <ShortRow> */}
-                {/* {!isAdmin ? null:
-                <form>
-                    <FormInput
-                    type="text"
-                    name="author"
-                    text="text"
-                    label="Author"
-                    value={formFields.author}
-                    onChange={handleChange}
-                    />
-                </form>
-                } */}
-            {/* </ShortRow> */}
-
 
             {!isAdmin ? 
             <>
+
                 <DetailGrid formFields={formFields} setFormFields={setFormFields} handleChange={handleChange} isAdmin={isAdmin} />
                 <DescriptionText>{formFields.description}</DescriptionText>
+
             </>
             :
             <>
+            
                 <TextEditor
                 textVal={formFields.description}
                 handler={handleChange} 
@@ -240,6 +225,7 @@ export const InstructionHead = (props) => {
                     submit updates
                 </Button>
             </>
+            
             }
             
 
@@ -252,8 +238,6 @@ export const InstructionHead = (props) => {
             <MainImage>
                 <img
                 src={cover_image_url}
-
-                // style={photoPositions}
                 
                 style={{
                     position:'absolute',
@@ -264,7 +248,6 @@ export const InstructionHead = (props) => {
                 />
             </MainImage>
 
-            
         </>
     )
 }
