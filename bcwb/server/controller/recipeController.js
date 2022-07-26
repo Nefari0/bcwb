@@ -67,6 +67,7 @@ module.exports = {
         const recipe = await db.recipe.delete_recipe([recipe_id])
         return res.status(200).send(recipe)
     },
+
     // --- Instrucions --- //
 
     getInstructionsByRecipeId: async (req,res) => {
@@ -77,13 +78,36 @@ module.exports = {
     },
 
     editInstructionsByInstructionId: async (req,res) => {
-        const { content, instruction_id, step } = req.body
-
-        // check if step value already exist
-        // if exist = true: return(over write current step value?)
-
         const db = req.app.get('db')
-        const instruction = await db.recipe.instructions.update_instruction([ content,step,instruction_id ])
+        const { content, instruction_id, recipe_id } = req.body
+        var step = req.body.step
+        
+        // --- Is step a valid integer? --- //
+        if (typeof(step) != 'number'){
+            if(step.split('').length <= 0) {
+                return res.status(400).send('Please choose a valid number to indicate the current step for this item')
+            }
+            if(parseInt(step) < 1) {
+                return res.status(400).send('The step must be a number greater than 0')
+            }
+        }     
+
+        // --- Check if step value already exist --- //
+        const existingStep = await db.recipe.instructions.existing_step([recipe_id,step])
+        console.log('here is existing step',step)
+        if(existingStep[0]) {
+            // --- If the existing step does not have the same id as the step being edited --- //
+            if(existingStep[0].instruction_id != instruction_id) {                
+                return res.status(409).send(`Instruction with step ${step} already exists. Please edit or delete the instruction in step ${step} instead`)
+            }
+        }
+
+        // --- Is content blank? --- //
+        if (content.split('').length <= 0) {
+            return res.status(411).send('Please fill the required text field')
+        }
+
+        const instruction = await db.recipe.instructions.update_instruction([ content,parseInt(step),instruction_id ])
         return res.status(200).send(instruction)
     },
 
@@ -97,9 +121,34 @@ module.exports = {
     postInstructionsByRecipeId: async (req,res) => {
         const db = req.app.get('db')
         const { recipe_id,step,content } = req.body
+        console.log('hit post item in recipe controller',step)
 
-                // check if step value already exist
-        // if exist = true: return(over write current step value?)
+        // Is step an integer?
+        // if (Number.isInteger(step) != true){
+        //     return res.status(400).send('Please choose a valid number to indicate the current step for this item')
+        // }
+        // --- Is step greater than zero? --- //
+        if(parseInt(step) < 1) {
+            return res.status(400).send('The step must be a number greater than 0')
+        }
+        // --- Is step a valid integer? --- //
+        if (typeof(step) != 'number'){
+            if(step.split('').length <= 0) {
+                return res.status(400).send('Please choose a valid number to indicate the current step for this item')
+            }
+        }     
+
+        // --- Check if step value already exist --- //
+        const existingStep = await db.recipe.instructions.existing_step([recipe_id,step])
+        console.log('here is existing step',step)
+        if(existingStep[0]) {
+            return res.status(409).send(`Instruction with step ${step} already exists. Please edit or delete the instruction in step ${step} instead`)
+        }
+
+        // --- Is content blank? --- //
+        if (content.split('').length <= 0) {
+            return res.status(411).send('Please fill the required text field')
+        }
 
         const instruction = await db.recipe.instructions.add_instruction(recipe_id,step,content)
         return res.status(200).send(instruction)
