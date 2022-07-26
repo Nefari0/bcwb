@@ -4,7 +4,6 @@ export const InstructionMain = styled.main`
 position:absolute;
 margin: auto;
 margin-top: 60px;
-
 min-height:350px;
 width: 550px;
 padding-right:20px;
