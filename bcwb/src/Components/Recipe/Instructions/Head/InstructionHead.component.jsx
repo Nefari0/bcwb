@@ -6,6 +6,7 @@ import { deleteFromFB } from '../../../Admin/Photos/deleteFromFB'
 import { TextEditor } from "../../../Form/TextEditor"
 import { DetailGrid } from "./DetailGrid"
 import { PositionPhoto } from "../../../Admin/Photos/PositionPhoto"
+import { ErrorMessage } from "../../../ErrorMessage/ErrorMessage"
 import { RECIPES,PHOTOS } from "../../../../endpoints"
 import AddPhoto from "../../../Admin/Photos/AddPhotos"
 import Button from "../../../Form/Button"
@@ -15,6 +16,7 @@ import Pinterest from "../../../Pinterest/Pinterest"
 export const InstructionHead = (props) => {
     const { cover_image_url,title,description,pinterest_url,category,published,recipe_id,servings,prep_time,author } = props.items[0]
     const { isAdmin } = props
+    const [ error,setError ] = useState(null)
 
     const [ formFields,setFormFields ] = useState({
         title:title,
@@ -98,8 +100,10 @@ export const InstructionHead = (props) => {
 
     // -- General use PUT request function -- //
     const putItem = async (url,items) => {
-        await axios.put(url,items).then(() =>{
+        await axios.put(url,items).then(res =>{
             props.getItems()
+        }).catch(err => {
+            setError(err.response.data)
         })
         return
     }
@@ -156,6 +160,8 @@ export const InstructionHead = (props) => {
 
                 <button onClick={(e) => handleClick(e,'published',!formFields.published)}>click to {formFields.published ? 'un-publish' : 'publish'}</button>
 
+                {error === null ? null :<ErrorMessage error={error}/> }
+
                 <FormInput
                     type="text"
                     name="title"
@@ -195,8 +201,6 @@ export const InstructionHead = (props) => {
                     value={formFields.servings}
                     onChange={handleChange}
                 />
-
-                
 
             </form>
             }
