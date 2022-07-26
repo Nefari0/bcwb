@@ -16,10 +16,9 @@ export const DetailGrid = (props) => {
           
             <Table>
                 <TableItem style={itemStyles} >
-                    <i>Prep time:</i>
+                    <i>Bake time:</i>
                     <SmallText>
-                        {prep_time}
-                        Hours
+                        {prep_time} Hours
                     </SmallText>
                 </TableItem>
 
