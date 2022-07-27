@@ -1,11 +1,10 @@
 import styled, { css } from 'styled-components';
 
 export const InstructionMain = styled.main`
-position:absolute;
+position:relative;
 margin: auto;
-margin-top: 60px;
 min-height:350px;
-width: 550px;
+width:90vw;
 padding-right:20px;
 padding-left:20px;
 background-color:#EFFDEC;
@@ -14,4 +13,5 @@ display:flex;
 flex-direction:column;
 align-items:baseline;
 text-align:center;
+overflow:hidden;
 `
