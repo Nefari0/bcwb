@@ -121,6 +121,19 @@ export const InstructionHead = (props) => {
     return(
         <>
 
+            <MainImage>
+                <img
+                src={cover_image_url}
+                
+                style={{
+                    position:'absolute',
+                    left:`${photoPositions.x}px`,
+                    top:`${photoPositions.y}px`,
+                    width:`${photoPositions.z}px`
+                }}
+                />
+            </MainImage>
+
             {/* -- ADMINS CAN ADD / DELETE PHOTOS -- */}
             {isAdmin ?
             <ShortRow>
@@ -231,23 +244,9 @@ export const InstructionHead = (props) => {
 
             <LongRow >
                 <Button onClick={copy} >share</Button>
-                <Pinterest />
+                <Pinterest/>
                 <Button>save recipe</Button>
             </LongRow>
-
-            <MainImage>
-                <img
-                src={cover_image_url}
-                
-                style={{
-                    position:'absolute',
-                    left:`${photoPositions.x}px`,
-                    top:`${photoPositions.y}px`,
-                    width:`${photoPositions.z}px`
-                }}
-                />
-            </MainImage>
-
         </>
     )
 }
