@@ -29,10 +29,13 @@ export const LandscapeImage = styled.div`
   margin:auto;
 `
 export const ThumbnailImage = styled.div`
+  position:relative;
   height:200px;
   width:200px;
+  border: solid 3px #555;
   border-radius:50%;
   overflow:hidden;
+  margin:10px;
   z-index:1000;
 `
 
@@ -55,28 +58,27 @@ export const DescriptionText = styled.p`
   text-align:left;
 `
 
-export const ImageTag = styled.h4`
+export const ImageTag = styled.p`
   position:absolute;
-  bottom:0px;
-  width:100%;
-  color:#fff
+  bottom:20px;
+  right:0px;
+  width:110%;
   background: rgba(0.863,0.982,0.839,.1);
   backdrop-filter: blur(12px);
-  border-top: solid 2px #003300;
-  border-bottom: solid 2px #003300; 
-  z-index:0;
+  border-top: solid 2px #fff;
+  border-bottom: solid 2px #fff;
+  z-index:10;
 `
 export const ShortRow = styled.div`
   display:flex;
   align-items:center;
   margin:20px;
   width:65%;
-`
-export const LongRow = styled.div`
+  `
+  export const LongRow = styled.div`
   display:flex;
   align-items:center;
   justify-content:space-between;
   margin:20px;
-  // background-color:blue;
   min-width:95%;
 `
