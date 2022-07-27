@@ -1,4 +1,10 @@
 
+.App {
+  min-width: 100px;
+  min-height: 100px;
+  // background-color: red;
+  // overflow: scroll;
+}
 
 html { font-size: 62.5%;}
 
@@ -65,7 +71,7 @@ li {
   font-size: 20px;
   margin-bottom: 10px;
   text-align: left;
-  max-width: 95%;
+  width: 95%;
 }
 
 li:first-child {
@@ -79,7 +85,7 @@ li:first-child {
 }
 
 li span {
-  width: 77%;
+  width: 120%;
   height: 2px;
   margin-left: 20px;
   top: 15px;
