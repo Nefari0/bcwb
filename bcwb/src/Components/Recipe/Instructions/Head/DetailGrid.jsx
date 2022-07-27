@@ -1,4 +1,4 @@
-import { Table,TableItem,SmallText } from "./InstructionHead.styles"
+import { Table,TableItem,SmallText,KeyWord } from "./InstructionHead.styles"
 import FormInput from "../../../Form/FormInput"
 
 export const DetailGrid = (props) => {
@@ -16,19 +16,19 @@ export const DetailGrid = (props) => {
           
             <Table>
                 <TableItem style={itemStyles} >
-                    <i>Bake time:</i>
+                    <KeyWord>Bake time:</KeyWord>
                     <SmallText>
                         {prep_time} Hours
                     </SmallText>
                 </TableItem>
 
                 <TableItem style={itemStyles} >
-                    <i>Servings:</i>
+                    <KeyWord>Servings:</KeyWord>
                     <SmallText>{servings}</SmallText>
                 </TableItem>
 
                 <TableItem >
-                    <i>Category:</i>
+                    <KeyWord>Category:</KeyWord>
                     <SmallText>{category}</SmallText>
                 </TableItem>
             </Table>
