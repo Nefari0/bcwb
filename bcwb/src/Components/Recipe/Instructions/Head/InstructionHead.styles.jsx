@@ -13,7 +13,7 @@ export const Table = styled.div`
 `
 
 export const TableItem = styled.span`
-  height:65px;
+  height:105px;
   text-align:center;
   display:flex;
   flex-direction:column;
@@ -21,6 +21,12 @@ export const TableItem = styled.span`
 `
 
 export const SmallText = styled.p`
-  font-size:12px;
   font-weight:600;
+  font-size: 2rem;
+`
+
+export const KeyWord = styled.i`
+  font-size: 1.8rem;
+  font-weight:400;
+  margin-top:15px;
 `
