@@ -15,11 +15,11 @@ const Pinterest= () => {
     },[])
 
     return(
-        <>
+        
             <a data-pin-do="embedPin" data-pin-build="doBuild" href={url}>
                 <Button>pin</Button>
             </a>
-        </>
+      
     )
 }
 
