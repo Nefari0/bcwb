@@ -11,8 +11,8 @@ const Home = () => {
             {/* <SignIn /> */}
             <h1>The Latest Recipes</h1>
             <LatestRecipes />
-            {/* <h1>Find Recipes For...</h1> */}
-            {/* <FindRecipes /> */}
+            <h1>Find Recipes For...</h1>
+            <FindRecipes />
             <Footer />
         </main>
     )
