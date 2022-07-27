@@ -15,9 +15,10 @@ export const NavBar = styled.nav`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  height: 100px;
-  width: 100vw;
+  height: 300px;
+  min-width:300px;
   border-bottom: solid 1px ${baseColor}
+  overflow:hidden
 `
 
 export const NavLink = styled.a`
@@ -30,7 +31,7 @@ export const DesktopMenu = styled.div`
   width:100%;
   display:flex;
   justify-content:space-around;
-  @media (max-width:1000px) {
+  @media (max-width:1250px) {
     display:none;
   }
 `
@@ -46,4 +47,8 @@ export const MobileMenu = styled.div`
   transition: 300ms ease all;
   z-index: 3;
   ${( {isMenuClosed } ) => isMenuClosed && menuClosed}
+`
+
+export const LogoBox = styled.img`
+  height:450px;
 `
