@@ -139,15 +139,19 @@ export const InstructionBody = (props) => {
             <ul>
                 {notes.length < 1 ? null : <li>notes<span></span></li>}
                 {mappedNotes}
-            <input
-                    type="text"
-                    placeholder="enter text"
-                    name="note_body"
-                    onChange={handleChange}
-                    value={note_body}
-            />
-            <button
-            onClick={(e) => postItem(e,RECIPES.CREATE_NOTE,formFields,grabNotes)}>add note</button>
+                {isAdmin ? <form>
+                    <input
+                            type="text"
+                            placeholder="enter text"
+                            name="note_body"
+                            onChange={handleChange}
+                            value={note_body}
+                    />
+
+                    <button onClick={(e) => postItem(e,RECIPES.CREATE_NOTE,formFields,grabNotes)}>
+                        add note
+                    </button>
+                </form> : null}
             </ul>
         </>
         
