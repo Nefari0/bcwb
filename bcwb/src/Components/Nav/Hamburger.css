@@ -1,9 +1,11 @@
 .hamburger {
     display: none;
-    width: 75px;
-    position: relative;
+    width: 7vw;
+    margin-right: 40px;
 }
 
-@media (max-width:1000px) {
-    .hamburger {display: inline;}
+@media (max-width:1250px) {
+    .hamburger {
+        display: inline;
+    }
 }
