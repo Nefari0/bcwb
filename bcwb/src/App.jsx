@@ -6,10 +6,8 @@ import { HashRouter } from 'react-router-dom'
 function App() {
   return (
     <HashRouter>
-    <div>
-      <header className="App-header">
+    <div className='App' >
         <Nav />
-      </header>
         {routes}
     </div>
     </HashRouter>
