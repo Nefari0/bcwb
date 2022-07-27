@@ -30,11 +30,11 @@ const FindRecipes = (props) => {
 
     const mappedItems = items.slice(0,4).map(el => {
 
-        return <ThumbnailImage key={el.id} ><img src={el.img} /><ImageTag>Image</ImageTag></ThumbnailImage>
+        return <ThumbnailImage key={el.id} ><img src={el.img} /><ImageTag><p style={{marginLeft:'50px',color:'#fff'}}>image</p></ImageTag></ThumbnailImage>
     })    
 
     return(
-        <section style={{height:'',backgroundColor:'blue'}} >
+        <section  >
             {mappedItems}
         </section>
     )
