@@ -68,7 +68,6 @@ const Recipe = (props) => {
             <LongRow>
                 <Button onClick={() => setIsAdmin(!isAdmin)} >Enter / Exit Admin View</Button>
                 <Button onClick={executeDeleteRecipe} >Delete Recipe</Button>
-                {/* <DeleteRecipe items={items[0]}/> */}
             </LongRow>
 
             {items[0] != undefined ?
