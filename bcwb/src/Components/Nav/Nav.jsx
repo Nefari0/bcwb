@@ -1,7 +1,7 @@
 import Hamburgar from './Hamburger'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { NavLink,DesktopMenu,MobileMenu,NavBar } from './NavStyles.styles'
+import { NavLink,DesktopMenu,MobileMenu,NavBar,LogoBox } from './NavStyles.styles'
 import Logo from '../Assets/Brittanys-Culinary-Creations-v1.png'
 
 const Nav = (props) => {
@@ -15,7 +15,7 @@ const Nav = (props) => {
 
     return(
         <NavBar>
-            <Link to='/' ><img src={Logo} style={{height:'150px',marginLeft:'40px'}} /></Link>
+            <Link to='/' ><LogoBox src={Logo} /></Link>
 
             <DesktopMenu>{mappedItems}</DesktopMenu>
 
