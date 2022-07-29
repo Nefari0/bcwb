@@ -23,5 +23,8 @@ export const RECIPES = {
 
 export const PHOTOS = {
     GET_PHOTOS_WITH_URL:'/api/photos/get/url/',
-    EDIT_PHOTO:'/api/photos/update'
+    EDIT_PHOTO:'/api/photos/update',
+
+    // --- Category Images --- //
+    GET_CATEGORY_IMAGES:'/api/category/images/get/all',
 }
