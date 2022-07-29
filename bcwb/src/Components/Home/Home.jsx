@@ -1,19 +1,16 @@
 import './Home.scss'
 import LatestRecipes from './LatestRecipes/LatestRecipes'
 import FindRecipes from './FindRecipes/FindRecipes'
-import { Footer } from '../Footer/Footer'
-// import SignIn from '../SignIn/SignIn'
+import { SectionText } from './HomeStyles.styles'
 
 const Home = () => {    
 
     return(
         <main className='home'>
-            {/* <SignIn /> */}
-            <h1>The Latest Recipes</h1>
+            <SectionText>Latest Recipes</SectionText>
             <LatestRecipes />
-            <h1>Find Recipes For...</h1>
+            <SectionText>Find Recipe</SectionText>
             <FindRecipes />
-            <Footer />
         </main>
     )
 }
