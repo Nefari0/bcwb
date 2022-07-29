@@ -17,7 +17,9 @@ export const NavBar = styled.nav`
   align-items: center;
   height: 300px;
   min-width:400px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.35);
+  
+  // min-width:100%;
+  // box-shadow: 0 0 5px rgba(0, 0, 0, 0.35);
   margin-bottom:20px;
 
   @media (max-width:800px){ height:200px; }
