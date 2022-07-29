@@ -1,13 +1,18 @@
-.home {
-    padding: 40px;
-    max-width: 100%;
+main{
+    min-width: 400px;
+    max-width: 1000px;
+    margin: auto;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-}
+    align-items: flex-start;
+    text-align: left;
 
-.home section {
-    width: 95%;
-    margin: auto;
-    display:flex;
+    section {
+        min-width: 400px;
+        min-height: 250px;
+        margin: auto;
+        display:flex;
+        align-items: center;
+        justify-content: center;
+    }
 }
