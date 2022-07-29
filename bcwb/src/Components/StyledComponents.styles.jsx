@@ -4,7 +4,7 @@ import { colors } from './Styles/colors';
 import { device } from './Styles/queries';
 
 const { mobileL } = device
-const { white,baseColor,lightPaper,yellowPaper,secondaryColor } = colors
+const { yellowPaper } = colors
 
 export const Error = styled.div`
   position:fixed;
