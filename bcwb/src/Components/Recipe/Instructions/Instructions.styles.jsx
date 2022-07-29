@@ -4,7 +4,7 @@ export const InstructionMain = styled.main`
 position:relative;
 margin: auto;
 min-height:350px;
-width:90vw;
+width:550px;
 padding-right:20px;
 padding-left:20px;
 background-color:#EFFDEC;
@@ -14,4 +14,8 @@ flex-direction:column;
 align-items:baseline;
 text-align:center;
 overflow:hidden;
+@media (max-width:550px) {
+    width:350px;
+    align-items:center;
+}
 `
