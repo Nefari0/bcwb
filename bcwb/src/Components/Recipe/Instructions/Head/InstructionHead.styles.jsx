@@ -10,6 +10,10 @@ export const Table = styled.div`
   row-gap: 50px;
   border-top: solid 1.5px #003300;
   border-bottom: solid 1.5px #003300;
+  @media (max-width:550px){
+    width:100%;
+    margin:0px;
+  }
 `
 
 export const TableItem = styled.span`
