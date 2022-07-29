@@ -2,6 +2,7 @@ import '../Home.scss'
 import { useState,useEffect } from 'react'
 import { ThumbnailImage,ImageTag } from '../../StyledComponents.styles'
 import axios from 'axios'
+import { PHOTOS } from '../../../endpoints'
 
 const FindRecipes = (props) => {
 
@@ -10,7 +11,7 @@ const FindRecipes = (props) => {
     useEffect(() => { getDB() },[])
 
     const getDB = () => {
-        axios.get('/api/category/images/get/all').then(res => {
+        axios.get(PHOTOS.GET_CATEGORY_IMAGES).then(res => {
             setItems(res.data)
         })
     }
