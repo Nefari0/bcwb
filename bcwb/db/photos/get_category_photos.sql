@@ -1,0 +1,1 @@
+select * from bcc_home_photo
