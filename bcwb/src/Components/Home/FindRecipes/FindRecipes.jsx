@@ -20,11 +20,7 @@ const FindRecipes = (props) => {
 
     const mappedItems = items.map(el => {
 
-        return <ThumbnailImage key={el.link_id} >
-                    <img src={el.photo_link} />
-                    <ImageTag>{el.category}</ImageTag>
-                </ThumbnailImage>
-    })    
+        return <ThumbnailImage key={el.link_id} ><img src={el.photo_link} /><ImageTag>{el.category}</ImageTag></ThumbnailImage>})    
 
     return(
         <section  >
