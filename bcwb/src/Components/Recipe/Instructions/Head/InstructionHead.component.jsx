@@ -244,7 +244,7 @@ export const InstructionHead = (props) => {
             
             <LongRow >
                 <BaseButton onClick={copy} >share</BaseButton>
-                <Pinterest width={'100%'}/>
+                <Pinterest/>
                 <BaseButton>save</BaseButton>
             </LongRow>
         </>
