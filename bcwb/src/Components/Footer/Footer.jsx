@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
-import { useState,useEffect } from 'react'
 import access from '../../access'
-import FormInput from '../Form/FormInput'
+import { Foot } from './Footer.styles'
 
 export const Footer = (props) => {
 
@@ -24,7 +23,7 @@ export const Footer = (props) => {
     }
 
     return(
-        <footer style={style} >
+        <Foot>
             {access.getAccess(text) === "ACCESS_GRANTED" ? 
             <Link to="/admin" ><h1>admin</h1></Link>
             :
@@ -32,6 +31,6 @@ export const Footer = (props) => {
                 <input  type="text" name="text" onChange={setFormItems} />
                 <button onClick={() => setLocal()} >submit</button>
             </>}
-        </footer>
+        </Foot>
     )
 }
