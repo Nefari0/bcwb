@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/static/css/main.fb466cbb.css",
-    "main.js": "/static/js/main.b252d61b.js",
+    "main.css": "/static/css/main.d4787275.css",
+    "main.js": "/static/js/main.ddbd2c98.js",
     "static/js/787.df4dbc62.chunk.js": "/static/js/787.df4dbc62.chunk.js",
     "static/media/Brittanys-Culinary-Creations-v1.png": "/static/media/Brittanys-Culinary-Creations-v1.9e37a654c742d6831941.png",
     "index.html": "/index.html",
-    "main.fb466cbb.css.map": "/static/css/main.fb466cbb.css.map",
-    "main.b252d61b.js.map": "/static/js/main.b252d61b.js.map",
+    "main.d4787275.css.map": "/static/css/main.d4787275.css.map",
+    "main.ddbd2c98.js.map": "/static/js/main.ddbd2c98.js.map",
     "787.df4dbc62.chunk.js.map": "/static/js/787.df4dbc62.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.fb466cbb.css",
-    "static/js/main.b252d61b.js"
+    "static/css/main.d4787275.css",
+    "static/js/main.ddbd2c98.js"
   ]
 }
