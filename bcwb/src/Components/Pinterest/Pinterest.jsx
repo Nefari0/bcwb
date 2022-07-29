@@ -1,8 +1,15 @@
 import { useEffect } from 'react'
-import Button from '../Form/Button'
+import { BaseButton } from '../Form/Button.styles'
 const url = 'https://www.pinterest.com/pin/203436108160231221/'
 
-const Pinterest= () => {
+const Pinterest= (props) => {
+
+    const defaultStyle = {
+        display:'flex',
+        flexDirection:'column',
+        width:'100%',
+        alignItems:'center'
+}
 
     useEffect(() => {
         const script = document.createElement('script')
@@ -16,8 +23,8 @@ const Pinterest= () => {
 
     return(
         
-            <a data-pin-do="embedPin" data-pin-build="doBuild" href={url}>
-                <Button>pin</Button>
+            <a data-pin-do="embedPin" data-pin-build="doBuild" href={url} style={defaultStyle} >
+                <BaseButton>pin</BaseButton>
             </a>
       
     )
