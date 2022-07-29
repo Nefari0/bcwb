@@ -1,5 +1,6 @@
 .hamburger {
     display: none;
+    color: #555;
     width: 75px;
     margin-right: 40px;
 }

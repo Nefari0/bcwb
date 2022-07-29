@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import { colors } from './Styles/colors';
 import { device } from './Styles/queries';
 
-const { mobileL } = device
+const { mobileL,tablet } = device
 const { yellowPaper } = colors
 
 export const Error = styled.div`
@@ -82,15 +82,6 @@ export const MainImage = styled.div`
   }
 `
 
-export const DescriptionText = styled.p`
-  color:#555;
-  font-family: 'Cedarville Cursive', cursive;
-  font-style:italic;
-  font-size: 1.8rem;
-  line-height: 1.8;
-  text-align:left;
-`
-
 export const ImageTag = styled.p`
   position:absolute;
   bottom:20px;
@@ -102,7 +93,22 @@ export const ImageTag = styled.p`
   z-index:10;
   text-align:center;
   color:${yellowPaper}
+  @media ${tablet} {
+    height:15px;
+    font-size:12px;
+    bottom:0px;
+  }
 `
+
+export const DescriptionText = styled.p`
+  color:#555;
+  font-family: 'Cedarville Cursive', cursive;
+  font-style:italic;
+  font-size: 1.8rem;
+  line-height: 1.8;
+  text-align:left;
+`
+
 export const ShortRow = styled.div`
   display:flex;
   align-items:center;
