@@ -1,4 +1,10 @@
+
 import styled, { css } from 'styled-components';
+import { colors } from './Styles/colors';
+import { device } from './Styles/queries';
+
+const { mobileL } = device
+const { white,baseColor,lightPaper,yellowPaper,secondaryColor } = colors
 
 export const Error = styled.div`
   position:fixed;
@@ -12,6 +18,8 @@ export const Error = styled.div`
 `;
 
 export const PortraitImage = styled.div`
+
+ 
   margin:10px;
   height:400px;
   width:267px;
@@ -29,14 +37,34 @@ export const LandscapeImage = styled.div`
   margin:auto;
 `
 export const ThumbnailImage = styled.div`
-  position:relative;
-  height:200px;
-  width:200px;
-  border: solid 3px #555;
-  border-radius:50%;
-  overflow:hidden;
-  margin:10px;
-  z-index:1000;
+  opacity: .5;
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+  border: 2px solid ${yellowPaper};
+  -webkit-transform: scale(1.15);
+  -ms-transform: scale(1.15);
+  transform: scale(1.15);
+  overflow: hidden;
+  -webkit-transition: -webkit-transform 0.5s, opacity 0.5s;
+  transition: transform 0.5s, opacity 0.5s;
+  opacity: 0.9;
+  transition: all 1000ms;
+  z-index: 0;
+  margin-left:40x;
+  margin-right:40px;
+
+  &:hover {
+    opacity: 1;
+    -webkit-transform: scale(1.03);
+    -ms-transform: scale(1.03);
+    transform: scale(1.03);
+    transition: all 200ms;
+  }
+  @media (max-width:800px) {
+    height:100px;
+    width:100px
+  }
 `
 
 export const MainImage = styled.div`
@@ -47,6 +75,11 @@ export const MainImage = styled.div`
   width:175px;
   overflow:hidden;
   border-radius:5px;
+  @media ${mobileL}{
+    position:relative;
+    margin:auto;
+    right:0;
+  }
 `
 
 export const DescriptionText = styled.p`
@@ -61,13 +94,14 @@ export const DescriptionText = styled.p`
 export const ImageTag = styled.p`
   position:absolute;
   bottom:20px;
-  right:0px;
-  width:110%;
+  right:-10px;
+  width:120%;
   background: rgba(0.863,0.982,0.839,.1);
   backdrop-filter: blur(12px);
-  border-top: solid 2px #fff;
-  border-bottom: solid 2px #fff;
+  border: solid 2px ${yellowPaper}
   z-index:10;
+  text-align:center;
+  color:${yellowPaper}
 `
 export const ShortRow = styled.div`
   display:flex;
@@ -80,5 +114,9 @@ export const ShortRow = styled.div`
   align-items:center;
   justify-content:space-between;
   margin:20px;
-  min-width:95%;
+  width:95%;
+  @media ${mobileL}{
+    flex-direction:column;
+    margin:auto;
+  }
 `
