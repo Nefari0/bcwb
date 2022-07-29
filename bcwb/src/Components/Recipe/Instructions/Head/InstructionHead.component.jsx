@@ -12,6 +12,7 @@ import AddPhoto from "../../../Admin/Photos/AddPhotos"
 import Button from "../../../Form/Button"
 import FormInput from "../../../Form/FormInput"
 import Pinterest from "../../../Pinterest/Pinterest"
+import { BaseButton } from "../../../Form/Button.styles"
 
 export const InstructionHead = (props) => {
     const { cover_image_url,title,description,pinterest_url,category,published,recipe_id,servings,prep_time,author } = props.items[0]
@@ -166,7 +167,7 @@ export const InstructionHead = (props) => {
             { !isAdmin ?
             <>
                 <h3 style={{width:'65%'}}>{title}</h3>
-                <h4 >{formFields.author}</h4>
+                <h4 style={{width:'65%'}} >{formFields.author}</h4>
             </>
             :
             <form>
@@ -241,11 +242,10 @@ export const InstructionHead = (props) => {
             
             }
             
-
             <LongRow >
-                <Button onClick={copy} >share</Button>
-                <Pinterest/>
-                <Button>save recipe</Button>
+                <BaseButton onClick={copy} >share</BaseButton>
+                <Pinterest width={'100%'}/>
+                <BaseButton>save</BaseButton>
             </LongRow>
         </>
     )
