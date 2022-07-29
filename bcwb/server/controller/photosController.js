@@ -1,5 +1,11 @@
 
 module.exports = {
+    getCategoryPhotos: async (req,res) => {
+        const db = req.app.get('db')
+        const photos = await db.photos.get_category_photos()
+        return res.status(200).send(photos)
+    },
+
     getAll: async (req,res) => {
         const db = req.app.get('db')
         const photos = await db.photos.get_photos()
