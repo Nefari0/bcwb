@@ -16,15 +16,18 @@ export const NavBar = styled.nav`
   justify-content: space-around;
   align-items: center;
   height: 300px;
-  min-width:400px;
-  
-  // min-width:100%;
+  min-width:300px;
+  overflow:hidden;
   // box-shadow: 0 0 5px rgba(0, 0, 0, 0.35);
   margin-bottom:20px;
 
-  @media (max-width:800px){ height:200px; }
+  @media (max-width:800px){
+    height:200px;
+  }
 
-  @media (max-width:400px) { height:100px; }
+  @media (max-width:400px) {
+    height:100px;
+  }
 `
 
 export const NavLink = styled.a`

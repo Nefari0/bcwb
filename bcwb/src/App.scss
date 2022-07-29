@@ -100,3 +100,9 @@ li span {
     margin: 0px 0px 10px 10px;
   }
 }
+
+@media (max-width:400px) {
+  li:first-child {
+    margin-left: 0px;
+  }
+}
