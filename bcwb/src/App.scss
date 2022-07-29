@@ -1,7 +1,7 @@
-
-.App {
-  min-width: 100px;
-  min-height: 100px;
+* {
+  margin: 0;
+  padding: 0;
+  width: 100%;
 }
 
 html { font-size: 62.5%;}
@@ -20,15 +20,14 @@ h2,
 h3,
 h4,
 h5 {
-  color: #555; 
-  width:65%; 
+  color: #555;
+
 }
 
 h1 {
   font-size: 36px;
   font-weight: 100;
   letter-spacing: 2px;
-  font-family: 'Playfair Display', serif;
 }
 
 h2 {
@@ -44,10 +43,10 @@ h3 {
 }
 
 h4 {
-  font-size: 20px;
-  font-family: 'Cedarville Cursive', cursive;
-  font-weight: 100;
+  font-size: 24px;
+  font-style: italic;
   text-align: center;
+  top: 15px;
   margin-bottom: 30px;
 }
 
@@ -59,15 +58,15 @@ p {
 
 ul,
 ol {
-  margin-bottom: 20px;
   position: relative;
   width: 90%;
   color: #555;
+  margin: 10px 0px 10px 0px;
 }
 
 li {
   font-size: 20px;
-  margin-bottom: 10px;
+  margin: 5px 0px 5px 40px;
   text-align: left;
   width: 95%;
 }
@@ -76,7 +75,7 @@ li:first-child {
   width: 100%;
   font-weight: bold;
   margin-bottom: 0;
-  margin-left: -40px;
+  margin: 10px 0px 10px 0px;
   list-style-type: none;
   text-transform: uppercase;
   position: relative;
@@ -89,4 +88,16 @@ li span {
   top: 15px;
   border-top: solid 1.5px #555;
   position: absolute;
+}
+
+
+
+/* --- MEDIA QUERIES --- */
+@media (max-width:550px){
+  li:first-child {
+    margin-left: -30px;
+  }
+  li {
+    margin: 0px 0px 10px 10px;
+  }
 }
