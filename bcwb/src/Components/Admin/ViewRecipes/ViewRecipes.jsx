@@ -4,11 +4,13 @@ import Recipe from "../../Recipe/Recipe"
 import { RecipeListItem } from "./RecipeListItem"
 import { Link } from 'react-router-dom'
 
-export const ViewRecipes = () => {
+export const ViewRecipes = (props) => {
 
     const [ items,setItems] = useState([])
 
-    useEffect(() => {getAllRecipes()},[])
+    useEffect(() => {
+        getAllRecipes()
+    },[])
 
     const getAllRecipes = () => {
         axios.get('/api/recipes/get/all').then(res => {

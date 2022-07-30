@@ -1,9 +1,17 @@
 import './Admin.scss'
 import CreateRecipe from './CreateRecipe/CreateRecipe'
 import { ViewRecipes } from './ViewRecipes/ViewRecipes'
+import {updateCharacters} from '../../ducks/breakingBadReducer';
+import { getRecipes } from '../../ducks/recipeReducer';
+import { connect } from 'react-redux'
+import { useEffect } from 'react';
 
-const Admin = () => {
+const Admin = (props) => {
 
+    useEffect(() => {
+        getRecipes()
+    },[])
+    
     const resetAccess = () => {
         localStorage.setItem('text','')
     }
@@ -12,9 +20,13 @@ const Admin = () => {
         <main className="admin">
             <button onClick={resetAccess} >logout admin</button>
             <CreateRecipe />
-            <ViewRecipes />
+            <ViewRecipes recipes={props.recipes} />
         </main>
     )
 }
 
-export default Admin
+function mapStateToProps(reduxState) {
+    return reduxState
+}
+
+export default connect(mapStateToProps, { updateCharacters,getRecipes })(Admin)
