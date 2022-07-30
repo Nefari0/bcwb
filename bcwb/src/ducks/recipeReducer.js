@@ -25,7 +25,8 @@ export default function recipeReducer(state = initialState, action) {
     case GET_RECIPES + "_FULFILLED":
         return {
             ...state,
-            recipes: action.payload
+            recipes: action.payload,
+            isLoading:false
         };
     case GET_RECIPES + "_REJECTED":
         return {

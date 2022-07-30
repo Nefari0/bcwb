@@ -17,7 +17,7 @@ const Home = (props) => {
 
     return(
         <main className='home'>
-            {props.isLoading ? <Spinner /> : null}
+            {props.recipes.isLoading ? <Spinner /> : null}
             <SectionText>Latest Recipes</SectionText>
             <LatestRecipes />
             <SectionText>Find Recipe</SectionText>

@@ -1,6 +1,7 @@
 import './Admin.scss'
 import CreateRecipe from './CreateRecipe/CreateRecipe'
 import { ViewRecipes } from './ViewRecipes/ViewRecipes'
+import Spinner from '../Spinner/spinner.component';
 import {updateCharacters} from '../../ducks/breakingBadReducer';
 import { getRecipes } from '../../ducks/recipeReducer';
 import { connect } from 'react-redux'
@@ -20,6 +21,7 @@ const Admin = (props) => {
         <main className="admin">
             <button onClick={resetAccess} >logout admin</button>
             <CreateRecipe />
+            {props.recipes.isLoading ? <Spinner /> : null}
             <ViewRecipes recipes={props.recipes} />
         </main>
     )
