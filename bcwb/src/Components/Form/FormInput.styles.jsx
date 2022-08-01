@@ -1,6 +1,8 @@
 import styled, { css } from 'styled-components';
 import { colors } from '../Styles/colors';
+import { fonts } from '../Styles/fonts'
 
+const { cursive } = fonts
 const { darkText } = colors
 const subColor = 'grey';
 const mainColor = 'black';
@@ -20,6 +22,7 @@ export const FormInputLabel = styled.label`
   left: 5px;
   top: 10px;
   transition: 300ms ease all;
+  ${cursive}
   ${({ shrink }) => shrink && shrinkLabelStyles};
 `;
 

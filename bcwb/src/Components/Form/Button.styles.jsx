@@ -1,12 +1,13 @@
 import styled, { css } from 'styled-components';
 import { SpinnerContainer } from '../Spinner/spinner.styles';
 import { colors } from '../Styles/colors';
-import { queries } from '@testing-library/react';
-const { tablet } = queries
+import { fonts } from '../Styles/fonts'
+
+const { cursive } = fonts
 const { baseColor,white } = colors
 
 export const BaseButton = styled.button`
-  width: 165px;
+  min-width: 165px;
   margin: 0px 0px 16px 5px;
   width: auto;
   height: 50px;
@@ -16,9 +17,12 @@ export const BaseButton = styled.button`
   font-size: 16px;
   background-color: ${baseColor}
   color: ${white}
-  text-transform: uppercase;
-  font-family: 'Open Sans Condensed';
-  font-weight: bolder;
+  // text-transform: uppercase;
+  text-transform: capitalize;
+  // font-family: 'Open Sans Condensed';
+  ${cursive}
+  // font-weight: bolder;
+  font-weight:200;
   border: none;
   cursor: pointer;
   display: flex;
