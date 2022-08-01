@@ -35,6 +35,7 @@ export const BaseButton = styled.button`
     margin:auto;
     margin-bottom:15px;
     width:90%;
+    padding: 0 10px 0 10px;
   }
 
   @media (max-width:350px) {
