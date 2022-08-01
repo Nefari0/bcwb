@@ -6,15 +6,16 @@ const { tablet } = queries
 const { baseColor,white } = colors
 
 export const BaseButton = styled.button`
-  min-width: 165px;
+  width: 165px;
+  margin: 0px 0px 16px 5px;
   width: auto;
   height: 50px;
   letter-spacing: 0.5px;
   line-height: 50px;
-  padding: 0 35px 0 35px;
+  padding: 0 25px 0 25px;
   font-size: 16px;
   background-color: ${baseColor}
-  color: white;
+  color: ${white}
   text-transform: uppercase;
   font-family: 'Open Sans Condensed';
   font-weight: bolder;
@@ -27,12 +28,17 @@ export const BaseButton = styled.button`
   &:hover {
     background-color: white;
     color: black;
-    border: 1px solid black;
+    border: 1px solid ${baseColor}
   }
 
   @media (max-width:550px) {
-    margin:5px;
-    width:100%;
+    margin:auto;
+    margin-bottom:15px;
+    width:90%;
+  }
+
+  @media (max-width:350px) {
+    font-size:12px;
   }
 `;
 
@@ -51,12 +57,12 @@ export const GoogleSignInButton = styled(BaseButton)`
 GoogleSignInButton.displayName = 'GoogleSignInButton';
 
 export const InvertedButton = styled(BaseButton)`
-  background-color: white;
-  color: black;
-  border: 1px solid black;
+  background-color: ${white}
+  color: ${baseColor}
+  border: 1px solid ${baseColor}
 
   &:hover {
-    background-color: black;
+    background-color: ${baseColor}
     color: white;
     border: none;
   }
