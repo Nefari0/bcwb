@@ -42,28 +42,36 @@ export const ThumbnailImage = styled.div`
   width: 200px;
   border-radius: 50%;
   border: 2px solid ${yellowPaper};
-  -webkit-transform: scale(1.15);
-  -ms-transform: scale(1.15);
-  transform: scale(1.15);
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
   overflow: hidden;
   -webkit-transition: -webkit-transform 0.5s, opacity 0.5s;
   transition: transform 0.5s, opacity 0.5s;
   opacity: 0.9;
   transition: all 1000ms;
   z-index: 0;
-  margin-left:40x;
-  margin-right:40px;
+  margin: 0px 40px 0px 40px;
 
   &:hover {
     opacity: 1;
-    -webkit-transform: scale(1.03);
-    -ms-transform: scale(1.03);
-    transform: scale(1.03);
+    -webkit-transform: scale(1.15);
+    -ms-transform: scale(1.15);
+    transform: scale(1.15);
     transition: all 200ms;
+    z-index:1000;
   }
-  @media (max-width:800px) {
+
+  @media ${tablet} {
+    margin:auto;
+    height:150px;
+    width:150px
+  }
+
+  @media ${mobileL} {
     height:100px;
-    width:100px
+    width:100px;
+    margin: 0px 10px 0px 10px;
   }
 `
 
@@ -75,6 +83,7 @@ export const MainImage = styled.div`
   width:175px;
   overflow:hidden;
   border-radius:5px;
+
   @media ${mobileL}{
     position:relative;
     margin:auto;
@@ -93,7 +102,8 @@ export const ImageTag = styled.p`
   z-index:10;
   text-align:center;
   color:${yellowPaper}
-  @media ${tablet} {
+
+  @media ${mobileL} {
     height:15px;
     font-size:12px;
     bottom:0px;
