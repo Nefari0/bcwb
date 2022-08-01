@@ -16,12 +16,13 @@ const Nav = (props) => {
     return(
         <NavBar>
             <Link to='/' ><LogoBox src={Logo} /></Link>
+            {/* *** THESE FEATURES ARE TEMPORARILY DISABLED UNTIL DESIGN IS UPDATED *** */}
 
-            <DesktopMenu>{mappedItems}</DesktopMenu>
+            {/* <DesktopMenu>{mappedItems}</DesktopMenu> */}
 
-            <Hamburgar setMenu={setMenu} menu={isMenuClosed} /> 
+            {/* <Hamburgar setMenu={setMenu} menu={isMenuClosed} />  */}
 
-            <MobileMenu isMenuClosed={isMenuClosed} >{!isMenuClosed ? mappedItems : null}</MobileMenu>
+            {/* <MobileMenu isMenuClosed={isMenuClosed} >{!isMenuClosed ? mappedItems : null}</MobileMenu> */}
         </NavBar>
     )
 }

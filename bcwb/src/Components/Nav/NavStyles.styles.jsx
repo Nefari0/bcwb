@@ -57,7 +57,7 @@ export const MobileMenu = styled.div`
 `
 
 export const LogoBox = styled.img`
-  max-width:1000px;
+  max-width:500px;
   @media (max-width:800px){
     max-width:600px;
   }
