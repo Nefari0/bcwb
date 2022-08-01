@@ -1,5 +1,7 @@
 import styled, { css } from 'styled-components';
+import { colors } from '../Styles/colors';
 
+const { darkText } = colors
 const subColor = 'grey';
 const mainColor = 'black';
 
@@ -68,3 +70,24 @@ export const Group = styled.div`
     letter-spacing: 0.3em;
   }
 `;
+
+export const Form = styled.form`
+  max-width:550px;
+  margin:auto;
+  overflow:hidden;
+
+  h4 {
+    margin-left:15px;
+    text-align:left;
+    border-bottom: solid 1px ${darkText}
+    color: ${darkText}
+    font-size:24px;
+    font-family: 'Cedarville Cursive', cursive;
+    font-weight:200;
+    opacity:.7;
+  }
+
+  @media (max-width:560px) {
+    width:90%;
+  }
+`
