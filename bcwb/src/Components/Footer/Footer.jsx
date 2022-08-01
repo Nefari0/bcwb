@@ -23,6 +23,7 @@ export const Footer = (props) => {
 
     return(
         <footer>
+            {/* <Link to="/signin" ><h1>sign Up</h1></Link> */}
             {access.getAccess(text) === "ACCESS_GRANTED" ? 
             <Link to="/admin" ><h1>admin</h1></Link>
             :
