@@ -74,6 +74,7 @@ const CreateRecipe = (props) => {
 
     return(
         <main className='CreateRecipe'>
+            
                 <h1>Create Recipe</h1>
             
                 {error ? <ErrorMessage error={error} setError={setError} /> : null}
