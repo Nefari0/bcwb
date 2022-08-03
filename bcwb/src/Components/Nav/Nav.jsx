@@ -1,13 +1,13 @@
-import Hamburgar from './Hamburger'
+// import Hamburgar from './Hamburger'
 import { useState,useContext } from 'react'
-import { Link } from 'react-router-dom'
-import { NavLink,DesktopMenu,MobileMenu,NavBar,LogoBox } from './NavStyles.styles'
-import Logo from '../Assets/Brittanys-Culinary-Creations-v1.png'
 import { UserContext } from '../Context/user.context'
 import { signOutUser } from '../../base'
-import { BaseButton,DecoButtonWrapper } from '../Form/Button.styles'
-import { styles } from '../Styles/customStyles'
 import access from '../../access'
+import { Link } from 'react-router-dom'
+import { styles } from '../Styles/customStyles'
+import { BaseButton,DecoButtonWrapper } from '../Form/Button.styles'
+import { NavLink,DesktopMenu,MobileMenu,NavBar,LogoBox } from './NavStyles.styles'
+import Logo from '../Assets/Brittanys-Culinary-Creations-v1.png'
 
 const { decoButton } = styles
 
@@ -15,10 +15,10 @@ const Nav = () => {
 
     const [ isMenuClosed,setMenu ] = useState(true)
     const menuItems = ['Home','About','Recipes']
-
+        
     const signOutHandler = async () => {
         await signOutUser()
-        setCurrentUser(null)
+        await setCurrentUser(null)
     }
 
     const { currentUser,setCurrentUser } = useContext(UserContext)
