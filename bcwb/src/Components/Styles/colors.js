@@ -5,4 +5,5 @@ export const colors = {
     yellowPaper:'#FFFBCE;',
     white:'#fff;',
     darkText:'#555;',
+    tags:'#E67E22;'
 }
