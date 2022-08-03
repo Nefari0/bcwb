@@ -2,7 +2,6 @@ import './Home.scss'
 import LatestRecipes from './LatestRecipes/LatestRecipes'
 import FindRecipes from './FindRecipes/FindRecipes'
 import { SectionText } from './HomeStyles.styles'
-import {updateCharacters} from '../../ducks/breakingBadReducer';
 import { getRecipes } from '../../ducks/recipeReducer';
 import { connect } from 'react-redux'
 import { useEffect } from 'react';
@@ -11,8 +10,8 @@ import Spinner from '../Spinner/spinner.component';
 const Home = (props) => {    
 
     useEffect(() => {
-        props.updateCharacters()
         props.getRecipes()
+
     },[])
 
     return(
@@ -30,4 +29,4 @@ function mapStateToProps(reduxState) {
     return reduxState
 }
 
-export default connect(mapStateToProps, { getRecipes,updateCharacters })(Home)
+export default connect(mapStateToProps, { getRecipes })(Home)
