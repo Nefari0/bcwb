@@ -4,7 +4,7 @@ import { colors } from './Styles/colors';
 import { device } from './Styles/queries';
 
 const { mobileL,tablet } = device
-const { yellowPaper } = colors
+const { tags,lightPaper } = colors
 
 export const Error = styled.div`
   position:fixed;
@@ -41,7 +41,7 @@ export const ThumbnailImage = styled.div`
   height: 200px;
   width: 200px;
   border-radius: 50%;
-  border: 2px solid ${yellowPaper};
+  border: 2px solid ${tags}
   -webkit-transform: scale(1);
   -ms-transform: scale(1);
   transform: scale(1);
@@ -98,10 +98,10 @@ export const ImageTag = styled.p`
   width:120%;
   background: rgba(0.863,0.982,0.839,.1);
   backdrop-filter: blur(12px);
-  border: solid 2px ${yellowPaper}
+  border: solid 2px ${tags}
   z-index:10;
   text-align:center;
-  color:${yellowPaper}
+  color:${lightPaper}
 
   @media ${mobileL} {
     height:15px;
