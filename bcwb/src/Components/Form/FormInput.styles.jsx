@@ -85,7 +85,7 @@ export const Form = styled.form`
     border-bottom: solid 1px ${darkText}
     color: ${darkText}
     font-size:24px;
-    font-family: 'Cedarville Cursive', cursive;
+    ${cursive}
     font-weight:200;
     opacity:.7;
   }
