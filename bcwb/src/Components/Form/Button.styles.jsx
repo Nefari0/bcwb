@@ -1,10 +1,12 @@
 import styled, { css } from 'styled-components';
 import { SpinnerContainer } from '../Spinner/spinner.styles';
 import { colors } from '../Styles/colors';
-import { fonts } from '../Styles/fonts'
+import { fonts } from '../Styles/fonts';
+import { device } from '../Styles/queries';
 
+const { mobileL,mobileM,mobileS } =device
 const { cursive } = fonts
-const { baseColor,white } = colors
+const { baseColor,white,darkText } = colors
 
 export const BaseButton = styled.button`
   min-width: 165px;
@@ -17,12 +19,8 @@ export const BaseButton = styled.button`
   font-size: 16px;
   background-color: ${baseColor}
   color: ${white}
-  // text-transform: uppercase;
   text-transform: capitalize;
-  // font-family: 'Open Sans Condensed';
   ${cursive}
-  // font-weight: bolder;
-  font-weight:200;
   border: none;
   cursor: pointer;
   display: flex;
@@ -35,14 +33,14 @@ export const BaseButton = styled.button`
     border: 1px solid ${baseColor}
   }
 
-  @media (max-width:550px) {
+  @media ${mobileL} {
     margin:auto;
     margin-bottom:15px;
     width:90%;
     padding: 0 10px 0 10px;
   }
 
-  @media (max-width:350px) {
+  @media ${mobileS} {
     font-size:12px;
   }
 `;
@@ -81,3 +79,23 @@ export const ButtonSpinner = styled(SpinnerContainer)`
 `;
 
 ButtonSpinner.displayName = 'ButtonSpinner';
+
+export const DecoButtonWrapper =  styled.span`
+  opacity:.5;
+  position:relative;
+  height:50px;
+  max-width:165px;
+  min-width:165px;
+  border: solid 2px ${darkText}
+
+  @media ${mobileL} {
+    -webkit-transform: scale(.5);
+    -ms-transform: scale(.5);
+    transform: scale(.5);
+    position:absolute;
+  }
+`
+// --- DecoButtonWrapper uses decoButton.styles.js in jsx for styling to work --- //
+// --- e.i. <DecoButtonWrapper><BaseButton style={styles.decoButton}> --- //
+
+DecoButtonWrapper.displayName  = "DecoButtonWrapper"
