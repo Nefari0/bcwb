@@ -1,18 +1,16 @@
 import './App.scss';
 import Nav from './Components/Nav/Nav';
-import { Footer } from './Components/Footer/Footer';
 import routes from './routes';
 import { HashRouter } from 'react-router-dom'
-import Spinner from './Components/Spinner/spinner.component';
+import { MobileUserBar } from './Components/MobileUserBar/MobileUserBar.component';
 
 function App() {
   return (
     <HashRouter>
     <div >
         <Nav />
-        {/* <Spinner /> */}
+        <MobileUserBar />
         {routes}
-        <Footer />
     </div>
     </HashRouter>
   );
