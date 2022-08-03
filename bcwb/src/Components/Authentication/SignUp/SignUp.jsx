@@ -68,55 +68,59 @@ const SignUp = (props) => {
     }
 
     return(
-        
-        <Form onSubmit={handleSubmit} >
+        <>
+            <Form onSubmit={handleSubmit} >
 
-            <h4>Dont have an account</h4>
-            
-            <FormInput
-             label='Email'
-             name='email'
-             type='text'
-             required
-             onChange={handleChange} 
-             value={email}
-            />
+                <h4>Dont have an account</h4>
+                
+                <FormInput
+                label='Email'
+                name='email'
+                type='text'
+                required
+                onChange={handleChange} 
+                value={email}
+                />
 
-            <FormInput
-             label='Display Name'
-             name='displayName'
-             type='text'
-             required
-             onChange={handleChange} 
-             value={displayName}
-            />
+                <FormInput
+                label='Display Name'
+                name='displayName'
+                type='text'
+                required
+                onChange={handleChange} 
+                value={displayName}
+                />
 
 
-            <FormInput
-             label='Password'
-             name='password'
-             type='text'
-             required
-             onChange={handleChange} 
-             value={password}
-            />
+                <FormInput
+                label='Password'
+                name='password'
+                type='password'
+                required
+                onChange={handleChange} 
+                value={password}
+                />
 
-            <FormInput
-             label='Confirm Password'
-             name='confirmPassword'
-             type='text'
-             required
-             onChange={handleChange} 
-             value={confirmPassword}
-            />
+                <FormInput
+                label='Confirm Password'
+                name='confirmPassword'
+                type='password'
+                required
+                onChange={handleChange} 
+                value={confirmPassword}
+                />
 
-            <BaseButton type="submit" >Sign Up</BaseButton>
+                <BaseButton type="submit" >Sign Up</BaseButton>
 
-            <GoogleSignInButton onClick={() => logGoogleUser()}>sign in with google</GoogleSignInButton>
 
-            <Link to="/signin" style={{textDecoration:'none'}} ><InvertedButton>already have an account?</InvertedButton></Link>
+            </Form>
 
-        </Form>
+            <Form>
+                <GoogleSignInButton onClick={() => logGoogleUser()}>sign in with google</GoogleSignInButton>
+
+                <Link to="/signin" style={{textDecoration:'none'}} ><InvertedButton>already have an account?</InvertedButton></Link>
+            </Form>
+        </>
         
     )
 }
