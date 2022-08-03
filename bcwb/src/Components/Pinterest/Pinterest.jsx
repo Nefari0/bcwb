@@ -8,7 +8,8 @@ const Pinterest= (props) => {
         display:'flex',
         flexDirection:'column',
         width:'100%',
-        alignItems:'center'
+        alignItems:'center',
+        textDecoration:'none'
 }
 
     useEffect(() => {
