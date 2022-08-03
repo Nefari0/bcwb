@@ -19,7 +19,6 @@ const Admin = (props) => {
     
     return(
         <main className="admin">
-            <button onClick={resetAccess} >logout admin</button>
             <CreateRecipe />
             {props.recipes.isLoading ? <Spinner /> : null}
             <ViewRecipes recipes={props.recipes} />
