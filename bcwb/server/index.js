@@ -3,6 +3,7 @@ const express = require('express')
 const session = require('express-session')
 const massive = require('massive');
 const path = require('path');
+const categoryController = require('./controller/categoryController');
 const { deletePhoto } = require('./controller/photosController');
 const photosController = require('./controller/photosController');
 const recipeController = require('./controller/recipeController');
@@ -56,6 +57,11 @@ app.put('/api/notes/edit',recipeController.editNote)
 app.post('/api/notes/create',recipeController.createNote)
 // --- Category Images --- //
 app.get('/api/category/images/get/all/',photosController.getCategoryPhotos)
+// --- Category Items --- //
+app.get('/api/category/get/all', categoryController.getAllCategories)
+app.post('/api/category/add', categoryController.addCategory)
+app.put('/api/category/edit', categoryController.editCategory)
+app.delete('/api/category/delete/:category_id',categoryController.deleteCategories)
 // --------------------------------------------------- //
 
 // --- Server --- //
