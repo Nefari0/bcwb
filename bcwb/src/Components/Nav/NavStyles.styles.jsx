@@ -1,6 +1,8 @@
 import styled, { css } from 'styled-components';
 import { colors } from '../Styles/colors';
+import { device } from '../Styles/queries';
 
+const { tablet,mobileM,mobileL } = device
 const { baseColor } = colors
 
 
@@ -13,19 +15,44 @@ transition: 300ms ease all;
 export const NavBar = styled.nav`
   list-style-type: none;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
   height: 300px;
-  min-width:300px;
+  min-width:105%;
   overflow:hidden;
-  // box-shadow: 0 0 5px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.65);
   margin-bottom:20px;
 
-  @media (max-width:800px){
-    height:200px;
+  i,
+  span {
+    margin:50px;
+    @media ${mobileL} {
+      display:none;
+    }
   }
 
-  @media (max-width:400px) {
+  i {
+    margin:75px;
+    position:absolute;
+    color: ${baseColor}
+    width:50px;
+    top:60px;
+    right:200px;
+    font-size:24px;
+    text-decoration: underline;
+
+    @media ${tablet} {
+      top:-40px;
+      right:140px;
+    }
+  }
+
+  @media ${tablet} {
+    height:100px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0);
+  }
+
+  @media ${mobileM} {
     height:100px;
   }
 `
@@ -58,7 +85,7 @@ export const MobileMenu = styled.div`
 
 export const LogoBox = styled.img`
   max-width:500px;
-  @media (max-width:800px){
-    max-width:600px;
+  @media ${tablet}{
+    max-width:300px;
   }
 `
