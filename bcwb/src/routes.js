@@ -1,5 +1,5 @@
 import { Switch,Routes,Route,BrowserRouter as Router } from 'react-router-dom'
-import Admin from './Components/Admin/Admin'
+import Admin from './Components/Admin/Admin.component'
 import Home from './Components/Home/Home'
 import Recipe from './Components/Recipe/Recipe'
 import SignUp from './Components/Authentication/SignUp/SignUp'
