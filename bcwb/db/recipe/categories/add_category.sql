@@ -3,3 +3,5 @@ VALUES (
     $1,
     $2
 )
+
+RETURNING *;
