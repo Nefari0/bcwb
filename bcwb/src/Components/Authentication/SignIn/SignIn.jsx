@@ -104,7 +104,7 @@ const SignIn = (props) => {
 
         {/* --- SIGN IN WITH GOOGLE / CREATE NEW ACCOUNT */}
         <Form>
-            <GoogleSignInButton onClick={() => logGoogleUser()}>sign in with google</GoogleSignInButton>
+            <GoogleSignInButton onClick={logGoogleUser}>sign in with google</GoogleSignInButton>
             <Link to="/signup" style={{textDecoration:'none'}} ><InvertedButton>Dont have an account?</InvertedButton></Link>
         </Form>
         </>
