@@ -33,7 +33,7 @@ const Nav = () => {
         <NavBar>
 
             <Link style={{maxWidth:'500px'}} to={`/`} >
-                <LogoBox style={{backgroundColor:''}} src={Logo} />
+                <LogoBox src={Logo} />
             </Link>
 
             {currentUser != null && access.getAccess(currentUser.uid) === "ACCESS_GRANTED" ? 
