@@ -4,7 +4,7 @@ import { colors } from '../Styles/colors';
 import { fonts } from '../Styles/fonts';
 import { device } from '../Styles/queries';
 
-const { mobileL,mobileM,mobileS } =device
+const { tablet,mobileL } =device
 const { cursive } = fonts
 const { baseColor,white,darkText } = colors
 
@@ -38,10 +38,6 @@ export const BaseButton = styled.button`
     margin-bottom:15px;
     width:90%;
     padding: 0 10px 0 10px;
-  }
-
-  @media ${mobileS} {
-    font-size:12px;
   }
 `;
 
@@ -81,18 +77,18 @@ export const ButtonSpinner = styled(SpinnerContainer)`
 ButtonSpinner.displayName = 'ButtonSpinner';
 
 export const DecoButtonWrapper =  styled.span`
-  opacity:.5;
+  opacity:.7;
   position:relative;
   height:50px;
   max-width:165px;
   min-width:165px;
   border: solid 2px ${darkText}
 
-  @media ${mobileL} {
-    -webkit-transform: scale(.5);
-    -ms-transform: scale(.5);
-    transform: scale(.5);
-    position:absolute;
+  @media ${tablet} {
+    -webkit-transform: scale(.6);
+    -ms-transform: scale(.6);
+    transform: scale(.6);
+    margin:-30px
   }
 `
 // --- DecoButtonWrapper uses decoButton.styles.js in jsx for styling to work --- //
