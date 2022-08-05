@@ -18,13 +18,18 @@ export const RECIPES = {
     DELETE_NOTE:'/api/notes/delete/one/',
     PUT_NOTE:'/api/notes/edit',
     CREATE_NOTE:'/api/notes/create',
-
 }
 
 export const PHOTOS = {
     GET_PHOTOS_WITH_URL:'/api/photos/get/url/',
     EDIT_PHOTO:'/api/photos/update',
-
     // --- Category Images --- //
     GET_CATEGORY_IMAGES:'/api/category/images/get/all',
+}
+
+export const CATEGORIES = {
+    GET_ALL_CATEGORIES:'/api/category/get/all',
+    ADD_CATEGORY:'/api/category/add',
+    EDIT_CATEGORY:'/api/category/edit',
+    DELETE_CATEGORY:'/api/category/delete/',
 }
