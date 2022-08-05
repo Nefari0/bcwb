@@ -7,14 +7,15 @@ import { Link } from 'react-router-dom'
 import { styles } from '../Styles/customStyles'
 import { BaseButton,DecoButtonWrapper } from '../Form/Button.styles'
 import { NavLink,DesktopMenu,MobileMenu,NavBar,LogoBox } from './NavStyles.styles'
-import Logo from '../Assets/Brittanys-Culinary-Creations-v1.png'
+import Logo from '../Assets/Brittanys-Culinary-Creations-v3.png'
 
 const { decoButton } = styles
 
 const Nav = () => {
 
-    const [ isMenuClosed,setMenu ] = useState(true)
-    const menuItems = ['Home','About','Recipes']
+    // *** REMOVED PENDING DESIGN UPDATES *** //
+    // const [ isMenuClosed,setMenu ] = useState(true)
+    // const menuItems = ['Home','About','Recipes']
         
     const signOutHandler = async () => {
         await signOutUser()
@@ -23,12 +24,17 @@ const Nav = () => {
 
     const { currentUser,setCurrentUser } = useContext(UserContext)
 
-    const  mappedItems = menuItems.map((el,i) => {
-        return <NavLink onClick={() => setMenu(!isMenuClosed)} key={i}>{el}</NavLink>
-    })
+    // *** REMOVED PENDING DESIGN UPDATES *** //
+    // const  mappedItems = menuItems.map((el,i) => {
+    //     return <NavLink onClick={() => setMenu(!isMenuClosed)} key={i}>{el}</NavLink>
+    // })
 
     return(
         <NavBar>
+
+            <Link style={{maxWidth:'500px'}} to={`/`} >
+                <LogoBox style={{backgroundColor:''}} src={Logo} />
+            </Link>
 
             {currentUser != null && access.getAccess(currentUser.uid) === "ACCESS_GRANTED" ? 
 
@@ -37,8 +43,6 @@ const Nav = () => {
             null
 
             }
-
-            <Link to={`/`} ><LogoBox src={Logo} /></Link>
 
             <DecoButtonWrapper>
                 {currentUser ? 
