@@ -15,10 +15,10 @@ transition: 300ms ease all;
 export const NavBar = styled.nav`
   list-style-type: none;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
   height: 300px;
-  min-width:105%;
+  min-width:100%;
   overflow:hidden;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.65);
   margin-bottom:20px;
@@ -42,8 +42,9 @@ export const NavBar = styled.nav`
     text-decoration: underline;
 
     @media ${tablet} {
-      top:-40px;
-      right:140px;
+      font-size:16px;
+      top:-35px;
+      right:125px;
     }
   }
 
@@ -85,6 +86,8 @@ export const MobileMenu = styled.div`
 
 export const LogoBox = styled.img`
   max-width:500px;
+  overflow:none;
+  margin:none;
   @media ${tablet}{
     max-width:300px;
   }
