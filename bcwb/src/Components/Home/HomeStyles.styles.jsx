@@ -6,6 +6,8 @@ const { cursive } = fonts
 const { darkText } = colors
 
 export const SectionText = styled.em`
+position:relative;
+    width:99%;
     text-align:left;
     color:${darkText}
     border-bottom: solid 1px ${darkText}
