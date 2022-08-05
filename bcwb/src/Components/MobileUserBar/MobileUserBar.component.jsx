@@ -21,16 +21,21 @@ export const MobileUserBar = (props) => {
     return(
         <UserHeader>
 
+            {/*** ACCESS TO ADMIN LINK IF APPLICABLE ***/}
             {currentUser != null && access.getAccess(currentUser.uid) === "ACCESS_GRANTED" ? 
 
-            <DecoButtonWrapper style={{marginLeft:'100px'}} ><Link to="/admin"><BaseButton style={decoButton} >Admin</BaseButton></Link></DecoButtonWrapper>
+            <DecoButtonWrapper >
+                <Link to="/admin">
+                    <BaseButton style={decoButton} >Admin</BaseButton>
+                </Link>
+            </DecoButtonWrapper>
             : 
             null
 
             }
+            {/* ************************************** */}
  
             <DecoButtonWrapper>
-
                 {currentUser ?
                 <BaseButton style={decoButton} onClick={signOutHandler} >sign out</BaseButton>
                 :
@@ -38,7 +43,6 @@ export const MobileUserBar = (props) => {
                     <BaseButton style={decoButton} >sign in</BaseButton>
                 </Link>
                 }
-
             </DecoButtonWrapper>
  
         </UserHeader>

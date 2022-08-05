@@ -8,12 +8,10 @@ const { baseColor,secondaryColor,mobileLMin,yellowPaper,lightPaper } = colors
 
 export const UserHeader = styled.header`
 
-    // max-width:300px;
+    min-width:300px;
     height:50px;
-    // background-color:${baseColor}
-    // opacity:.75;
     display:flex;
-    // justify-content:center;
+    justify-content:center;
     align-items:center;
     margin:0px 0px 10px 0px;
     
@@ -23,8 +21,9 @@ export const UserHeader = styled.header`
 
     span {
         @media ${mobileL} {
-            // margin-left:50px;
-            // left
+            position:absolute
+            margin-right:200px;
+            
         }
     }
 `

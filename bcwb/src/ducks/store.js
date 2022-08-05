@@ -7,9 +7,9 @@ import recipeReducer from './recipeReducer'
 const rootReducer = combineReducers({
     characters: breakingBadReducer,
     recipes:recipeReducer
-})
+});
 
 export default createStore(
     rootReducer,
     composeWithDevTools(applyMiddleware(reduxPromiseMiddleware))
-)
+);

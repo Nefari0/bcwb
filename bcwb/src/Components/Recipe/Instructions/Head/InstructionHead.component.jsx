@@ -90,11 +90,11 @@ export const InstructionHead = (props) => {
     }
 
     // -- Updates the cover_photo_url according to the AddPhotos.jsx update function requirements -- //
-    const updateCoverImage = async (cover_image_url,styling) => {
+    const updateCoverImage = async (cover_image_url) => {
 
         const { title,description,pinterest_url,category,published,recipe_id,servings,prep_time,author } = formFields
 
-        await putItem(RECIPES.EDIT_RECIPE,{title,description,pinterest_url,category,published,recipe_id,servings,prep_time,cover_image_url,styling,author})
+        await putItem(RECIPES.EDIT_RECIPE,{title,description,pinterest_url,category,published,recipe_id,servings,prep_time,cover_image_url,author})
 
         return
     }

@@ -1,11 +1,13 @@
 import './Recipe.scss'
-import { useState,useEffect } from 'react'
+import { useState,useEffect,useContext } from 'react'
+import { UserContext } from '../Context/user.context'
 import axios from 'axios'
 import InstructionContainer from './Instructions/InstructionContainer'
 import Button from '../Form/Button'
 import { LongRow } from '../StyledComponents.styles'
 import { RECIPES } from '../../endpoints'
 import { deleteFromFB } from '../Admin/Photos/deleteFromFB'
+import access from '../../access'
 
 const Recipe = (props) => {
     const { recipe_id } = props.match.params
@@ -14,9 +16,16 @@ const Recipe = (props) => {
     const [ ingredients,setIngredients ] = useState([])
     const [ notes,setNotes ] = useState([])
 
+    const { currentUser,setCurrentUser } = useContext(UserContext)
+    
     // ******** testing only ********** //
     const [ isAdmin,setIsAdmin ] = useState(false)
     // ******** testing only ********** //
+    // const admin = currentUser != null && access.getAccess(currentUser.uid)
+    // console.log(access.getAccess(currentUser.uid))
+    // const adminUser = () => {
+    //     return (currentUser != null ? access.getAccess(currentUser.uid) : null)
+    // }
 
     useEffect(() => {getContent()},[])
 
@@ -65,12 +74,13 @@ const Recipe = (props) => {
     return(
         <main className='recipe-box' >
 
-            <LongRow>
+            {currentUser != null && access.getAccess(currentUser.uid) === "ACCESS_GRANTED" ? <LongRow>
                 <Button onClick={() => setIsAdmin(!isAdmin)} >Enter / Exit Admin View</Button>
                 {/* <Button onClick={executeDeleteRecipe} >Delete Recipe</Button> */}
-            </LongRow>
+            </LongRow> : null}
 
             {items[0] != undefined ?
+
             <InstructionContainer
             items={items} ingredients={ingredients}
             instructions={instructions}
@@ -80,7 +90,9 @@ const Recipe = (props) => {
             grabInstructions={grabInstructions}
             grabNotes={grabNotes}
             getItems={getItems}
-            /> : null}
+            />
+            
+            : null}
 
         </main>
     )
