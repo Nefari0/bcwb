@@ -3,11 +3,13 @@ import { useState,useEffect,useContext } from 'react'
 import { UserContext } from '../Context/user.context'
 import axios from 'axios'
 import InstructionContainer from './Instructions/InstructionContainer'
-import Button from '../Form/Button'
+import { BaseButton } from '../Form/Button.styles'
 import { LongRow } from '../StyledComponents.styles'
 import { RECIPES } from '../../endpoints'
 import { deleteFromFB } from '../Admin/Photos/deleteFromFB'
 import access from '../../access'
+import Confirmation from '../dialogues/confirmation.component'
+import { ErrorMessage } from '../dialogues/errorMessage.component'
 
 const Recipe = (props) => {
     const { recipe_id } = props.match.params
@@ -16,16 +18,13 @@ const Recipe = (props) => {
     const [ ingredients,setIngredients ] = useState([])
     const [ notes,setNotes ] = useState([])
 
-    const { currentUser,setCurrentUser } = useContext(UserContext)
+    const confirmDeleteMessage = 'Are you sure you want to permanently delete this recipe?'
+    const [ confirmDelete,setConfirmDelete ] = useState(null)
+
+    const { currentUser } = useContext(UserContext)
     
-    // ******** testing only ********** //
+    // ******** Editing recipe ********** //
     const [ isAdmin,setIsAdmin ] = useState(false)
-    // ******** testing only ********** //
-    // const admin = currentUser != null && access.getAccess(currentUser.uid)
-    // console.log(access.getAccess(currentUser.uid))
-    // const adminUser = () => {
-    //     return (currentUser != null ? access.getAccess(currentUser.uid) : null)
-    // }
 
     useEffect(() => {getContent()},[])
 
@@ -65,7 +64,7 @@ const Recipe = (props) => {
     const executeDeleteRecipe = async () => {
         const { cover_image_url } = items[0]
         await deleteFromFB(cover_image_url,null)
-        axios.post(RECIPES.DELETE_RECIPE,items).then(() => {
+        await axios.post(RECIPES.DELETE_RECIPE,items[0]).then(() => {
             props.history.push('/')
             
         })
@@ -74,9 +73,12 @@ const Recipe = (props) => {
     return(
         <main className='recipe-box' >
 
+            {confirmDelete ? <Confirmation closeMessage={setConfirmDelete} message={confirmDeleteMessage} functionToExecute={executeDeleteRecipe} /> : null}
+            {/* <ErrorMessage /> */}
+
             {currentUser != null && access.getAccess(currentUser.uid) === "ACCESS_GRANTED" ? <LongRow>
-                <Button onClick={() => setIsAdmin(!isAdmin)} >Enter / Exit Admin View</Button>
-                {/* <Button onClick={executeDeleteRecipe} >Delete Recipe</Button> */}
+                <BaseButton onClick={() => setIsAdmin(!isAdmin)} >{isAdmin ? 'exit edit mode' : 'enter edit mode' }</BaseButton>
+                <BaseButton onClick={() => setConfirmDelete(confirmDeleteMessage)} >Delete Recipe</BaseButton>
             </LongRow> : null}
 
             {items[0] != undefined ?
