@@ -6,16 +6,24 @@ import { device } from './Styles/queries';
 const { mobileL,tablet } = device
 const { lightPaper,baseColor } = colors
 
-export const Error = styled.div`
-  position:fixed;
-  top:40%;
-  width:500px;
-  background-color:grey;
-  color:#fff;
-  z-index:1;
-  border-radius:5px;
-  box-shadow: 0px 5px 20px -7px #000000;
-`;
+// export const Error = styled.div`
+//   position:fixed;
+//   top:40%;
+//   width:500px;
+//   background-color:grey;
+//   color:#fff;
+//   z-index:100000;
+//   border-radius:5px;
+//   padding:10px;
+//   display:flex;
+//   flex-direction:column;
+//   box-shadow: 0px 5px 20px -7px #000000;
+
+//   @media ${mobileL} {
+//     top:20%;
+//     width:295px;
+//   }
+// `;
 
 export const PortraitImage = styled.div`
 
