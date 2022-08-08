@@ -8,6 +8,18 @@ module.exports = {
     addCategory: async (req,res) => {
         const db = req.app.get('db')
         const {category,photo_url} = req.body
+
+        // -- Ensure category text field contains valid information -- //
+        if (category.split('').length < 1) {
+            return res.status(400).send('Please fill in the required text field')
+        }
+
+        // -- Check for existing name in categories
+        const existingCategory = await db.recipe.categories.get_category_by_name([category])
+        if (existingCategory[0]) {
+            return res.status(400).send(`${category} already exists`)
+        }
+
         const newCategory = await db.recipe.categories.add_category([category,photo_url])
         return res.status(200).send(newCategory)
     },
@@ -15,6 +27,12 @@ module.exports = {
     editCategory: async (req,res) => {
         const db = req.app.get('db')
         const { photo_url,category,category_id } = req.body
+
+        // -- Ensure category text field contains valid information -- //
+        if (category.split('').length < 1) {
+            return res.status(400).send('Please fill in the required text field')
+        }
+
         const newCategory = await db.recipe.categories.edit_category([category,photo_url,category_id])
         return res.status(200).send(newCategory)
     },
