@@ -5,7 +5,7 @@ import Instruction from "./Instruction";
 import Ingredient from "./Ingredient";
 import { Note } from "./Note";
 import { RECIPES } from "../../../../endpoints";
-import { ErrorMessage } from "../../../ErrorMessage/ErrorMessage";
+import { ErrorMessage } from "../../../dialogues/errorMessage.component";
 
 export const InstructionBody = (props) => {
     const { instructions,ingredients,items,grabIngredients,grabInstructions,isAdmin,notes,grabNotes } = props

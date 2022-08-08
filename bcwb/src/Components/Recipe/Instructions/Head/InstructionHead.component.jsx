@@ -6,18 +6,21 @@ import { deleteFromFB } from '../../../Admin/Photos/deleteFromFB'
 import { TextEditor } from "../../../Form/TextEditor"
 import { DetailGrid } from "./DetailGrid"
 import { PositionPhoto } from "../../../Admin/Photos/PositionPhoto"
-import { ErrorMessage } from "../../../ErrorMessage/ErrorMessage"
+import { ErrorMessage } from "../../../dialogues/errorMessage.component"
 import { RECIPES,PHOTOS } from "../../../../endpoints"
 import AddPhoto from "../../../Admin/Photos/AddPhotos"
 import Button from "../../../Form/Button"
 import FormInput from "../../../Form/FormInput"
 import Pinterest from "../../../Pinterest/Pinterest"
 import { BaseButton } from "../../../Form/Button.styles"
+import Confirmation from "../../../dialogues/confirmation.component"
 
 export const InstructionHead = (props) => {
     const { cover_image_url,title,description,pinterest_url,category,published,recipe_id,servings,prep_time,author } = props.items[0]
     const { isAdmin } = props
     const [ error,setError ] = useState(null)
+    const confirmDeletePhoto = "Do you want to permantently delete this photo?"
+    const [ confirmDelete,setConfirmDelete ] = useState(null)
 
     const [ formFields,setFormFields ] = useState({
         title:title,
@@ -109,6 +112,7 @@ export const InstructionHead = (props) => {
         return
     }
 
+    // -- Copy page URL when "share" button is clicked -- //
     const copy = () => {
         const el = document.createElement('input');
         el.value = window.location.href;
@@ -119,8 +123,20 @@ export const InstructionHead = (props) => {
         alert('Link copied to clipboard')
     }
 
+    const handleDeletePhoto = () => {
+        deleteFromFB(cover_image_url,updateCoverImage(null,null))
+    }
+
     return(
         <>
+
+            {confirmDelete ?
+            <Confirmation 
+                functionToExecute={handleDeletePhoto}
+                closeMessage={setConfirmDelete}
+                message={confirmDelete}
+            />
+            : null}
 
             <MainImage>
                 <img
@@ -151,12 +167,13 @@ export const InstructionHead = (props) => {
                 :
 
                 <>
-                    <button onClick={() => deleteFromFB(cover_image_url,updateCoverImage(null,null))} >
+                    {/* <button onClick={() => deleteFromFB(cover_image_url,updateCoverImage(null,null))} > */}
+                    <button onClick={() => setConfirmDelete(confirmDeletePhoto)} >
                         delete photo
                     </button>
               
                     <button onClick={(e) => putItem(PHOTOS.EDIT_PHOTO,photoPositions)} >Submit Photo Updates</button>
-                    <PositionPhoto move={repositionPhoto} />
+                    <PositionPhoto move={repositionPhoto} style={{position:'relative'}} />
                 </>
                 }
 
