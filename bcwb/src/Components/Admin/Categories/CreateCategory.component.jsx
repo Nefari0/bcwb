@@ -1,11 +1,11 @@
-import { deleteFromFB } from "../Photos/deleteFromFB"
 import axios from "axios"
-import { CreateCat } from "./Categories.styles"
-import FormInput from "../../Form/FormInput"
-import { BaseButton,InvertedButton } from "../../Form/Button.styles"
-import AddPhotos from '../Photos/AddPhotos'
-import { ThumbnailImage } from "../../StyledComponents.styles"
+import { deleteFromFB } from "../Photos/deleteFromFB"
 import { CATEGORIES } from "../../../endpoints"
+import { CreateCat } from "./Categories.styles"
+import { BaseButton,InvertedButton } from "../../Form/Button.styles"
+import { ThumbnailImage } from "../../StyledComponents.styles"
+import FormInput from "../../Form/FormInput"
+import AddPhotos from '../Photos/AddPhotos'
 
 const { ADD_CATEGORY,EDIT_CATEGORY,DELETE_CATEGORY } = CATEGORIES
 
@@ -16,12 +16,12 @@ const CreateCategory = (props) => {
         formFields,
         setFormFields,
         selectCat,
+        setError
         } = props
-
     const { category,category_id,photo_url } = formFields
-
         const putItem = async (e,url,object) => {
         e.preventDefault()
+
         await axios.put(url,object).then(res => {
             const { category,category_id,photo_url } = res.data[0]
             setFormFields({
@@ -30,10 +30,11 @@ const CreateCategory = (props) => {
                 photo_url:photo_url
             })
             
-        })
+        }).catch(err => setError(err.response.data))
     }
 
-    const postItem = async (e,object) => {
+    const postItem = async (e) => {
+
         e.preventDefault()
         await axios.post(ADD_CATEGORY,formFields).then(res => {
             const { category,category_id,photo_url } = res.data[0]
@@ -42,12 +43,12 @@ const CreateCategory = (props) => {
                 category_id:category_id,
                 photo_url:photo_url
             })
-        })
+        }).catch(err => setError(err.response.data))
     }
 
     const updateImage = async (img,e) => {
+        
         e.preventDefault()
-        console.log('hit update image',img)
         const { category,category_id } = formFields
         const updatedObject = {
             category:category,
