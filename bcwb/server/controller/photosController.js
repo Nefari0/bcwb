@@ -29,7 +29,7 @@ module.exports = {
         return res.status(200).send(photo)
     },
 
-    // deletePhoto: async (req,res) => {
+    // deleteById: async (req,res) => {
     //     const db = req.app.get('db')
     //     const { photo_id } = req.params
     //     const photo = await db.photos.delete_photo([photo_id])
@@ -39,16 +39,10 @@ module.exports = {
     deleteWithUrl: async (req,res) => {
         const db = req.app.get('db')
         const { url } = req.body
-        const existingPhoto = await db.photos.get_with_url([url])
 
-        if (!existingPhoto[0]) {
-            await db.photos.reset_photo_url([url])
-            return res.status(404).send('not found')
-        }
+        await db.photos.delete_with_url([url])
 
-        const deletedPhoto = await db.photos.delete_with_url([url])
-
-        return res.status(200).send(deletedPhoto)
+        return res.status(200).send('Photo has been deleted')
     },
 
     updatePhoto: async (req,res) => {
