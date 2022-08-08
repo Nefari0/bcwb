@@ -158,7 +158,8 @@ const Photos = (props) => {
                             position:'absolute',
                             left:`${position.x}px`,
                             top:`${position.y}px`,
-                            width:`${position.z}px`
+                            width:`${position.z}px`,
+                            zIndex:'1'
                     }}/>
                 </MainImage>
                 :
@@ -170,7 +171,6 @@ const Photos = (props) => {
                             left:`${position.x}px`,
                             top:`${position.y}px`,
                             width:`${position.z}px`,
-                            zIndex:'0'
                     }}/>
                 </LargeThumbnail>}
                 
