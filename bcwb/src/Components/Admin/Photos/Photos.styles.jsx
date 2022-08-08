@@ -10,6 +10,7 @@ export const AddPhotoContainer = styled.div`
   width: 300px;
   position: absolute;
   background-color: ${yellowPaper}
+  z-index:1;
   box-shadow:10px 5px 60px 10px rgba(36, 36, 36, 1);
 `
 
