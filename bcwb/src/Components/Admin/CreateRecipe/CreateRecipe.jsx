@@ -3,7 +3,7 @@ import { useState } from 'react'
 import FormInput from '../../Form/FormInput'
 import Button from '../../Form/Button'
 import axios from 'axios'
-import { ErrorMessage } from '../../ErrorMessage/ErrorMessage'
+import { ErrorMessage } from '../../dialogues/errorMessage.component'
 import { withRouter } from 'react-router'
 
 const defaultState = {
