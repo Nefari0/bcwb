@@ -5,6 +5,7 @@ import axios from "axios";
 import { BaseButton } from "../../Form/Button.styles";
 import CreateCategory from "./CreateCategory.component";
 import CatItem from "./CatItem.component";
+import { ErrorMessage } from "../../dialogues/errorMessage.component";
 
 const defaultState = {
     category:'',
@@ -12,13 +13,13 @@ const defaultState = {
     category_id:null,
 }
 
-
 const { GET_ALL_CATEGORIES } = CATEGORIES
 
 const ViewCategories = () => {
 
     const [ items,setItems ] = useState([])
     const [formFields, setFormFields] = useState(null);
+    const [ error,setError ] = useState(null)
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -56,7 +57,7 @@ const ViewCategories = () => {
         <CatView>
 
             <BaseButton onClick={() => setFormFields(defaultState)} >add new</BaseButton>
-
+            {error ? <ErrorMessage error={error} setError={setError} /> : null}
             {formFields ?
 
             <CreateCategory
@@ -64,6 +65,8 @@ const ViewCategories = () => {
                 formFields={formFields}
                 setFormFields={setFormFields}
                 selectCat={selectCat}
+                error={error}
+                setError={setError}
             />
 
             : null}
