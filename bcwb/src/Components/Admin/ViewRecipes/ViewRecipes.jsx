@@ -1,6 +1,5 @@
 import axios from "axios"
 import { useState,useEffect } from "react"
-import Recipe from "../../Recipe/Recipe"
 import { RecipeListItem } from "./RecipeListItem"
 import { Link } from 'react-router-dom'
 
