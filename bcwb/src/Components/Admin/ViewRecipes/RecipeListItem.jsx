@@ -7,7 +7,7 @@ export const RecipeListItem = (props) => {
 
     return (
         <>
-            <ThumbnailImage><img src={items.cover_image_url} small={'small'} /></ThumbnailImage>
+            <ThumbnailImage><img src={items.cover_image_url} /></ThumbnailImage>
             <h4>{items.title}</h4>
         </>
     )
