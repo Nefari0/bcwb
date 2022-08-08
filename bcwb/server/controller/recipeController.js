@@ -54,9 +54,8 @@ module.exports = {
     },
 
     deleteRecipe: async (req,res) => {
-        const { recipe_id,cover_image_url } = req.body[0]
+        const { recipe_id,cover_image_url } = req.body
         const db = req.app.get('db')
-        const url = cover_image_url
         // delete recipe intructions
         await db.recipe.instructions.delete_instruction_by_recipe_id([recipe_id])
         // delete recipe ingredients
