@@ -16,6 +16,8 @@ import { getStorage,ref,uploadBytesResumable,getDownloadURL } from 'firebase/sto
 import { PositionPhoto } from './PositionPhoto'
 import { AddPhotoContainer,LargeThumbnail } from './Photos.styles'
 import { BaseButton } from '../../Form/Button.styles'
+import { connect } from 'react-redux'
+import { setSpinner } from '../../../ducks/recipeReducer'
 const storage = getStorage(app)
  
 const Photos = (props) => {
@@ -99,9 +101,9 @@ const Photos = (props) => {
     }
 
     const addPhoto = async (url,e) => {
-
+        props.setSpinner(true)
         // get ref
-        const storageRef = await ref(storage, `${path}/${url.name}`)
+        const storageRef = await ref(storage, `${path}/${title}`)
 
         // add to firebase
         await uploadBytesResumable(storageRef,url)
@@ -114,6 +116,7 @@ const Photos = (props) => {
 
         // update cover photo if applicable
         if(updateDB != null){await updateDB(dlUrl,e)}
+        props.setSpinner(false)
         await setPreview(null)
     }
 
@@ -185,4 +188,10 @@ const Photos = (props) => {
     )
 }
 
-export default Photos
+function mapStateToProps(reduxState) {
+    return reduxState
+}
+
+export default connect(mapStateToProps, {setSpinner})(Photos)
+
+// export default Photos
