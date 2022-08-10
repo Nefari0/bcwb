@@ -9,6 +9,8 @@ import { RECIPES } from '../../endpoints'
 import { deleteFromFB } from '../Admin/Photos/deleteFromFB'
 import access from '../../access'
 import Confirmation from '../dialogues/confirmation.component'
+import { connect } from 'react-redux'
+import { setSpinner } from '../../ducks/recipeReducer'
 import { ErrorMessage } from '../dialogues/errorMessage.component'
 
 const Recipe = (props) => {
@@ -72,7 +74,6 @@ const Recipe = (props) => {
 
     return(
         <main className='recipe-box' >
-
             {confirmDelete ? <Confirmation closeMessage={setConfirmDelete} message={confirmDeleteMessage} functionToExecute={executeDeleteRecipe} /> : null}
             {/* <ErrorMessage /> */}
 
@@ -100,4 +101,8 @@ const Recipe = (props) => {
     )
 }
 
-export default Recipe
+function mapStateToProps(reduxState) {
+    return reduxState
+}
+
+export default connect(mapStateToProps, {setSpinner})(Recipe)
