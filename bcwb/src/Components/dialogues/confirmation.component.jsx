@@ -9,6 +9,7 @@ const Confirmation = (props) => {
         switch (params) {
             case 'yes':
                 functionToExecute(url);
+                closeMessage(null)
                 break
             case 'no':
                 closeMessage(null);
