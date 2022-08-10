@@ -8,6 +8,7 @@ export const SpinnerOverlay = styled.div`
   align-items: center;
   position:fixed;
   top:20%;
+  z-index:100000000;
 `;
 
 export const SpinnerContainer = styled.div`
