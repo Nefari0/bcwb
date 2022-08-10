@@ -3,12 +3,12 @@ import { BaseButton } from "../Form/Button.styles";
 
 const Confirmation = (props) => {
 
-    const { functionToExecute,closeMessage,message } = props
+    const { functionToExecute,closeMessage,message,url } = props
 
     const selectionHandler = (params) => {
         switch (params) {
             case 'yes':
-                functionToExecute();
+                functionToExecute(url);
                 break
             case 'no':
                 closeMessage(null);
