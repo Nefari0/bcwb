@@ -9,7 +9,7 @@ export const AddPhotoContainer = styled.div`
   height: 600px;
   width: 300px;
   position: absolute;
-  background-color: ${yellowPaper}
+  background-color: ${yellowPaper};
   z-index:1;
   box-shadow:10px 5px 60px 10px rgba(36, 36, 36, 1);
 `
@@ -41,7 +41,7 @@ export const LargeThumbnail = styled.div`
   margin:auto;
   height:200px;
   width:200px;
-  border: 2px solid ${baseColor}
+  border: 2px solid ${baseColor};
   border-radius: 50%;
   overflow: hidden;
   z-index:10;

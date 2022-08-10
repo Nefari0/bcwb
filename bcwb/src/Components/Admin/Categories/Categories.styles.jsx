@@ -9,7 +9,7 @@ export const CatView = styled.section`
     margin: auto;
     display:flex;
     flex-wrap:wrap;
-    border-top: solid 1px ${baseColor}
+    border-top: solid 1px ${baseColor};
 
     button {
         font-style:italic;
@@ -22,7 +22,7 @@ export const CatView = styled.section`
 export const CreateCat = styled.div`
     position:absolute;
     max-width:290px;
-    background-color:${yellowPaper}
+    background-color:${yellowPaper};
     box-shadow:10px 5px 60px 10px rgba(36, 36, 36, 1);
     z-index:1001;
     positon:relative;

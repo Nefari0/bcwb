@@ -11,8 +11,8 @@ export const Error = styled.div`
   top:40%;
   width:500px;
   margin:auto;
-  background-color:${yellowPaper}
-  color:${baseColor}
+  background-color:${yellowPaper};
+  color:${baseColor};
   z-index:100000;
   border-radius:5px;
   padding:10px;
