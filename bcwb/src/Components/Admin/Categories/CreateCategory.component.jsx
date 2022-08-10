@@ -6,7 +6,10 @@ import { BaseButton,InvertedButton } from "../../Form/Button.styles"
 import { ThumbnailImage } from "../../StyledComponents.styles"
 import FormInput from "../../Form/FormInput"
 import AddPhotos from '../Photos/AddPhotos'
+import { connect } from 'react-redux'
+import { setSpinner } from "../../../ducks/recipeReducer"
 
+// -- End points -- //
 const { ADD_CATEGORY,EDIT_CATEGORY,DELETE_CATEGORY } = CATEGORIES
 
 const CreateCategory = (props) => {
@@ -22,6 +25,7 @@ const CreateCategory = (props) => {
 
     const putItem = async (e,url,object) => {
         e.preventDefault()
+        props.setSpinner(true)
 
         await axios.put(url,object).then(res => {
             const { category,category_id,photo_url } = res.data[0]
@@ -31,12 +35,16 @@ const CreateCategory = (props) => {
                 photo_url:photo_url
             })
             
-        }).catch(err => setError(err.response.data))
+        }).catch(err => {
+            props.setSpinner(false)
+            setError(err.response.data)
+        })
     }
 
     const postItem = async (e) => {
-
         e.preventDefault()
+
+        props.setSpinner(true)
         await axios.post(ADD_CATEGORY,formFields).then(res => {
             const { category,category_id,photo_url } = res.data[0]
             setFormFields({
@@ -44,12 +52,18 @@ const CreateCategory = (props) => {
                 category_id:category_id,
                 photo_url:photo_url
             })
-        }).catch(err => setError(err.response.data))
+        }).catch(err => {
+            setError(err.response.data)
+            props.setSpinner(false)
+        })
+
+        props.setSpinner(false)
     }
 
     const updateImage = async (img,e) => {
-        
         e.preventDefault()
+
+        props.setSpinner(true)
         const { category,category_id } = formFields
         const updatedObject = {
             category:category,
@@ -57,21 +71,26 @@ const CreateCategory = (props) => {
             photo_url:img
         }
         await putItem(e,EDIT_CATEGORY,updatedObject)
-
+        props.setSpinner(false)
     }
 
     const deleteCategory = async () => {
+        props.setSpinner(true)
         try {
             await deleteFromFB(photo_url)
-        } catch (err) {console.log('There was an error',err.message)}
+        } catch (err) {
+            console.log('There was an error',err.message)
+            props.setSpinner(false)
+        }
 
-        try {
-            await axios.post('/api/photos/delete/url',photo_url)
-        } catch (err) {console.log('there was an error',err.message)}       
 
-        try {
-            await axios.delete(`${DELETE_CATEGORY}/${category_id}`)
-        } catch (err) {console.log('there was an error',err.message)}
+        await axios.post('/api/photos/delete/url',photo_url)
+ 
+
+
+        await axios.delete(`${DELETE_CATEGORY}/${category_id}`)
+
+        props.setSpinner(false)
         setError('Category has been deleted')
     }
 
@@ -125,4 +144,8 @@ const CreateCategory = (props) => {
     )
 }
 
-export default CreateCategory
+function mapStateToProps(reduxState) {
+    return reduxState
+}
+
+export default connect(mapStateToProps, {setSpinner})(CreateCategory)
