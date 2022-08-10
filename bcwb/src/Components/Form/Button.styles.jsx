@@ -1,12 +1,12 @@
 import styled, { css } from 'styled-components';
 import { SpinnerContainer } from '../Spinner/spinner.styles';
-import { colors } from '../Styles/colors';
+import { colors, baseGradient } from '../Styles/colors';
 import { fonts } from '../Styles/fonts';
 import { device } from '../Styles/queries';
 
 const { tablet,mobileL } =device
 const { cursive } = fonts
-const { baseColor,white,darkText } = colors
+const { baseColor,white,darkText,lightPaper,secondaryColor } = colors
 
 export const BaseButton = styled.button`
   min-width: 165px;
@@ -17,8 +17,9 @@ export const BaseButton = styled.button`
   line-height: 50px;
   padding: 0 25px 0 25px;
   font-size: 16px;
-  background-color: ${baseColor}
-  color: ${white}
+  background-color: ${baseColor};
+
+  color: ${white};
   text-transform: capitalize;
   ${cursive}
   border: none;
@@ -26,11 +27,13 @@ export const BaseButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: 300ms ease all;
 
   &:hover {
-    background-color: white;
+    background: white;
     color: black;
-    border: 1px solid ${baseColor}
+    border: 1px solid ${baseColor};
+    transition: 300ms ease all;
   }
 
   @media ${mobileL} {
@@ -56,9 +59,9 @@ export const GoogleSignInButton = styled(BaseButton)`
 GoogleSignInButton.displayName = 'GoogleSignInButton';
 
 export const InvertedButton = styled(BaseButton)`
-  background-color: ${white}
-  color: ${baseColor}
-  border: 1px solid ${baseColor}
+  background-color: ${white};
+  color: ${baseColor};
+  border: 1px solid ${baseColor};
 
   &:hover {
     background-color: ${baseColor}
@@ -82,7 +85,7 @@ export const DecoButtonWrapper =  styled.span`
   height:50px;
   max-width:165px;
   min-width:165px;
-  border: solid 2px ${darkText}
+  border: solid 2px ${darkText};
 
   @media ${tablet} {
     -webkit-transform: scale(.6);
@@ -95,3 +98,46 @@ export const DecoButtonWrapper =  styled.span`
 // --- e.i. <DecoButtonWrapper><BaseButton style={styles.decoButton}> --- //
 
 DecoButtonWrapper.displayName  = "DecoButtonWrapper"
+
+
+//  PROTPTYPING NEW DECOBUTTON
+export const DecoButtonWrapperPrototype =  styled.span`
+  margin: 0px 0px 16px 5px;
+  position:relative;
+  height:50px;
+  min-width:165px;
+  width:auto;
+  border: solid 2px ${darkText};
+  z-index:1;
+
+  button {
+    width:100%;
+    position:absolute;
+    right: -5px;
+    top: 5px;
+    opacity:.6;
+    font-size:18px;
+    z-index:0;
+    transition: 300ms ease all;
+    
+    &:hover {
+      transition: 300ms ease all;
+      right:0px;
+      top:0px;
+      background:white;
+      box-shadow:10px 5px 60px 10px rgba(6, 6, 6, .1);
+    }
+  }
+
+  @media ${mobileL} {
+    width:90%;
+    // -webkit-transform: scale(.6);
+    // -ms-transform: scale(.6);
+    // transform: scale(.6);
+    // margin:-30px
+  }
+`
+// --- DecoButtonWrapper uses decoButton.styles.js in jsx for styling to work --- //
+// --- e.i. <DecoButtonWrapper><BaseButton style={styles.decoButton}> --- //
+
+DecoButtonWrapperPrototype.displayName  = "DecoButtonWrapperPrototype"
