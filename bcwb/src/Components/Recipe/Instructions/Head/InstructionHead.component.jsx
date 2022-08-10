@@ -1,4 +1,6 @@
 import axios from "axios"
+import { connect } from "react-redux"
+import { setSpinner } from "../../../../ducks/recipeReducer"
 import { ShortRow,LongRow,MainImage } from '../../../StyledComponents.styles'
 import { DescriptionText } from "../../../StyledComponents.styles"
 import { useState,useEffect } from "react"
@@ -15,9 +17,22 @@ import Pinterest from "../../../Pinterest/Pinterest"
 import { BaseButton } from "../../../Form/Button.styles"
 import Confirmation from "../../../dialogues/confirmation.component"
 
-export const InstructionHead = (props) => {
-    const { cover_image_url,title,description,pinterest_url,category,published,recipe_id,servings,prep_time,author } = props.items[0]
+const InstructionHead = (props) => {
+    const {
+        cover_image_url,
+        title,
+        description,
+        pinterest_url,
+        category,
+        published,
+        recipe_id,
+        servings,
+        prep_time,
+        author
+    } = props.items[0]
+    
     const { isAdmin } = props
+
     const [ error,setError ] = useState(null)
     const confirmDeletePhoto = "Do you want to permantently delete this photo?"
     const [ confirmDelete,setConfirmDelete ] = useState(null)
@@ -123,14 +138,16 @@ export const InstructionHead = (props) => {
         alert('Link copied to clipboard')
     }
 
+    // --- Delete photo from Firebase - then PG database --- //
     const handleDeletePhoto = async () => {
+        props.setSpinner(true)
         await deleteFromFB(cover_image_url,null)
-        updateCoverImage(null)
+        await updateCoverImage(null)
+        props.setSpinner(false)
     }
 
     return(
         <>
-
             {confirmDelete ?
             <Confirmation 
                 functionToExecute={handleDeletePhoto}
@@ -267,3 +284,9 @@ export const InstructionHead = (props) => {
         </>
     )
 }
+
+function mapStateToProps(reduxState) {
+    return reduxState
+}
+
+export default connect(mapStateToProps, {setSpinner})(InstructionHead)
