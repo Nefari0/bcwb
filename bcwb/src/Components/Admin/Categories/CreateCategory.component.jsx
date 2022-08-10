@@ -19,7 +19,8 @@ const CreateCategory = (props) => {
         setError
         } = props
     const { category,category_id,photo_url } = formFields
-        const putItem = async (e,url,object) => {
+
+    const putItem = async (e,url,object) => {
         e.preventDefault()
 
         await axios.put(url,object).then(res => {
@@ -69,8 +70,16 @@ const CreateCategory = (props) => {
         } catch (err) {console.log('there was an error',err.message)}       
 
         try {
-            axios.delete(`${DELETE_CATEGORY}/${category_id}`)
+            await axios.delete(`${DELETE_CATEGORY}/${category_id}`)
         } catch (err) {console.log('there was an error',err.message)}
+        setError('Category has been deleted')
+    }
+
+    const handleDelete = async (e) => {
+        e.preventDefault()
+
+        await deleteCategory()
+        selectCat(e,null)
     }
 
     return(
@@ -99,12 +108,12 @@ const CreateCategory = (props) => {
             
             <>
                 {!photo_url ?
-                    <AddPhotos style={{position:'absolute',right:'100px'}} title={category} label={"Add photo"} updateDB={updateImage}/>
+                    <AddPhotos style={{position:'absolute',right:'100px'}} title={`category_name${category_id}/${category_id}`} label={"Add photo"} updateDB={updateImage} />
                 :
                     <ThumbnailImage style={{margin:'auto'}}><img src={photo_url} /></ThumbnailImage>
                 }
 
-                <InvertedButton onClick={deleteCategory} >delete category</InvertedButton>
+                <InvertedButton onClick={handleDelete} >delete category</InvertedButton>
             </>
             
             : null}
