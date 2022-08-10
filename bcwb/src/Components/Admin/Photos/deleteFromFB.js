@@ -1,10 +1,6 @@
 // ***************** Using deleteFromFB.js  ****************** //
-// The updateDB parameter is used to update any datebase an uploaded file might be associated with
-// An example would be adding the new image url to a database element
-// example:
-// axios.call(updateEndPoint,{items + url (from AddPhotos)})()
-
-// Any parameters with no data must be declared as null
+// -- Pass url of file to be deleted into function. This will automatically
+// -- delete from Firebase and Photos PG database
 // ********************************************************* //
 
 import { app } from '../../../base'
@@ -12,23 +8,23 @@ import { getStorage,ref,deleteObject } from 'firebase/storage'
 import axios from 'axios'
 const storage = getStorage(app)
 
-export const deleteFromFB = async (url,updateDB) => {
+export const deleteFromFB = async (url) => {
 
     // --- Get ref --- //
     const storageRef = await ref(storage, `${url}`)
 
-    // --- Delete from cloud --- //
+    // --- Delete from PG database -- //
+    const deleteFromDB = async (url) => {
+        await axios.post(`/api/photos/delete/url`,{url})
+    }
+
+
+    // --- Delete from cloud - then delete from db using "deleteFromDB()" --- //
     await deleteObject(storageRef).then(() => {
-        console.log('file deleted from db')
-    }).catch((error) => {
-        console.log('there was an error',error)
-    })
-
-    // --- Remove from photo DB --- //
-    await axios.post(`/api/photos/delete/url`,{url}).then(() => {
-
-        // --- Remove from foreign DB --- //
-        if (updateDB != null){updateDB(null)}
+        deleteFromDB(url)
+        return ('deleted from firebase')
+    }).catch(() => {
+        deleteFromDB(url)
     })
 
     return ('deleted')
