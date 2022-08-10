@@ -193,5 +193,3 @@ function mapStateToProps(reduxState) {
 }
 
 export default connect(mapStateToProps, {setSpinner})(Photos)
-
-// export default Photos
