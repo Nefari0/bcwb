@@ -8,6 +8,8 @@ import { connect } from 'react-redux'
 import { useEffect,useState } from 'react';
 import { AdminHeader,AdminBox } from './Admin.styles';
 import ViewCategories from './Categories/ViewCategories.component';
+import { ButtonsPrototype } from './Prototyping/buttons.component';
+import RecipeContextTesting from './Prototyping/recipes.components';
 
 const Admin = (props) => {
 
@@ -34,6 +36,8 @@ const Admin = (props) => {
                 <h4 >new recipe</h4>
                 <h4 onClick={() => changeView('VIEW_CATEGORIES')} >categories</h4>
             </AdminHeader>
+            <ButtonsPrototype />
+            {/* <RecipeContextTesting /> */}
             <CreateRecipe />
             {props.recipes.isLoading ? <Spinner /> : null}
             {currentView === 'VIEW_CATEGORIES' ? <ViewCategories /> : null}
