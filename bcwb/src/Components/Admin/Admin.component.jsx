@@ -1,7 +1,6 @@
 import './Admin.scss'
 import CreateRecipe from './CreateRecipe/CreateRecipe'
 import { ViewRecipes } from './ViewRecipes/ViewRecipes'
-import Spinner from '../Spinner/spinner.component';
 import {updateCharacters} from '../../ducks/breakingBadReducer';
 import { getRecipes } from '../../ducks/recipeReducer';
 import { connect } from 'react-redux'
@@ -36,10 +35,9 @@ const Admin = (props) => {
                 <h4 >new recipe</h4>
                 <h4 onClick={() => changeView('VIEW_CATEGORIES')} >categories</h4>
             </AdminHeader>
-            <ButtonsPrototype />
+            {/* <ButtonsPrototype /> */}
             {/* <RecipeContextTesting /> */}
             <CreateRecipe />
-            {props.recipes.isLoading ? <Spinner /> : null}
             {currentView === 'VIEW_CATEGORIES' ? <ViewCategories /> : null}
             {currentView === 'VIEW_RECIPES' ? <ViewRecipes recipes={props.recipes} /> : null}
         </AdminBox>
