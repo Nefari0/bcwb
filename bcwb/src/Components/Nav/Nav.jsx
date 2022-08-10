@@ -6,6 +6,7 @@ import access from '../../access'
 import { Link } from 'react-router-dom'
 import { styles } from '../Styles/customStyles'
 import { BaseButton,DecoButtonWrapper } from '../Form/Button.styles'
+import { DecoButton } from '../Form/DecoButton'
 import { NavLink,DesktopMenu,MobileMenu,NavBar,LogoBox } from './NavStyles.styles'
 import Logo from '../Assets/Brittanys-Culinary-Creations-v3.png'
 
@@ -44,17 +45,11 @@ const Nav = () => {
 
             }
 
-            <DecoButtonWrapper>
-                {currentUser ? 
-
-                <BaseButton style={decoButton} onClick={signOutHandler} >sign out</BaseButton>
-                :
-                <Link to="/signin">
-                    <BaseButton style={decoButton}>sign in</BaseButton>
-                </Link>
-
-                }
-            </DecoButtonWrapper>
+            {currentUser ?
+            <DecoButton clickFunc={signOutHandler} label={'sign out'} />
+            :
+            <DecoButton label={'sign in'} path={'/signin'} />
+            }
 
             {/* *** THESE FEATURES ARE TEMPORARILY DISABLED UNTIL DESIGN IS UPDATED *** */}
 
