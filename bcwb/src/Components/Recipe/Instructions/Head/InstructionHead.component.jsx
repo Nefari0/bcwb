@@ -87,7 +87,7 @@ export const InstructionHead = (props) => {
     }
 
     const handleClick = (e,name,val) => {
-        console.log('hit publish',name,val)
+
         e.preventDefault()
         setFormFields({ ...formFields, [name]:val})
     }
@@ -123,8 +123,9 @@ export const InstructionHead = (props) => {
         alert('Link copied to clipboard')
     }
 
-    const handleDeletePhoto = () => {
-        deleteFromFB(cover_image_url,updateCoverImage(null,null))
+    const handleDeletePhoto = async () => {
+        await deleteFromFB(cover_image_url,null)
+        updateCoverImage(null)
     }
 
     return(
@@ -133,6 +134,7 @@ export const InstructionHead = (props) => {
             {confirmDelete ?
             <Confirmation 
                 functionToExecute={handleDeletePhoto}
+                url={cover_image_url}
                 closeMessage={setConfirmDelete}
                 message={confirmDelete}
             />
@@ -159,7 +161,7 @@ export const InstructionHead = (props) => {
 
                 <AddPhoto
                 label={'add photo'}
-                title={title}
+                title={`recipe${recipe_id}/${recipe_id}`}
                 album={title}
                 updateDB={updateCoverImage}
                 />
@@ -167,7 +169,6 @@ export const InstructionHead = (props) => {
                 :
 
                 <>
-                    {/* <button onClick={() => deleteFromFB(cover_image_url,updateCoverImage(null,null))} > */}
                     <button onClick={() => setConfirmDelete(confirmDeletePhoto)} >
                         delete photo
                     </button>
@@ -179,8 +180,7 @@ export const InstructionHead = (props) => {
 
             </ShortRow> : null}
 
-            {/* -- DISPPLAY OR EDIT TITLE -- */}
-            {/* <ShortRow> */}
+            {/* -- DISPLAY OR EDIT TITLE -- */}
             { !isAdmin ?
             <>
                 <h3 style={{width:'65%'}}>{title}</h3>
