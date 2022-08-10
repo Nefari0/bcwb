@@ -1,4 +1,3 @@
-import '../Home.scss'
 import { useState,useEffect } from 'react'
 import { ThumbnailImage,ImageTag } from '../../StyledComponents.styles'
 import axios from 'axios'
