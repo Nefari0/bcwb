@@ -6,6 +6,7 @@ const initialState = {
 };
 
 const GET_RECIPES = "GET_RECIPES";
+const SET_SPINNER = "SET_SPINNER";
 
 export function getRecipes() {
   return {
@@ -13,6 +14,13 @@ export function getRecipes() {
     payload: axios.get('/api/recipes/get/all')
 
   };
+}
+
+export function setSpinner(val) {
+  return {
+    type: SET_SPINNER,
+    payload:val
+  }
 }
 
 export default function recipeReducer(state = initialState, action) {
@@ -33,7 +41,13 @@ export default function recipeReducer(state = initialState, action) {
             ...state,
             isLoading:false
         }
+    // -- Spinner / load screen controller -- //
+    case SET_SPINNER:
+        return {
+            ...state,
+            isLoading:action.payload
+        }
     default:
-      return state;
+        return state;
   }
 }
