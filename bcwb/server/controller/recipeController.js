@@ -17,6 +17,12 @@ module.exports = {
         const { recipe_id } = req.params
         const db = req.app.get('db')
         const recipe = await db.recipe.get_recipe_by_id([recipe_id])
+        const { cover_image_url } = recipe[0]
+        const checkPhoto = await db.photos.get_with_url(cover_image_url)
+        const existingPhoto = checkPhoto[0]
+        if (existingPhoto === undefined) {
+            await db.photos.reset_photo_url([cover_image_url])
+        }
         return res.status(200).send(recipe)
     },
 
