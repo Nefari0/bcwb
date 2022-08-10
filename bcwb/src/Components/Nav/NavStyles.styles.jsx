@@ -23,6 +23,15 @@ export const NavBar = styled.nav`
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.65);
   margin-bottom:20px;
 
+  span {
+    @media ${tablet} {
+      -webkit-transform: scale(.6);
+      -ms-transform: scale(.6);
+      transform: scale(.6);
+      margin:-30px
+    }
+  }
+
   i,
   span {
     margin:50px;
@@ -34,7 +43,7 @@ export const NavBar = styled.nav`
   i {
     margin:75px;
     position:absolute;
-    color: ${baseColor}
+    color: ${baseColor};
     width:50px;
     top:60px;
     right:200px;
