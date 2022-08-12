@@ -45,7 +45,6 @@ export const LandscapeImage = styled.div`
   margin:auto;
 `
 export const ThumbnailImage = styled.div`
-  opacity: .5;
   height: 200px;
   width: 200px;
   border-radius: 50%;
@@ -56,13 +55,11 @@ export const ThumbnailImage = styled.div`
   overflow: hidden;
   -webkit-transition: -webkit-transform 0.5s, opacity 0.5s;
   transition: transform 0.5s, opacity 0.5s;
-  opacity: 0.9;
   transition: all 1000ms;
   z-index: 0;
   margin: 0px 40px 0px 40px;
 
   &:hover {
-    opacity: 1;
     -webkit-transform: scale(1.15);
     -ms-transform: scale(1.15);
     transform: scale(1.15);
