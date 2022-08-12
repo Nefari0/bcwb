@@ -1,4 +1,3 @@
-import './Admin.scss'
 import CreateRecipe from './CreateRecipe/CreateRecipe'
 import { ViewRecipes } from './ViewRecipes/ViewRecipes'
 import {updateCharacters} from '../../ducks/breakingBadReducer';
