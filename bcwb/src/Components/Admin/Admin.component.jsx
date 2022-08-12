@@ -37,7 +37,7 @@ const Admin = (props) => {
             </AdminHeader>
             {/* <ButtonsPrototype /> */}
             {/* <RecipeContextTesting /> */}
-            <CreateRecipe />
+            <CreateRecipe changeView={changeView} />
             {currentView === 'VIEW_CATEGORIES' ? <ViewCategories /> : null}
             {currentView === 'VIEW_RECIPES' ? <ViewRecipes recipes={props.recipes} /> : null}
         </AdminBox>
