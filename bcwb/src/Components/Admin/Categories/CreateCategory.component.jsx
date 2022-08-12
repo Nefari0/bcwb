@@ -7,7 +7,7 @@ import { ThumbnailImage } from "../../StyledComponents.styles"
 import FormInput from "../../Form/FormInput"
 import AddPhotos from '../Photos/AddPhotos'
 import { connect } from 'react-redux'
-import { setSpinner } from "../../../ducks/recipeReducer"
+import { setSpinner,getCategories } from "../../../ducks/recipeReducer"
 
 // -- End points -- //
 const { ADD_CATEGORY,EDIT_CATEGORY,DELETE_CATEGORY } = CATEGORIES
@@ -19,7 +19,8 @@ const CreateCategory = (props) => {
         formFields,
         setFormFields,
         selectCat,
-        setError
+        setError,
+        udpateList
         } = props
     const { category,category_id,photo_url } = formFields
 
@@ -29,6 +30,7 @@ const CreateCategory = (props) => {
 
         await axios.put(url,object).then(res => {
             const { category,category_id,photo_url } = res.data[0]
+            props.getCategories()
             setFormFields({
                 category:category,
                 category_id:category_id,
@@ -47,6 +49,7 @@ const CreateCategory = (props) => {
         props.setSpinner(true)
         await axios.post(ADD_CATEGORY,formFields).then(res => {
             const { category,category_id,photo_url } = res.data[0]
+            props.getCategories()
             setFormFields({
                 category:category,
                 category_id:category_id,
@@ -88,10 +91,13 @@ const CreateCategory = (props) => {
  
 
 
-        await axios.delete(`${DELETE_CATEGORY}/${category_id}`)
+        await axios.delete(`${DELETE_CATEGORY}/${category_id}`).then(res => {
+        })
 
         props.setSpinner(false)
         setError('Category has been deleted')
+        props.getCategories()
+        udpateList()
     }
 
     const handleDelete = async (e) => {
@@ -129,7 +135,7 @@ const CreateCategory = (props) => {
                 {!photo_url ?
                     <AddPhotos style={{position:'absolute',right:'100px'}} title={`category_name${category_id}/${category_id}`} label={"Add photo"} updateDB={updateImage} />
                 :
-                    <ThumbnailImage style={{margin:'auto'}}><img src={photo_url} /></ThumbnailImage>
+                    <ThumbnailImage><img src={photo_url} /></ThumbnailImage>
                 }
 
                 <InvertedButton onClick={handleDelete} >delete category</InvertedButton>
@@ -148,4 +154,4 @@ function mapStateToProps(reduxState) {
     return reduxState
 }
 
-export default connect(mapStateToProps, {setSpinner})(CreateCategory)
+export default connect(mapStateToProps, {setSpinner,getCategories})(CreateCategory)
