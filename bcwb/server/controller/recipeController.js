@@ -28,7 +28,6 @@ module.exports = {
 
     getPublishedRecipes: async (req,res) => {
         const db = req.app.get('db')
-        console.log('hit backend')
         const recipes = await db.recipe.get_published_recipes()
         return res.status(200).send(recipes)
     },
@@ -40,7 +39,12 @@ module.exports = {
         const cover_image_url = null
         const db = req.app.get('db')
 
-        // -- Check if title already exists -- //
+        // --- Ensure the information provided is valid --- //
+        if (category.split('').length < 1) {
+            return res.status(400).send('Please select a category')
+        }
+
+        // --- Check if title already exists --- //
         const exists = await db.recipe.get_recipe_by_title([title])
 
         if (exists[0]){
