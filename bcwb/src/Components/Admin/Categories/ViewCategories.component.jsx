@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { CatView } from "./Categories.styles";
 import { CATEGORIES } from "../../../endpoints";
-import axios from "axios";
 import { BaseButton } from "../../Form/Button.styles";
 import CreateCategory from "./CreateCategory.component";
 import CatItem from "./CatItem.component";
 import { ErrorMessage } from "../../dialogues/errorMessage.component";
+import { connect } from 'react-redux'
+import { getCategories } from "../../../ducks/recipeReducer";
 
 const defaultState = {
     category:'',
@@ -13,9 +14,7 @@ const defaultState = {
     category_id:null,
 }
 
-const { GET_ALL_CATEGORIES } = CATEGORIES
-
-const ViewCategories = () => {
+const ViewCategories = (props) => {
 
     const [ items,setItems ] = useState([])
     const [formFields, setFormFields] = useState(null);
@@ -27,6 +26,7 @@ const ViewCategories = () => {
         setFormFields({ ...formFields, [name]: value });
       };
 
+    // --- Selecting a category item renders it in CreateCategory --- //
     const selectCat = (e,cat) => {
         e.preventDefault()
 
@@ -43,9 +43,17 @@ const ViewCategories = () => {
         } else setFormFields(null)
     }
 
+    // --- Fetch categories --- //
+    const setCategories = async () => {
+        const response = await props.getCategories()
+        const { data } = response.value
+        await setItems(data)
+    }
+
     useEffect(() => {
-        axios.get(GET_ALL_CATEGORIES).then(res => setItems(res.data))
+        setCategories()
     },[])
+
 
     const mappedItems = items.map(el => {
         return(
@@ -67,6 +75,7 @@ const ViewCategories = () => {
                 selectCat={selectCat}
                 error={error}
                 setError={setError}
+                udpateList={setCategories}
             />
 
             : null}
@@ -77,4 +86,8 @@ const ViewCategories = () => {
     )
 }
 
-export default ViewCategories
+function mapStateToProps(reduxState) {
+    return reduxState
+}
+
+export default connect(mapStateToProps,{getCategories})(ViewCategories)
