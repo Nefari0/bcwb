@@ -14,10 +14,10 @@ const Home = (props) => {
 
     return(
         <HomePage>
+            {/* <SectionText>Find Recipe</SectionText> */}
+            <FindRecipes />
             <SectionText>Latest Recipes</SectionText>
             <LatestRecipes />
-            <SectionText>Find Recipe</SectionText>
-            <FindRecipes />
         </HomePage>
     )
 }
