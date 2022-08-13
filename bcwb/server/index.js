@@ -58,7 +58,8 @@ app.post('/api/notes/create',recipeController.createNote)
 // --- Category Images --- //
 app.get('/api/category/images/get/all/',photosController.getCategoryPhotos)
 // --- Category Items --- //
-app.get('/api/category/get/all', categoryController.getAllCategories)
+app.get('/api/category/get/names',categoryController.getCategoryNames)
+app.get('/api/category/get/all/photos', categoryController.getCategoriesAndPhotos)
 app.post('/api/category/add', categoryController.addCategory)
 app.put('/api/category/edit', categoryController.editCategory)
 app.delete('/api/category/delete/:category_id',categoryController.deleteCategories)
