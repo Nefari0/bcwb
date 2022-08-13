@@ -1,5 +1,11 @@
 module.exports = {
-    getAllCategories: async (req,res) => {
+    getCategoriesAndPhotos: async (req,res) => {
+        const db = req.app.get('db')
+        const categories = await db.recipe.categories.get_categories_and_coordinates()
+        return res.status(200).send(categories)
+    },
+
+    getCategoryNames: async (req,res) => {
         const db = req.app.get('db')
         const categories = await db.recipe.categories.get_categories()
         return res.status(200).send(categories)
