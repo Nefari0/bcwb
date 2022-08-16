@@ -8,7 +8,10 @@ export const ErrorMessage = (props) => {
     return (
         <Error>
         <p>{error}</p>
-            <BaseButton onClick={() => {setError(null)}} >ok</BaseButton>
+            <BaseButton onClick={(e) => {
+                e.preventDefault()
+                setError(null)
+                }} >ok</BaseButton>
         </Error>
     )
 }
