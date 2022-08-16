@@ -6,7 +6,7 @@ import CreateCategory from "./CreateCategory.component";
 import CatItem from "./CatItem.component";
 import { ErrorMessage } from "../../dialogues/errorMessage.component";
 import { connect } from 'react-redux'
-import { getCategories } from "../../../ducks/recipeReducer";
+import { getCategories,getCategoryNames } from "../../../ducks/recipeReducer";
 
 const defaultState = {
     category:'',
@@ -45,7 +45,7 @@ const ViewCategories = (props) => {
 
     // --- Fetch categories --- //
     const setCategories = async () => {
-        const response = await props.getCategories()
+        const response = await props.getCategoryNames()
         const { data } = response.value
         await setItems(data)
     }
@@ -90,4 +90,4 @@ function mapStateToProps(reduxState) {
     return reduxState
 }
 
-export default connect(mapStateToProps,{getCategories})(ViewCategories)
+export default connect(mapStateToProps,{getCategories,getCategoryNames})(ViewCategories)
