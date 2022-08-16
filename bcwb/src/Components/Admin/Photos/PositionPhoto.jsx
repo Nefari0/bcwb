@@ -1,11 +1,11 @@
 import { PositionController,KeyStyling } from "./Photos.styles";
 
-export const PositionPhoto = ({style,move}) => {
+export const PositionPhoto = ({style,move,otherProps}) => {
 
-    const ControlNob = (tag,params,val) => {
+    const ControlNob = (tag,direction,val) => {
 
         return(
-        <KeyStyling onClick={(e) => move(e,val,params)} style={{width:'100px',margin:'0px'}} >
+        <KeyStyling onClick={(e) => move(e,val,direction)} style={{width:'100px',margin:'0px'}} >
             {tag}
         </KeyStyling>
         )   
