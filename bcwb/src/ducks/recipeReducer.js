@@ -1,18 +1,25 @@
 import axios from "axios";
 import { CATEGORIES,RECIPES } from "../endpoints";
 
-const { GET_ALL_CATEGORIES } = CATEGORIES
+const { GET_ALL_CATEGORIES,GET_CATEGORY_NAMES } = CATEGORIES
 const { GET_RECIPES } = RECIPES
 
 const initialState = {
   recipes: {},
   categories: {},
+  categoryNames:{},
   errorMessage:'',
   isLoading:false,
 };
 
+// RECIPES
 const FETCH_RECIPES = "FETCH_RECIPES";
+
+// CATEGORIES
 const FETCH_CATEGORIES = "FETCH_CATEGORIES";
+const FETCH_CATEGORY_NAMES = 'FETCH_CATEGORY_NAMES'
+
+// LOAD SCREEN
 const SET_SPINNER = "SET_SPINNER";
 
 export function getRecipes() {
@@ -23,6 +30,7 @@ export function getRecipes() {
   };
 };
 
+// --- Get all categories and photo coordinates - This is for published recipes --- //
 export function getCategories() {
   return {
     type: FETCH_CATEGORIES,
@@ -30,6 +38,15 @@ export function getCategories() {
   }
 }
 
+// --- Fetch All categories - This should only be used by admin --- // 
+export function getCategoryNames() {
+  return {
+    type: FETCH_CATEGORY_NAMES,
+    payload: axios.get(GET_CATEGORY_NAMES)
+  }
+}
+
+// --- Setting load screen remotely --- //
 export function setSpinner(val) {
   return {
     type: SET_SPINNER,
@@ -40,7 +57,7 @@ export function setSpinner(val) {
 export default function recipeReducer(state = initialState, action) {
   switch (action.type) {
 
-    //  --- Get all categories --- //
+    //  --- Get all categories anc coordinates --- //
     case FETCH_CATEGORIES + '_PENDING':
       return {
         ...state,
@@ -58,6 +75,25 @@ export default function recipeReducer(state = initialState, action) {
           isLoading:false,
           errorMessage:'not found'
         };
+
+    // --- Get category names --- //
+    case FETCH_CATEGORY_NAMES + '_PENDING':
+      return {
+        ...state,
+        isLoading:true,
+      };
+    case FETCH_CATEGORY_NAMES + '_FULFILLED':
+      return {
+        ...state,
+        categoryNames: action.payload.data,
+        isLoading:false
+      }
+    case FETCH_CATEGORY_NAMES + '_REJECTED':
+      return {
+        ...state,
+        isLoading:false,
+        errorMessage:'not found'
+      };
 
     // --- Get Recipes --- //
     case FETCH_RECIPES + "_PENDING":
