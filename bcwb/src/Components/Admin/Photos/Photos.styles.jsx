@@ -18,7 +18,6 @@ export const PositionController = styled.form`
 
   width:200px;
   height:200px;
-  background-color:green;
   position:absolute;
   z-index:1;
   display:flex;
@@ -27,7 +26,6 @@ export const PositionController = styled.form`
 `
 
 export const KeyStyling = styled.button`
-  position:absoute;
   max-width:100px;
   max-height:100px;
   font-size:12px;
