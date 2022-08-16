@@ -12,7 +12,6 @@ import { deleteFromFB } from '../Admin/Photos/deleteFromFB'
 import access from '../../access'
 import Confirmation from '../dialogues/confirmation.component'
 import { setSpinner } from '../../ducks/recipeReducer'
-// import { ErrorMessage } from '../dialogues/errorMessage.component'
 import RecipeHead from './RecipeHead/RecipeHead.component'
 
 const Recipe = (props) => {
@@ -45,8 +44,6 @@ const Recipe = (props) => {
         })
     }
 
-    
-
     const grabInstructions = () => {
         axios.get(`/api/instructions/${recipe_id}`).then(res => {
             setInstructions(res.data)
@@ -74,11 +71,18 @@ const Recipe = (props) => {
         })
     }
 
+    // -- Scroll down to recipe -- //
+    const jump = () => {
+        window.scrollTo({
+            top: 800,
+            behavior: 'smooth'
+        });
+    }
+
     return(
         <main className='recipe-box' >
             {confirmDelete ? <Confirmation closeMessage={setConfirmDelete} message={confirmDeleteMessage} functionToExecute={executeDeleteRecipe} /> : null}
-            {/* <ErrorMessage /> */}
-            {items[0] ? <RecipeHead items={items} /> : null}
+            {items[0] ? <RecipeHead items={items} jump={jump} /> : null}
             {currentUser != null && access.getAccess(currentUser.uid) === "ACCESS_GRANTED" ?
             <LongRow>
                 <BaseButton onClick={() => setIsAdmin(!isAdmin)} >{isAdmin ? 'exit edit mode' : 'enter edit mode' }</BaseButton>
