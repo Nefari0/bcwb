@@ -6,14 +6,17 @@ const { baseColor,darkText,lightPaper } = colors
 export const CoverContainer = styled.div`
     position:relative;
     min-height:400px;
-    min-width:280px;
-    max-width:300px;
+    max-width:290px;
     text-align:center;
     display:flex;
     flex-direction:column;
     align-items:center;
     background-color: ${lightPaper};
     border: solid 1px ${baseColor};
+    margin:auto;
+    overflow:hidden;
+    padding:5px;
+    
 
     img,
     h5,
@@ -41,7 +44,6 @@ export const CoverContainer = styled.div`
         h5 {
             margin:auto;
             background-color: ${lightPaper};
-            padding:0px 5px 0px 5px;
             width:60px;
             font-size: 12px;
             text-transform:uppercase;
@@ -50,10 +52,16 @@ export const CoverContainer = styled.div`
 
     strong {
         color: ${darkText};
-        min-width:10px;
-        margin:10px 0px 0px 0px;
-        padding-left:0px;
-        padding-bottom:10px;
+        padding:0px;
+        position:relative;
+
+        svg {
+            max-width:14px;
+            color:${baseColor};
+            position:absolute;
+            left:-18px;
+            bottom:1px;
+        }
     }
 
     button {
