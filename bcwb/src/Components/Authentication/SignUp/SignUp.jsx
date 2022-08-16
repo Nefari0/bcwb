@@ -20,20 +20,23 @@ const SignUp = (props) => {
     const [ formFields,setFormFields ] = useState(defaultState)
     const { email,password,displayName,confirmPassword } = formFields
 
-    const logGoogleUser = async () => {
+    const logGoogleUser = async (e) => {
+        e.preventDefault()
+
         const { user } = await signInWithGooglePopup();
         const userDocRef = await createUserDocumentFromAuth(user)
         props.history.push(`/home/${userDocRef.id}`)
     }
 
-    const handleChange = (event) => {
-        event.preventDefault()
-        const  { name,value } = event.target
+    const handleChange = (e) => {
+        e.preventDefault()
+        
+        const  { name,value } = e.target
         setFormFields({...formFields, [name]:value})
     }
 
-    const handleSubmit = async (event) => {
-        event.preventDefault()
+    const handleSubmit = async (e) => {
+        e.preventDefault()
         
         if(password != confirmPassword) {
             alert("Passwords do not match")

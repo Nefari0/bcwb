@@ -28,8 +28,8 @@ const SignIn = (props) => {
         setFormFields(defaultState)
     }
 
-    const logGoogleUser = async () => {
-
+    const logGoogleUser = async (event) => {
+        event.preventDefault()
         const { user } = await signInWithGooglePopup();
         const userDocRef = await createUserDocumentFromAuth(user)
 
