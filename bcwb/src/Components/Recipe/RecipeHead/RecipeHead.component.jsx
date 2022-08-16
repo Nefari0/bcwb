@@ -1,26 +1,33 @@
 import { RecipeHeader } from "./RecipeHead.styles"
-import { BaseButton,InvertedButton } from "../../Form/Button.styles"
-import { useEffect,useState } from "react"
+import { InvertedButton } from "../../Form/Button.styles"
 
 const RecipeHead = (props) => {
-    const { title,author } = props.items[0]
-    // const [recipe,setRecipe] = useState({})
-    
-    // useEffect(() => {setRecipe(props.items)},[])
-    // console.log(recipe)    
-    // const { title } = recipe[0]
+    const { title,author,date_created } = props.items[0]
+
+    const timeFormat = () => {
+        var months = [ "January","February","March","April","May","June","July","August","September","October","November","December"];
+        const timeSplit = date_created.split('-')
+
+        const day = timeSplit[2].split('T')[0]
+
+        const month = timeSplit[1].split('')
+        const monthIndex = (month[0] === '0' ? parseInt(month[1]) : parseInt(month)) -1
+
+        const year = timeSplit[0]
+
+        return (<><i> on</i>{`${months[monthIndex]} ${day}, ${year}`}</>)
+    }
+
     return (
         <RecipeHeader>
             <h1>{title}</h1>
-            <section style={{marginLeft:''}}>
-                {/* <div style={{textAlign:'right'}} > */}
-                
-                <strong><i>by    </i>{author}   <i> on   </i>text</strong>
-                {/* </div> */}
-               
-                {/* <strong> </strong> */}
+            <section>
+                <strong>
+                    {author.length < 1 ? null : <><i>by </i>{author}</>}
+                    {date_created ? timeFormat() : null}
+                </strong>
             </section>
-            <InvertedButton>jump to recipe</InvertedButton>
+            <InvertedButton onClick={() => props.jump()} >jump to recipe</InvertedButton>
         </RecipeHeader>
     )
 }
