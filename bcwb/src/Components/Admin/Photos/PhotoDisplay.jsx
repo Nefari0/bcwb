@@ -1,3 +1,5 @@
+// --- This component is for managing all BCWB photos --- //
+
 import { useState,useEffect } from "react"
 
 
