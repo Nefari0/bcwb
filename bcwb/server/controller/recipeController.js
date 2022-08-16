@@ -33,11 +33,12 @@ module.exports = {
     },
 
     createRecipe: async (req,res) => {
-        const { title,description,category,servings,hours,author} = req.body
+        const { title,description,category,servings,hours,author,minutes} = req.body
         const published = false
         const pinterest_url = null
         const cover_image_url = null
         const db = req.app.get('db')
+        const date_created = new Date
 
         // --- Ensure the information provided is valid --- //
         if (category.split('').length < 1) {
@@ -51,13 +52,21 @@ module.exports = {
             return res.status(409).send('This title already exists')
         }
 
-        const recipe = await db.recipe.create_recipe([title,description,pinterest_url,category,published,servings,hours,author,cover_image_url])
+        const recipe = await db.recipe.create_recipe([title,description,pinterest_url,category,published,servings,hours,author,cover_image_url,date_created,minutes])
         return res.status(200).send(recipe)
     },
 
     updateRecipe: async (req,res) => {
         const { title,description,pinterest_url,category,published,servings,hours,author,cover_image_url,recipe_id,minutes } = req.body 
         const db = req.app.get('db')
+
+        if (hours === '' || hours < 0) {
+            return res.status(400).send('Number of hours must be at least 0')
+        }
+
+        if (minutes === '' || minutes < 0) {
+            return res.status(400).send('Number of minutes must be at least 0')
+        }
 
         const recipe = await db.recipe.update_recipe([title,description,pinterest_url,category,published,cover_image_url,servings,hours,author,minutes,recipe_id])
         return res.status(200).send(recipe)
