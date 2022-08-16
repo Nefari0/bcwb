@@ -1,5 +1,5 @@
 
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { colors } from './Styles/colors';
 import { device } from './Styles/queries';
 
@@ -28,7 +28,9 @@ const { lightPaper,baseColor } = colors
 export const PortraitImage = styled.div`
 
  
-  margin:10px;
+  // margin:10px;
+  margin:auto;
+  background-color:red;
   height:400px;
   width:267px;
   border-radius:10px;
@@ -45,8 +47,8 @@ export const LandscapeImage = styled.div`
   margin:auto;
 `
 export const ThumbnailImage = styled.div`
-  height: 200px;
-  width: 200px;
+  height: 100px;
+  width: 100px;
   border-radius: 50%;
   border: 2px solid ${baseColor};
   -webkit-transform: scale(1);
@@ -57,7 +59,7 @@ export const ThumbnailImage = styled.div`
   transition: transform 0.5s, opacity 0.5s;
   transition: all 1000ms;
   z-index: 0;
-  margin: 0px 40px 0px 40px;
+  margin:5px;
 
   &:hover {
     -webkit-transform: scale(1.15);
@@ -67,17 +69,6 @@ export const ThumbnailImage = styled.div`
     z-index:1000;
   }
 
-  @media ${tablet} {
-    margin:auto;
-    height:150px;
-    width:150px
-  }
-
-  @media ${mobileL} {
-    height:100px;
-    width:100px;
-    margin: 0px 10px 0px 10px;
-  }
 `
 
 export const MainImage = styled.div`
@@ -107,12 +98,9 @@ export const ImageTag = styled.p`
   z-index:10;
   text-align:center;
   color:${lightPaper};
-
-  @media ${mobileL} {
-    height:15px;
-    font-size:12px;
-    bottom:0px;
-  }
+  height:15px;
+  font-size:12px;
+  bottom:0px;
 `
 
 export const DescriptionText = styled.p`
@@ -121,7 +109,6 @@ export const DescriptionText = styled.p`
   font-style:italic;
   font-size: 1.8rem;
   line-height: 1.8;
-  text-align:left;
 `
 
 export const ShortRow = styled.div`
