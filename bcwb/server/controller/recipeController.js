@@ -33,7 +33,7 @@ module.exports = {
     },
 
     createRecipe: async (req,res) => {
-        const { title,description,category,servings,prep_time,author} = req.body
+        const { title,description,category,servings,hours,author} = req.body
         const published = false
         const pinterest_url = null
         const cover_image_url = null
@@ -51,15 +51,15 @@ module.exports = {
             return res.status(409).send('This title already exists')
         }
 
-        const recipe = await db.recipe.create_recipe([title,description,pinterest_url,category,published,servings,prep_time,author,cover_image_url])
+        const recipe = await db.recipe.create_recipe([title,description,pinterest_url,category,published,servings,hours,author,cover_image_url])
         return res.status(200).send(recipe)
     },
 
     updateRecipe: async (req,res) => {
-        const { title,description,pinterest_url,category,published,servings,prep_time,author,cover_image_url,recipe_id } = req.body 
+        const { title,description,pinterest_url,category,published,servings,hours,author,cover_image_url,recipe_id,minutes } = req.body 
         const db = req.app.get('db')
 
-        const recipe = await db.recipe.update_recipe([title,description,pinterest_url,category,published,cover_image_url,servings,prep_time,author,recipe_id])
+        const recipe = await db.recipe.update_recipe([title,description,pinterest_url,category,published,cover_image_url,servings,hours,author,minutes,recipe_id])
         return res.status(200).send(recipe)
     },
 
