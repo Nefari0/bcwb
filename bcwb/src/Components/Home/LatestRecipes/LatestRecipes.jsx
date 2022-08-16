@@ -26,6 +26,7 @@ const LatestRecipes = () => {
             title:el.title,
             category:el.category,
             hours:el.hours,
+            minutes:el.minutes,
             servings:el.servings,
             author:el.author,
             recipe_id:el.id_recipe,
