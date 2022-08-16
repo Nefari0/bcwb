@@ -23,7 +23,7 @@ export const DetailGrid = (props) => {
         const returnVal = unitFormat(hours,'hour') + (hours > 0 && minutes > 0 ? 'and ' : ' ') + unitFormat(minutes,'minute')
       
         return (<p>{returnVal}</p>)
-      }
+    }
 
     return(
         <>
