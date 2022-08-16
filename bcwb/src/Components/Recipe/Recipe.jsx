@@ -2,6 +2,8 @@ import './Recipe.scss'
 import { useState,useEffect,useContext } from 'react'
 import { UserContext } from '../Context/user.context'
 import axios from 'axios'
+import { connect } from 'react-redux'
+
 import InstructionContainer from './Instructions/InstructionContainer'
 import { BaseButton } from '../Form/Button.styles'
 import { LongRow } from '../StyledComponents.styles'
@@ -9,9 +11,9 @@ import { RECIPES } from '../../endpoints'
 import { deleteFromFB } from '../Admin/Photos/deleteFromFB'
 import access from '../../access'
 import Confirmation from '../dialogues/confirmation.component'
-import { connect } from 'react-redux'
 import { setSpinner } from '../../ducks/recipeReducer'
-import { ErrorMessage } from '../dialogues/errorMessage.component'
+// import { ErrorMessage } from '../dialogues/errorMessage.component'
+import RecipeHead from './RecipeHead/RecipeHead.component'
 
 const Recipe = (props) => {
     const { recipe_id } = props.match.params
@@ -76,11 +78,14 @@ const Recipe = (props) => {
         <main className='recipe-box' >
             {confirmDelete ? <Confirmation closeMessage={setConfirmDelete} message={confirmDeleteMessage} functionToExecute={executeDeleteRecipe} /> : null}
             {/* <ErrorMessage /> */}
-
-            {currentUser != null && access.getAccess(currentUser.uid) === "ACCESS_GRANTED" ? <LongRow>
+            {items[0] ? <RecipeHead items={items} /> : null}
+            {currentUser != null && access.getAccess(currentUser.uid) === "ACCESS_GRANTED" ?
+            <LongRow>
                 <BaseButton onClick={() => setIsAdmin(!isAdmin)} >{isAdmin ? 'exit edit mode' : 'enter edit mode' }</BaseButton>
                 <BaseButton onClick={() => setConfirmDelete(confirmDeleteMessage)} >Delete Recipe</BaseButton>
             </LongRow> : null}
+
+            
 
             {items[0] != undefined ?
 
