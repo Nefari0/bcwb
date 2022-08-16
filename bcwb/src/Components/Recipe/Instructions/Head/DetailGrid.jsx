@@ -1,35 +1,48 @@
-import { Table,TableItem,SmallText,KeyWord } from "./InstructionHead.styles"
-import FormInput from "../../../Form/FormInput"
+import { Table,TableItem } from "./InstructionHead.styles"
 
 export const DetailGrid = (props) => {
 
-    const { isAdmin,formFields,handleChange } = props
-    const { category,prep_time,servings } = formFields
+    const { formFields } = props
+    const { category,hours,servings,minutes } = formFields
 
     const itemStyles ={ // Element specific styling
         borderRight:'1px solid #003300',
         fontWeight:'100'
     }
 
+    const timeFormats = () => {
+  
+        const multiUnit = (input) => {
+          return (input > 1 ? 's' : '')
+        }
+      
+        const unitFormat = (input,string) => {
+          return (input > 0 ? `${input} ${string}${multiUnit(input)} ` : '')
+        }
+      
+        const returnVal = unitFormat(hours,'hour') + (hours > 0 && minutes > 0 ? 'and ' : ' ') + unitFormat(minutes,'minute')
+      
+        return (<p>{returnVal}</p>)
+      }
+
     return(
         <>
           
             <Table>
                 <TableItem style={itemStyles} >
-                    <KeyWord>Bake time:</KeyWord>
-                    <SmallText>
-                        {prep_time} Hours
-                    </SmallText>
+                    <i>Bake time:</i>
+                    {timeFormats()}
+
                 </TableItem>
 
                 <TableItem style={itemStyles} >
-                    <KeyWord>Servings:</KeyWord>
-                    <SmallText>{servings}</SmallText>
+                    <i>Servings:</i>
+                    <p>{servings}</p>
                 </TableItem>
 
                 <TableItem >
-                    <KeyWord>Category:</KeyWord>
-                    <SmallText>{category}</SmallText>
+                    <i>Category:</i>
+                    <p>{category}</p>
                 </TableItem>
             </Table>
 
