@@ -21,7 +21,7 @@ const Cats = (props) => {
 
     const goToCreateNewCategory = (e) => {
         e.preventDefault()
-        changeView('VIEW_CATEGORIES')
+        if (changeView != null) {changeView('VIEW_CATEGORIES')}
         closeMenu(false)
     }
 
