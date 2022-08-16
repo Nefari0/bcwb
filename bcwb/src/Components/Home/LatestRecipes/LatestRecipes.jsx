@@ -5,12 +5,7 @@ import { PortraitImage } from '../../StyledComponents.styles';
 import { LatestRecipeItem } from './LatestRecipeItem';
 import { RECIPES } from '../../../endpoints';
 import { Link } from 'react-router-dom'
-
-const style = { // Styling for Content.js
-    width:'50px',
-    margin:'auto',
-
-}
+import Recipe from '../RecipeCover/recipe.component'
 
 const LatestRecipes = () => {
     const [ items,setItems ] = useState([])
@@ -26,11 +21,25 @@ const LatestRecipes = () => {
     }
 
     const mappedItems = items.map(el => {
-        return <Link to={`/recipe/${el.recipe_id}`} key={el.recipe_id} ><LatestRecipeItem  img={el.cover_image_url} id={el.id} title={el.title} /></Link>
+        const items = {
+            description:el.description,
+            title:el.title,
+            category:el.category,
+            hours:el.hours,
+            servings:el.servings,
+            author:el.author,
+            recipe_id:el.id_recipe,
+            cover_image_url:el.cover_image_url,
+            x:el.x,
+            y:el.y,
+            z:el.z
+        }
+        return <Link to={`/recipe/${el.recipe_id}`} key={el.recipe_id} style={{textDecoration:'none'}} ><Recipe items={items} /></Link>
     })
 
     return(
         <section>
+            {/* <Recipe /> */}
             {mappedItems}
         </section>
     )
