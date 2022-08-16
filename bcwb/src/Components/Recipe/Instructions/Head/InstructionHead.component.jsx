@@ -1,6 +1,12 @@
 import axios from "axios"
+
 import { connect } from "react-redux"
 import { setSpinner } from "../../../../ducks/recipeReducer"
+import { getCategories,getCategoryNames } from "../../../../ducks/recipeReducer"
+import { repositionPhoto } from "../../../Admin/Photos/repositionPhoto"
+
+import { RECIPES,PHOTOS } from "../../../../endpoints"
+
 import { ShortRow,LongRow,MainImage } from '../../../StyledComponents.styles'
 import { DescriptionText } from "../../../StyledComponents.styles"
 import { useState,useEffect } from "react"
@@ -9,13 +15,15 @@ import { TextEditor } from "../../../Form/TextEditor"
 import { DetailGrid } from "./DetailGrid"
 import { PositionPhoto } from "../../../Admin/Photos/PositionPhoto"
 import { ErrorMessage } from "../../../dialogues/errorMessage.component"
-import { RECIPES,PHOTOS } from "../../../../endpoints"
 import AddPhoto from "../../../Admin/Photos/AddPhotos"
 import Button from "../../../Form/Button"
 import FormInput from "../../../Form/FormInput"
 import Pinterest from "../../../Pinterest/Pinterest"
-import { BaseButton } from "../../../Form/Button.styles"
+import { BaseButton,InvertedButton } from "../../../Form/Button.styles"
 import Confirmation from "../../../dialogues/confirmation.component"
+import Cats from "../../../Admin/CreateRecipe/cats.component"
+import NewCatTextField from "./NewCatTextField.component"
+// import ViewCategoriesComponent from "../../../Admin/Categories/ViewCategories.component"
 
 const InstructionHead = (props) => {
     const {
@@ -27,15 +35,19 @@ const InstructionHead = (props) => {
         published,
         recipe_id,
         servings,
-        prep_time,
-        author
+        hours,
+        author,
+        minutes
     } = props.items[0]
     
     const { isAdmin } = props
 
-    const [ error,setError ] = useState(null)
+    const [error,setError] = useState(null)
     const confirmDeletePhoto = "Do you want to permantently delete this photo?"
-    const [ confirmDelete,setConfirmDelete ] = useState(null)
+
+    const [confirmDelete,setConfirmDelete] = useState(null)
+    const [openCategories,setOpenCategories] = useState(false)
+    const [createCat,setCreateCat] = useState(false)
 
     const [ formFields,setFormFields ] = useState({
         title:title,
@@ -46,14 +58,16 @@ const InstructionHead = (props) => {
         pinterest_url:pinterest_url,
         cover_image_url:cover_image_url,
         servings:servings,
-        prep_time,
-        author:author
+        hours,
+        author:author,
+        minutes:minutes,
     })
 
     const [ photoPositions,setPhotoPositions ] = useState({})
 
     useEffect(() => {
         getPosititions(cover_image_url)
+        props.getCategoryNames()
     },[])
     
     // --- Get styling/position parameters of photo by url --- //
@@ -72,27 +86,13 @@ const InstructionHead = (props) => {
         }).catch(err => console.log(err,'styling not found not found'))}
     }
 
-    // --- Adjust styling/position of photo - Utilized as props in PositionPhoto.jsx --- //
-    const repositionPhoto = (e,value,direction) => {
-        e.preventDefault()
-        switch (direction) {
-            case 'x':
-                var newValue = photoPositions.x + value
-                setPhotoPositions({...photoPositions,['x']:newValue,})
-                break;
-
-            case 'y':
-                var newValue = photoPositions.y + value
-                setPhotoPositions({...photoPositions,['y']:newValue})
-                break;
-            
-            case 'z':
-                var newValue = photoPositions.z + value
-                setPhotoPositions({...photoPositions, ['z']:newValue})
-                break;
-        }
-        return
+    // --- Adjust styling/position of photo - Utilized in props in PositionPhoto.jsx --- //
+    const positionHandler = (e,val,direction) => {
+        repositionPhoto(e,val,direction,photoPositions,setPhotoPositions)
     }
+
+    // --- Open / display new category text feild --- //
+    const newCategory = () => {setCreateCat(!createCat)}
 
     // -- Handles text input -- //
     const handleChange = (e) => {
@@ -101,18 +101,16 @@ const InstructionHead = (props) => {
         setFormFields({ ...formFields, [name]:value})
     }
 
-    const handleClick = (e,name,val) => {
-
-        e.preventDefault()
+    const handleClick = (name,val) => {
         setFormFields({ ...formFields, [name]:val})
     }
 
     // -- Updates the cover_photo_url according to the AddPhotos.jsx update function requirements -- //
     const updateCoverImage = async (cover_image_url) => {
 
-        const { title,description,pinterest_url,category,published,recipe_id,servings,prep_time,author } = formFields
+        const { title,description,pinterest_url,category,published,recipe_id,servings,hours,author } = formFields
 
-        await putItem(RECIPES.EDIT_RECIPE,{title,description,pinterest_url,category,published,recipe_id,servings,prep_time,cover_image_url,author})
+        await putItem(RECIPES.EDIT_RECIPE,{title,description,pinterest_url,category,published,recipe_id,servings,hours,cover_image_url,author})
 
         return
     }
@@ -125,6 +123,12 @@ const InstructionHead = (props) => {
             setError(err.response.data)
         })
         return
+    }
+    // -- General use POST request function -- //
+    const postItem = async (url,items) => {
+        await axios.post(url,items).then(() => {
+            props.getItems()
+        })
     }
 
     // -- Copy page URL when "share" button is clicked -- //
@@ -191,7 +195,7 @@ const InstructionHead = (props) => {
                     </button>
               
                     <button onClick={(e) => putItem(PHOTOS.EDIT_PHOTO,photoPositions)} >Submit Photo Updates</button>
-                    <PositionPhoto move={repositionPhoto} style={{position:'relative'}} />
+                    <PositionPhoto move={positionHandler} style={{position:'relative'}} />
                 </>
                 }
 
@@ -201,14 +205,19 @@ const InstructionHead = (props) => {
             { !isAdmin ?
             <>
                 <h3 style={{width:'65%'}}>{title}</h3>
-                <h4 style={{width:'65%'}} >{formFields.author}</h4>
+                <h5 style={{width:'65%',marginBottom:'40px'}} >{formFields.author}</h5>
             </>
             :
+            <>
             <form>
 
-                <button onClick={(e) => handleClick(e,'published',!formFields.published)}>click to {formFields.published ? 'un-publish' : 'publish'}</button>
+                <button onClick={(e) => {
+                        e.preventDefault()
+                        handleClick('published',!formFields.published)
+                    }
+                }>click to {formFields.published ? 'un-publish' : 'publish'}</button>
 
-                {error === null ? null :<ErrorMessage error={error}/> }
+                {error === null ? null : <ErrorMessage error={error} setError={setError} /> }
 
                 <FormInput
                     type="text"
@@ -228,20 +237,47 @@ const InstructionHead = (props) => {
                     onChange={handleChange}
                 />
 
-                <FormInput
-                    type="text"
-                    name="category"
-                    label="Category"
-                    value={formFields.category}
-                    onChange={handleChange}
+                {openCategories ?
+                <Cats
+                    categories={props.recipes.categoryNames}
+                    handleClick={handleClick}
+                    closeMenu={setOpenCategories}
+                    changeView={newCategory}
                 />
-                <FormInput
-                    type="number"
-                    name="prep_time"
-                    label="Prep time"
-                    value={formFields.prep_time}
-                    onChange={handleChange}
-                />
+                :
+                    (!createCat ?
+                    <InvertedButton onClick={() => setOpenCategories(!openCategories)} >
+                        {formFields.category === "" ? "select category" : formFields.category}
+                    </InvertedButton>
+                    :
+                    <NewCatTextField
+                        postItem={postItem}
+                        formFields={formFields}
+                        handleChange={handleChange}
+                        cancel={newCategory}
+                    />)
+                }
+
+                
+
+                <>
+                    <FormInput
+                        type="number"
+                        name="hours"
+                        label="Bake time hours"
+                        value={formFields.hours}
+                        onChange={handleChange}
+                    />
+
+                    <FormInput
+                        type="number"
+                        name="minutes"
+                        label="Bake time minutes"
+                        value={formFields.minutes}
+                        onChange={handleChange}
+                    />
+                </>
+
                 <FormInput
                     type="number"
                     name="servings"
@@ -251,13 +287,14 @@ const InstructionHead = (props) => {
                 />
 
             </form>
+            </>
             }
 
             {!isAdmin ? 
             <>
 
                 <DetailGrid formFields={formFields} setFormFields={setFormFields} handleChange={handleChange} isAdmin={isAdmin} />
-                <DescriptionText>{formFields.description}</DescriptionText>
+                <DescriptionText style={{marginTop:'20px',marginBotton:'20px'}}>{formFields.description}</DescriptionText>
 
             </>
             :
@@ -289,4 +326,4 @@ function mapStateToProps(reduxState) {
     return reduxState
 }
 
-export default connect(mapStateToProps, {setSpinner})(InstructionHead)
+export default connect(mapStateToProps, {setSpinner,getCategories,getCategoryNames})(InstructionHead)
