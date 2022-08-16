@@ -1,6 +1,9 @@
-import { PortraitImage,ImageTag } from "../../StyledComponents.styles"
+// import { PortraitImage,ImageTag,MainImage } from "../../StyledComponents.styles"
+// import { colors } from "../../Styles/colors"
 
-export const LatestRecipeItem = ({img,title,id}) => {
+// const { baseColor } = colors
 
-    return(<PortraitImage><img src={img} /><ImageTag>{title}</ImageTag></PortraitImage>)
-}
+// export const LatestRecipeItem = ({img,title,id}) => {
+
+//     return(<MainImage style={{position:'relative'}}><img src={img} /><ImageTag style={{color:`${baseColor}`}} >{title}</ImageTag></MainImage>)
+// }
