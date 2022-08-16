@@ -15,14 +15,11 @@ export const HomePage = styled.main`
     text-align: left;
 
     section {
-
         min-width: 300px;
         min-height: 50px;
         margin: auto;
         display:flex;
-        flex-wrap:wrap;
         flex-direction:row;
-        align-items: center;
         justify-content: space-around;
         
         @media (max-width:800px) {
