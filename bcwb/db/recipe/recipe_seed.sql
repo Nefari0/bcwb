@@ -6,7 +6,9 @@ CREATE TABLE recipe (
     published BOOLEAN,
     category TEXT,
     servings TEXT,
-    prep_time TEXT,
+    hours INTEGER,
+    minutes INTEGER,
+    date_created: TEXT,
     author TEXT,
     cover_image_url TEXT
 )
