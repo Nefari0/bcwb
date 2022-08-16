@@ -1,6 +1,7 @@
-import { CoverContainer } from "./recipe.styles"
+import { CoverContainer,RecipeRow } from "./recipe.styles"
 import { DescriptionText, PortraitImage, ShortRow, MainImage } from "../../StyledComponents.styles"
-import { BaseButton } from "../../Form/Button.styles"
+import { BaseButton,InvertedButton } from "../../Form/Button.styles"
+import { restaurant,clock } from "../../SVG"
 
 const RecipeCover = ({items}) => {
 
@@ -8,24 +9,38 @@ const RecipeCover = ({items}) => {
         description,
         title,
         category,
-        prep_time,
+        hours,
         servings,
         author,
         recipe_id,
-        cover_image_url
+        cover_image_url,
+        x,
+        y,
+        z
     } = items
+
+    const alignment = {
+        width:`300px`,
+        position:'absolute',
+        left:'-10px',
+        top:'-5px'
+
+    }
+    
 
     return(
         <CoverContainer>
-            <PortraitImage><img src={cover_image_url} style={{width:'100%'}} /></PortraitImage>
-            {/* <MainImage><img src={cover_image_url} /></MainImage> */}
+            <PortraitImage style={{marginTop:'20px'}}><img src={cover_image_url} style={alignment} /></PortraitImage>
+
             <span><h5>{category}</h5></span>
+
             <h3>{title}</h3>
-            {/* <ShortRow> */}
-                <div style={{display:'flex',justifyContent:'center'}}><strong>Serves{servings}</strong><strong>Prep Time {prep_time}</strong></div>
-            {/* </ShortRow> */}
+
+            <ShortRow style={{margin:'5px 0px 10px 0px',width:''}}>{restaurant()}<strong>{servings} Servings</strong>{clock()}<strong>Prep Time {hours} hour</strong></ShortRow>    
+  
             <DescriptionText>{description}</DescriptionText>
-            <BaseButton style={{width:'50%',margin:'auto'}}>Read more</BaseButton>
+            
+            <InvertedButton>Read more</InvertedButton>
         </CoverContainer>
     )
 }
