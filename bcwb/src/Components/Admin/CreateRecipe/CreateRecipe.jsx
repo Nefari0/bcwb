@@ -14,9 +14,10 @@ const defaultState = {
     title:'',
     description:'',
     category:'',
-    prep_time:0,
+    hours:0,
     servings:0,
     author:'',
+    minutes:0,
 }
 
 const CreateRecipe = (props) => {
