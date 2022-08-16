@@ -47,4 +47,8 @@ export const RecipeHeader = styled.header`
         text-transform:uppercase;
         letter-spacing:4px;
     }
+
+    button {
+        max-width:50%;
+    }
 `
