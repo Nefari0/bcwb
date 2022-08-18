@@ -26,6 +26,13 @@ module.exports = {
         return res.status(200).send(recipe)
     },
 
+    getByCategory: async (req,res) => {
+        const db = req.app.get('db')
+        const { category } = req.body
+        const categories = await db.recipe.get_by_category([category])
+        return res.status(200).send(categories)
+    },
+
     getPublishedRecipes: async (req,res) => {
         const db = req.app.get('db')
         const recipes = await db.recipe.get_published_recipes()
