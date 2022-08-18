@@ -26,7 +26,7 @@ export const LandscapeImage = styled.div`
 export const ThumbnailImage = styled.div`
   height: 100px;
   width: 100px;
-  border-radius: 50%;
+  border-radius:10px;
   border: 2px solid ${baseColor};
   -webkit-transform: scale(1);
   -ms-transform: scale(1);
@@ -55,13 +55,38 @@ export const MainImage = styled.div`
   height:200px;
   width:175px;
   overflow:hidden;
-  border-radius:5px;
+  border-radius:1px;
 
   @media ${mobileL}{
     position:relative;
     margin:auto;
-    right:0;
+    right:0px;
   }
+`
+
+export const PrototypeImageTag = styled.p`
+  
+  padding: 4.8rem;
+  position: relative;
+  overflow: hidden;
+
+
+&:after {
+  content: "Best value";
+  position: absolute;
+  top: 16%;
+  right: 70px;
+  text-transform: uppercase;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #fff;
+  background: rgba(0.863,0.982,0.839,.1);
+  backdrop-filter: blur(12px);
+  padding-left:20px;
+  padding-right:20px;
+  transform: rotate(45deg);
+  font-size:12px;
+}
 `
 
 export const ImageTag = styled.p`
