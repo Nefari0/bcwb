@@ -5,6 +5,7 @@ export const RECIPES = {
     GET_RECIPES:'/api/recipes/get/all',
     GET_PUBLISHED_RECIPES:'/api/recipes/get/published',
     DELETE_RECIPE:'/api/recipes/delete',
+    GET_BY_CATEGORY:'/api/recipes/get/categories',
     // -- Instruction End Points -- //
     POST_INSTRUCTION:'/api/instructions/add',
     DELETE_INSTRUCTION:'/api/instructions/delete/',
