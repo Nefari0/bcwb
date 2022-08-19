@@ -4,13 +4,13 @@ import { colors } from './Styles/colors';
 import { device } from './Styles/queries';
 
 const { mobileL } = device
-const { lightPaper,baseColor } = colors
+const { lightPaper,baseColor,secondaryColor,yellowPaper,darkText } = colors
 
 export const PortraitImage = styled.div`
   margin:auto;
   height:400px;
   width:267px;
-  border-radius:10px;
+  border-radius:2px;
   position:relative;
   overflow:hidden;
 `;
@@ -26,17 +26,19 @@ export const LandscapeImage = styled.div`
 export const ThumbnailImage = styled.div`
   height: 100px;
   width: 100px;
-  border-radius:10px;
+  border-radius:5px;
   border: 2px solid ${baseColor};
   -webkit-transform: scale(1);
   -ms-transform: scale(1);
   transform: scale(1);
   overflow: hidden;
+  opacity:.9;
   -webkit-transition: -webkit-transform 0.5s, opacity 0.5s;
   transition: transform 0.5s, opacity 0.5s;
   transition: all 1000ms;
   z-index: 0;
   margin:5px;
+  box-shadow: 0 4px 3px 0  rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
 
   &:hover {
     -webkit-transform: scale(1.15);
@@ -44,6 +46,7 @@ export const ThumbnailImage = styled.div`
     transform: scale(1.15);
     transition: all 200ms;
     z-index:1000;
+    opacity:1;
   }
 
 `
@@ -64,45 +67,22 @@ export const MainImage = styled.div`
   }
 `
 
-export const PrototypeImageTag = styled.p`
-  
-  padding: 4.8rem;
-  position: relative;
-  overflow: hidden;
-
-
-&:after {
-  content: "Best value";
-  position: absolute;
-  top: 16%;
-  right: 70px;
-  text-transform: uppercase;
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #fff;
-  background: rgba(0.863,0.982,0.839,.1);
-  backdrop-filter: blur(12px);
-  padding-left:20px;
-  padding-right:20px;
-  transform: rotate(45deg);
-  font-size:12px;
-}
-`
-
 export const ImageTag = styled.p`
   position:absolute;
   bottom:20px;
-  right:-10px;
   width:120%;
-  background: rgba(0.863,0.982,0.839,.1);
-  backdrop-filter: blur(12px);
+  background:${yellowPaper};
   border: solid 2px ${baseColor};
   z-index:10;
   text-align:center;
-  color:${lightPaper};
-  height:15px;
-  font-size:12px;
-  bottom:0px;
+  color:${baseColor};
+  font-weight:800;
+  height:13px;
+  font-size:10px;
+  bottom:60px;
+  right:-40px;
+  transform: rotate(45deg);
+  box-shadow: 0px 5px 20px -7px #000000;
 `
 
 export const DescriptionText = styled.p`
@@ -119,12 +99,14 @@ export const ShortRow = styled.div`
   margin:20px;
   width:65%;
   `
+  
   export const LongRow = styled.div`
   display:flex;
   align-items:center;
   justify-content:space-between;
   margin:20px;
   width:95%;
+
   @media ${mobileL}{
     flex-direction:column;
     margin:auto;
