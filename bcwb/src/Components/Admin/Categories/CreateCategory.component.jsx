@@ -86,10 +86,7 @@ const CreateCategory = (props) => {
             props.setSpinner(false)
         }
 
-
         await axios.post('/api/photos/delete/url',photo_url)
- 
-
 
         await axios.delete(`${DELETE_CATEGORY}/${category_id}`).then(res => {
         })
@@ -133,7 +130,7 @@ const CreateCategory = (props) => {
             
             <>
                 {!photo_url ?
-                    <AddPhotos style={{position:'absolute',right:'100px'}} title={`category_name${category_id}/${category_id}`} label={"Add photo"} updateDB={updateImage} />
+                    <AddPhotos style={{position:'absolute',right:'100px'}} photo_name={`category_name${category_id}/${category_id}`} label={"Add photo"} updateDB={updateImage} />
                 :
                     <ThumbnailImage><img src={photo_url} /></ThumbnailImage>
                 }
