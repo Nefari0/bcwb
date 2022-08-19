@@ -6,8 +6,8 @@ const { cursive } = fonts
 const { darkText } = colors
 
 export const HomePage = styled.main`
-    min-width: 300px;
-    max-width: 1000px;
+    min-width:1300px;
+    max-width: 1300px;
     margin: auto;
     display: flex;
     flex-direction: column;
@@ -15,16 +15,14 @@ export const HomePage = styled.main`
     text-align: left;
 
     section {
-        min-width: 300px;
+        min-width: 1300px;
         min-height: 50px;
-        margin: auto;
         display:flex;
         flex-direction:row;
         justify-content: space-around;
+        padding:20px 0px 20px 0px;
+        flex-wrap:wrap;
         
-        @media (max-width:800px) {
-            flex-wrap: wrap;
-        }
 `
 
 export const SectionText = styled.em`
@@ -34,6 +32,7 @@ position:relative;
     color:${darkText};
     border-bottom: solid 1px ${darkText};
     margin-left:10px;
+    margin-bottom:24px;
     font-size:20px;
     ${cursive}
  `
