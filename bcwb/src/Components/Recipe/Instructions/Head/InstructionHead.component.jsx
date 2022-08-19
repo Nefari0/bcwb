@@ -108,9 +108,13 @@ const InstructionHead = (props) => {
     // -- Updates the cover_photo_url according to the AddPhotos.jsx update function requirements -- //
     const updateCoverImage = async (cover_image_url) => {
 
-        const { title,description,pinterest_url,category,published,recipe_id,servings,hours,author } = formFields
-
-        await putItem(RECIPES.EDIT_RECIPE,{title,description,pinterest_url,category,published,recipe_id,servings,hours,cover_image_url,author})
+        // const { title,description,pinterest_url,category,published,recipe_id,servings,hours,author,minutes } = formFields
+        formFields.cover_image_url = cover_image_url
+        // --- Update DB --- //
+        // await putItem(RECIPES.EDIT_RECIPE,{title,description,pinterest_url,category,published,recipe_id,servings,hours,cover_image_url,author,minutes})
+        await putItem(RECIPES.EDIT_RECIPE,formFields)
+        //  --- Update formFields --- //
+        await setFormFields({ ...formFields, [cover_image_url]:cover_image_url})
 
         return
     }
@@ -182,7 +186,7 @@ const InstructionHead = (props) => {
 
                 <AddPhoto
                 label={'add photo'}
-                title={`recipe${recipe_id}/${recipe_id}`}
+                photo_name={`recipe${recipe_id}/${recipe_id}`}
                 album={title}
                 updateDB={updateCoverImage}
                 />
