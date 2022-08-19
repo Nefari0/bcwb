@@ -4,9 +4,7 @@ import { colors } from '../../Styles/colors'
 const { darkText } = colors
  
 export const RecipeHeader = styled.header`
-    margin:auto;
-    padding-bottom:20px;
-    margin-bottom:10px;
+    margin-bottom:16px;
     min-width:100%;
     min-height:100px;
 
@@ -39,7 +37,7 @@ export const RecipeHeader = styled.header`
     }
 
     h1 {
-        margin:auto;
+        margin:12px;
         color:${darkText};
         text-align:center;
         font-weight:700;
@@ -50,5 +48,6 @@ export const RecipeHeader = styled.header`
 
     button {
         max-width:50%;
+        margin-top:12px;
     }
 `
