@@ -19,7 +19,7 @@ const Categories = (props) => {
 
     const mappedItems = items.map(el => {
         var styles = {
-            width:`${el.z}px`,
+            width:`${el.z + 50}px`,
             height:'auto',
             position:'absolute'
         }
