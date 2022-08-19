@@ -1,8 +1,5 @@
 import axios from "axios";
 import { useEffect,useState } from "react";
-// import Content from '../Content/Content';
-import { PortraitImage } from '../../StyledComponents.styles';
-import { LatestRecipeItem } from './LatestRecipeItem';
 import { RECIPES } from '../../../endpoints';
 import { Link } from 'react-router-dom'
 import Recipe from '../RecipeCover/recipe.component'
@@ -35,7 +32,7 @@ const LatestRecipes = () => {
             y:el.y,
             z:el.z
         }
-        return <Link to={`/recipe/${el.recipe_id}`} key={el.recipe_id} style={{textDecoration:'none'}} ><Recipe items={items} /></Link>
+        return <Link to={`/recipe/${el.recipe_id}`} key={el.recipe_id} style={{textDecoration:'none',width:'300px'}} ><Recipe items={items} /></Link>
     })
 
     return(
