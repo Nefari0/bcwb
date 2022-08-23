@@ -3,11 +3,18 @@ import { deleteFromFB } from "../Photos/deleteFromFB"
 import { CATEGORIES } from "../../../endpoints"
 import { CreateCat } from "./Categories.styles"
 import { BaseButton,InvertedButton } from "../../Form/Button.styles"
-import { ThumbnailImage } from "../../StyledComponents.styles"
+import { ThumbnailImage } from "../../Styles/Images/images.styles"
 import FormInput from "../../Form/FormInput"
 import AddPhotos from '../Photos/AddPhotos'
 import { connect } from 'react-redux'
 import { setSpinner,getCategories } from "../../../ducks/recipeReducer"
+
+// --- This is default object for items in ThumbnailImage - Will be removing this requirement --- //
+const thumbnailImageObject = {
+    category_id:null,
+    selectedCategory:null,
+    setSelectedCategory:null
+}
 
 // -- End points -- //
 const { ADD_CATEGORY,EDIT_CATEGORY,DELETE_CATEGORY } = CATEGORIES
@@ -132,7 +139,9 @@ const CreateCategory = (props) => {
                 {!photo_url ?
                     <AddPhotos style={{position:'absolute',right:'100px'}} photo_name={`category_name${category_id}/${category_id}`} label={"Add photo"} updateDB={updateImage} />
                 :
-                    <ThumbnailImage><img src={photo_url} /></ThumbnailImage>
+                    <ThumbnailImage propObject={thumbnailImageObject} >
+                        <img src={photo_url} />
+                    </ThumbnailImage>
                 }
 
                 <InvertedButton onClick={handleDelete} >delete category</InvertedButton>
