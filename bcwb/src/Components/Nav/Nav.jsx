@@ -1,65 +1,43 @@
-// import Hamburgar from './Hamburger'
-import { useState,useContext } from 'react'
-import { UserContext } from '../Context/user.context'
-import { signOutUser } from '../../base'
-import access from '../../access'
-import { Link } from 'react-router-dom'
-import { styles } from '../Styles/customStyles'
-import { BaseButton,DecoButtonWrapper } from '../Form/Button.styles'
-import { DecoButton } from '../Form/DecoButton'
-import { NavLink,DesktopMenu,MobileMenu,NavBar,LogoBox } from './NavStyles.styles'
-import Logo from '../Assets/Brittanys-Culinary-Creations-v3.png'
+import { NavBox } from "./nav.styles"
+import { useState,useEffect } from "react"
+import { connect } from 'react-redux'
+import { getCategories } from "../../ducks/recipeReducer"
+import { Content } from "./content.component"
 
-const { decoButton } = styles
+const Nav = (props) => {
 
-const Nav = () => {
+    const [items,setItems] = useState([])
+    const [selectedCategory,setSelectedCategory] = useState(68)
 
-    // *** REMOVED PENDING DESIGN UPDATES *** //
-    // const [ isMenuClosed,setMenu ] = useState(true)
-    // const menuItems = ['Home','About','Recipes']
-        
-    const signOutHandler = async () => {
-        await signOutUser()
-        await setCurrentUser(null)
+    useEffect(() => { getDB() },[])
+
+    const getDB = async () => {
+        const response = await props.getCategories()
+        const { data } = response.value
+        await setItems(data)
     }
 
-    const { currentUser,setCurrentUser } = useContext(UserContext)
+    const selectionHandler = (id) => {
+        setSelectedCategory(id)
+        window.scrollTo({
+            top: 300,
+            behavior: 'smooth'
+        });
+    }
 
-    // *** REMOVED PENDING DESIGN UPDATES *** //
-    // const  mappedItems = menuItems.map((el,i) => {
-    //     return <NavLink onClick={() => setMenu(!isMenuClosed)} key={i}>{el}</NavLink>
-    // })
+    const mappedItems = items.map(el => {
+        return <Content key={el.category_id} content={el} selectedCategory={selectedCategory} setSelectedCategory={selectionHandler} />
+    })
 
-    return(
-        <NavBar>
-
-            <Link style={{maxWidth:'500px'}} to={`/`} >
-                <LogoBox src={Logo} />
-            </Link>
-
-            {currentUser != null && access.getAccess(currentUser.uid) === "ACCESS_GRANTED" ? 
-
-            <i><Link to="/admin">Admin</Link></i>
-            : 
-            null
-
-            }
-
-            {currentUser ?
-            <DecoButton clickFunc={signOutHandler} label={'sign out'} />
-            :
-            <DecoButton label={'sign in'} path={'/signin'} />
-            }
-
-            {/* *** THESE FEATURES ARE TEMPORARILY DISABLED UNTIL DESIGN IS UPDATED *** */}
-
-            {/* <DesktopMenu>{mappedItems}</DesktopMenu> */}
-
-            {/* <Hamburgar setMenu={setMenu} menu={isMenuClosed} />  */}
-
-            {/* <MobileMenu isMenuClosed={isMenuClosed} >{!isMenuClosed ? mappedItems : null}</MobileMenu> */}
-        </NavBar>
+    return (
+        <NavBox>
+            {mappedItems}
+        </NavBox>
     )
 }
 
-export default Nav
+function mapStateToProps(reduxState) {
+    return reduxState
+}
+
+export default connect(mapStateToProps, {getCategories})(Nav)
