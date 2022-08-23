@@ -11,18 +11,21 @@ import React, { useState } from 'react'
 import Resizer from 'react-image-file-resizer'
 import axios from 'axios'
 import { app } from '../../../base'
-import { PortraitImage, MainImage, ThumbnailImage } from '../../StyledComponents.styles'
-import { getStorage,ref,uploadBytesResumable,getDownloadURL } from 'firebase/storage'
+import { PortraitImage, MainImage, ThumbnailImage } from '../../Styles/Images/images.styles'
+import { getStorage,ref,uploadBytesResumable,getDownloadURL } from 'firebase/storage'   
 import { PositionPhoto } from './PositionPhoto'
 import { AddPhotoContainer,LargeThumbnail } from './Photos.styles'
 import { BaseButton } from '../../Form/Button.styles'
 import { connect } from 'react-redux'
 import { setSpinner } from '../../../ducks/recipeReducer'
+import { PHOTOS } from '../../../endpoints'
+
+const { ADD_PHOTO,EDIT_PHOTO } = PHOTOS
 const storage = getStorage(app)
  
 const Photos = (props) => {
 
-    const { title,album,updateDB,label } = props
+    const { photo_name,album,updateDB,label } = props
 
     const path = `bcwb/images` // Location of images on cloud
     const [ preview,setPreview ] = useState(null)
@@ -102,32 +105,52 @@ const Photos = (props) => {
 
     const addPhoto = async (url,e) => {
         props.setSpinner(true)
-        // get ref
-        const storageRef = await ref(storage, `${path}/${title}`)
+        
+        // --- Get ref
+        const storageRef = await ref(storage, `${path}/${photo_name}`)
 
-        // add to firebase
-        await uploadBytesResumable(storageRef,url)
+        // --- Initialize photo DB
+        const newDBItem = await addToDb(null,photo_name)
 
-        // get download url
-        const dlUrl = await getDownloadURL(storageRef)
+        // --- Add to firebase
+        try {
+                await uploadBytesResumable(storageRef,url)
+                const dlUrl = await getDownloadURL(storageRef)
 
-        // add to DB
-        await addToDb(dlUrl)
+                const updateDBObj = {
+                    photo_id:newDBItem.photo_id,
+                    url:dlUrl,
+                    photo_name:newDBItem.photo_name,
+                    album:newDBItem.album,
+                    x:newDBItem.x,
+                    y:newDBItem.y,
+                    z:newDBItem.z,
+                }
+                await updatePhotoDB(updateDBObj)
+                // update cover photo if applicable
 
-        // update cover photo if applicable
-        if(updateDB != null){await updateDB(dlUrl,e)}
+                if(updateDB != null){await updateDB(dlUrl,e)}
+            
+        } catch(error) {
+            console.log(error)
+        }
+        
         props.setSpinner(false)
         await setPreview(null)
     }
 
-    // --- This function will be phased out - api calls will come from parent component
-    const addToDb = async (url) => {
+    const addToDb = async (url,photo_name) => {
         const { x,y,z } = position
+        const storage_ref = null
 
-        await axios.post('/api/photos/new',{url,title,album,x,y,z}).then(res => {
-            console.log('added to db')
+        const photo = await axios.post(ADD_PHOTO,{url,photo_name,album,x,y,z}).then(res => {
+            return (res.data)
         })
+
+        return photo[0]
     }
+
+    const updatePhotoDB = (param) => {axios.put(EDIT_PHOTO,param)}
 
     const hiddenFileInput = React.useRef(null);
   
