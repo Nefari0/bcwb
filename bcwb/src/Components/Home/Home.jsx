@@ -1,11 +1,14 @@
 import LatestRecipes from './LatestRecipes/LatestRecipes'
-import FindRecipes from './FindRecipes/FindRecipes'
+// import FindRecipes from './FindRecipes/FindRecipes'
 import { SectionText,HomePage } from './HomeStyles.styles'
 import { getRecipes } from '../../ducks/recipeReducer';
 import { connect } from 'react-redux'
-import { useEffect } from 'react';
+import { useEffect,useContext } from 'react';
+import { PhotoContext } from '../Context/photos.context';
 
 const Home = (props) => {    
+
+    const { photos } = useContext(PhotoContext)
 
     useEffect(() => {
         props.getRecipes()
@@ -15,7 +18,7 @@ const Home = (props) => {
     return(
         <HomePage>
             {/* <SectionText>Find Recipe</SectionText> */}
-            <FindRecipes />
+            {/* <FindRecipes /> */}
             <SectionText>Latest Recipes</SectionText>
             <LatestRecipes />
         </HomePage>
