@@ -6,22 +6,22 @@ const { cursive } = fonts
 const { darkText } = colors
 
 export const HomePage = styled.main`
-    min-width:1300px;
-    max-width: 1300px;
     margin: auto;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     text-align: left;
+    min-width:300px;
+    max-width:80%;
 
     section {
-        min-width: 1300px;
         min-height: 50px;
         display:flex;
         flex-direction:row;
-        justify-content: space-around;
+        justify-content:center;
         padding:20px 0px 20px 0px;
         flex-wrap:wrap;
+        
         
 `
 
