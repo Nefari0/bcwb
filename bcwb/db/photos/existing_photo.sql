@@ -1,0 +1,1 @@
+SELECT * FROM bcwb_photos WHERE photo_name = $1
