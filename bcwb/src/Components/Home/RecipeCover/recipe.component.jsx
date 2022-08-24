@@ -1,7 +1,14 @@
 import { CoverContainer } from "./recipe.styles"
-import { DescriptionText, PortraitImage, ShortRow, MainImage } from "../../StyledComponents.styles"
-import { BaseButton,InvertedButton } from "../../Form/Button.styles"
+import { DescriptionText, PortraitImage } from "../../Styles/Images/images.styles"
+import { InvertedButton } from "../../Form/Button.styles"
 import { restaurant,clock } from "../../SVG"
+
+const photoAlignment = {
+    width:`300px`,
+    position:'absolute',
+    left:'-10px',
+    top:'-5px'
+}
 
 const RecipeCover = ({items}) => {
 
@@ -20,15 +27,7 @@ const RecipeCover = ({items}) => {
         z
     } = items
 
-    const photoAlignment = {
-        width:`300px`,
-        position:'absolute',
-        left:'-10px',
-        top:'-5px'
-    }
-
     const quantityFormats = () => {
-  
         const multiUnit = (input) => {
           return (input > 1 ? 's' : '')
         }
