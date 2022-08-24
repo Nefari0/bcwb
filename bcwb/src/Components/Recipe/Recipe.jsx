@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 
 import InstructionContainer from './Instructions/InstructionContainer'
 import { BaseButton } from '../Form/Button.styles'
-import { LongRow } from '../StyledComponents.styles'
+import { LongRow } from '../Styles/Images/images.styles'
 import { RECIPES } from '../../endpoints'
 import { deleteFromFB } from '../Admin/Photos/deleteFromFB'
 import access from '../../access'
@@ -21,13 +21,13 @@ const Recipe = (props) => {
     const [ ingredients,setIngredients ] = useState([])
     const [ notes,setNotes ] = useState([])
 
-    const confirmDeleteMessage = 'Are you sure you want to permanently delete this recipe?'
     const [ confirmDelete,setConfirmDelete ] = useState(null)
-
-    const { currentUser } = useContext(UserContext)
-    
     // ******** Editing recipe ********** //
     const [ isAdmin,setIsAdmin ] = useState(false)
+    
+    const confirmDeleteMessage = 'Are you sure you want to permanently delete this recipe?'
+    const { currentUser } = useContext(UserContext)
+    
 
     useEffect(() => {getContent()},[])
 
