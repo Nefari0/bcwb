@@ -3,7 +3,7 @@ import { useState,useEffect } from "react"
 import { RecipeListItem } from "./RecipeListItem"
 import { Link } from 'react-router-dom'
 
-export const ViewRecipes = (props) => {
+export const ViewRecipes = () => {
 
     const [ items,setItems] = useState([])
 
