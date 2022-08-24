@@ -7,8 +7,7 @@ import { repositionPhoto } from "../../../Admin/Photos/repositionPhoto"
 
 import { RECIPES,PHOTOS } from "../../../../endpoints"
 
-import { ShortRow,LongRow,MainImage } from '../../../StyledComponents.styles'
-import { DescriptionText } from "../../../StyledComponents.styles"
+import { ShortRow,LongRow,MainImage,DescriptionText } from '../../../Styles/Images/images.styles'
 import { useState,useEffect } from "react"
 import { deleteFromFB } from '../../../Admin/Photos/deleteFromFB'
 import { TextEditor } from "../../../Form/TextEditor"
@@ -23,7 +22,6 @@ import { BaseButton,InvertedButton } from "../../../Form/Button.styles"
 import Confirmation from "../../../dialogues/confirmation.component"
 import Cats from "../../../Admin/CreateRecipe/cats.component"
 import NewCatTextField from "./NewCatTextField.component"
-// import ViewCategoriesComponent from "../../../Admin/Categories/ViewCategories.component"
 
 const InstructionHead = (props) => {
     const {
@@ -185,10 +183,10 @@ const InstructionHead = (props) => {
                 {cover_image_url === null ?
 
                 <AddPhoto
-                label={'add photo'}
-                photo_name={`recipe${recipe_id}/${recipe_id}`}
-                album={title}
-                updateDB={updateCoverImage}
+                    label={'add photo'}
+                    photo_name={`recipe${recipe_id}/${recipe_id}`}
+                    album={`recipe${recipe_id}`}
+                    updateDB={updateCoverImage}
                 />
 
                 :
