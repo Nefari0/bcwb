@@ -1,4 +1,5 @@
 import './App.scss';
+import Hero from './Components/Hero/Hero';
 import Nav from './Components/Nav/Nav';
 import routes from './routes';
 import { HashRouter } from 'react-router-dom'
@@ -14,8 +15,9 @@ function App(props) {
   return (
     <HashRouter>
     <div >
-        <Nav />
+        <Hero />
         <MobileUserBar />
+        <Nav/>
         {isLoading ? <Spinner /> : null}
         {routes}
     </div>
