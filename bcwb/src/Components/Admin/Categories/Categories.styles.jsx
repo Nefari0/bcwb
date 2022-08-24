@@ -21,6 +21,7 @@ export const CatView = styled.section`
 
 export const CreateCat = styled.div`
     position:absolute;
+    margin:auto;
     max-width:290px;
     background-color:${yellowPaper};
     box-shadow:10px 5px 60px 10px rgba(36, 36, 36, 1);
