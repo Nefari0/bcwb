@@ -13,7 +13,6 @@ export const CoverContainer = styled.div`
     align-items:center;
     background-color: ${lightPaper};
     border: solid 1px ${baseColor};
-    margin:auto;
     overflow:hidden;
     padding:5px;
     box-shadow: 0 4px 3px 0  rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
