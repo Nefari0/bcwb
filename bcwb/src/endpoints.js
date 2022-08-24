@@ -22,6 +22,8 @@ export const RECIPES = {
 }
 
 export const PHOTOS = {
+    GET_ALL_PHOTOS:'/api/photos/all',
+    ADD_PHOTO:'/api/photos/new',
     GET_PHOTOS_WITH_URL:'/api/photos/get/url/',
     EDIT_PHOTO:'/api/photos/update',
     // --- Category Images --- //
