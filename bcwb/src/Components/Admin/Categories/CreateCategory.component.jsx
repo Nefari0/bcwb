@@ -1,6 +1,6 @@
 import axios from "axios"
+import { PHOTOS,CATEGORIES } from "../../../endpoints"
 import { deleteFromFB } from "../Photos/deleteFromFB"
-import { CATEGORIES } from "../../../endpoints"
 import { CreateCat } from "./Categories.styles"
 import { BaseButton,InvertedButton } from "../../Form/Button.styles"
 import { ThumbnailImage } from "../../Styles/Images/images.styles"
@@ -8,16 +8,24 @@ import FormInput from "../../Form/FormInput"
 import AddPhotos from '../Photos/AddPhotos'
 import { connect } from 'react-redux'
 import { setSpinner,getCategories } from "../../../ducks/recipeReducer"
+import { useState,useEffect } from "react"
+import { PhotoManager } from "./photos.component" // under construction
+
+
+import { repositionPhoto } from "../Photos/repositionPhoto"
+import { PositionPhoto } from "../Photos/PositionPhoto"
+
 
 // --- This is default object for items in ThumbnailImage - Will be removing this requirement --- //
-const thumbnailImageObject = {
-    category_id:null,
-    selectedCategory:null,
-    setSelectedCategory:null
-}
+// const thumbnailImageObject = {
+//     category_id:null,
+//     selectedCategory:null,
+//     setSelectedCategory:null
+// }
 
 // -- End points -- //
 const { ADD_CATEGORY,EDIT_CATEGORY,DELETE_CATEGORY } = CATEGORIES
+const { GET_PHOTOS_WITH_URL } = PHOTOS
 
 const CreateCategory = (props) => {
 
@@ -29,7 +37,13 @@ const CreateCategory = (props) => {
         setError,
         udpateList
         } = props
+
     const { category,category_id,photo_url } = formFields
+    // const [adjustPhoto,setAdjustPhoto] = useState(false)
+    // const  [photo,setPhoto] = useState({})
+    // const { x,y,z } = photo
+    
+    // useEffect(() => {findPhotos()},[])
 
     const putItem = async (e,url,object) => {
         e.preventDefault()
@@ -70,19 +84,28 @@ const CreateCategory = (props) => {
         props.setSpinner(false)
     }
 
-    const updateImage = async (img,e) => {
-        e.preventDefault()
+    // const findPhotos = () => {
+    //     const url = photo_url
+    //     try {
+    //         axios.post(GET_PHOTOS_WITH_URL,{url}).then(res => {
+    //             setPhoto(...res.data)
+    //         })
+    //     } catch(err) {console.log(err)}
+    // }
 
-        props.setSpinner(true)
-        const { category,category_id } = formFields
-        const updatedObject = {
-            category:category,
-            category_id:category_id,
-            photo_url:img
-        }
-        await putItem(e,EDIT_CATEGORY,updatedObject)
-        props.setSpinner(false)
-    }
+    // const updateImage = async (img,e) => {
+    //     e.preventDefault()
+
+    //     props.setSpinner(true)
+    //     const { category,category_id } = formFields
+    //     const updatedObject = {
+    //         category:category,
+    //         category_id:category_id,
+    //         photo_url:img
+    //     }
+    //     await putItem(e,EDIT_CATEGORY,updatedObject)
+    //     props.setSpinner(false)
+    // }
 
     const deleteCategory = async () => {
         props.setSpinner(true)
@@ -133,21 +156,17 @@ const CreateCategory = (props) => {
 
             </form>
 
-            {category_id ? 
-            
-            <>
-                {!photo_url ?
-                    <AddPhotos style={{position:'absolute',right:'100px'}} photo_name={`category_name${category_id}/${category_id}`} label={"Add photo"} updateDB={updateImage} />
-                :
-                    <ThumbnailImage propObject={thumbnailImageObject} >
-                        <img src={photo_url} />
-                    </ThumbnailImage>
-                }
-
-                <InvertedButton onClick={handleDelete} >delete category</InvertedButton>
-            </>
-            
-            : null}
+ 
+                {category_id ? 
+                    <PhotoManager
+                        putItem={putItem}
+                        category_id={category_id}
+                        photo_url={photo_url}
+                        handleDelete={handleDelete}
+                        formFields={formFields}
+                        setSpinner={props.setSpinner}
+                    />
+                : null}
 
             <InvertedButton onClick={(e) => selectCat(e,null)} >cancel</InvertedButton>
 
