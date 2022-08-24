@@ -7,7 +7,7 @@ import { Content } from "./content.component"
 const Nav = (props) => {
 
     const [items,setItems] = useState([])
-    const [selectedCategory,setSelectedCategory] = useState(68)
+    const [selectedCategory,setSelectedCategory] = useState(0)
 
     useEffect(() => { getDB() },[])
 
@@ -20,7 +20,7 @@ const Nav = (props) => {
     const selectionHandler = (id) => {
         setSelectedCategory(id)
         window.scrollTo({
-            top: 300,
+            top: 160,
             behavior: 'smooth'
         });
     }
