@@ -3,29 +3,15 @@ import { PHOTOS,CATEGORIES } from "../../../endpoints"
 import { deleteFromFB } from "../Photos/deleteFromFB"
 import { CreateCat } from "./Categories.styles"
 import { BaseButton,InvertedButton } from "../../Form/Button.styles"
-import { ThumbnailImage } from "../../Styles/Images/images.styles"
 import FormInput from "../../Form/FormInput"
-import AddPhotos from '../Photos/AddPhotos'
 import { connect } from 'react-redux'
 import { setSpinner,getCategories } from "../../../ducks/recipeReducer"
 import { useState,useEffect } from "react"
-import { PhotoManager } from "./photos.component" // under construction
-
-
-import { repositionPhoto } from "../Photos/repositionPhoto"
-import { PositionPhoto } from "../Photos/PositionPhoto"
-
-
-// --- This is default object for items in ThumbnailImage - Will be removing this requirement --- //
-// const thumbnailImageObject = {
-//     category_id:null,
-//     selectedCategory:null,
-//     setSelectedCategory:null
-// }
+import { PhotoManager } from "./Photos/photos.component" // under construction
 
 // -- End points -- //
 const { ADD_CATEGORY,EDIT_CATEGORY,DELETE_CATEGORY } = CATEGORIES
-const { GET_PHOTOS_WITH_URL } = PHOTOS
+const { GET_PHOTOS_WITH_URL,EDIT_PHOTO } = PHOTOS
 
 const CreateCategory = (props) => {
 
@@ -37,13 +23,10 @@ const CreateCategory = (props) => {
         setError,
         udpateList
         } = props
-
     const { category,category_id,photo_url } = formFields
-    // const [adjustPhoto,setAdjustPhoto] = useState(false)
-    // const  [photo,setPhoto] = useState({})
-    // const { x,y,z } = photo
+    const  [photo,setPhoto] = useState({})
     
-    // useEffect(() => {findPhotos()},[])
+    useEffect(() => {findPhotos()},[])
 
     const putItem = async (e,url,object) => {
         e.preventDefault()
@@ -60,8 +43,14 @@ const CreateCategory = (props) => {
             
         }).catch(err => {
             props.setSpinner(false)
-            setError(err.response.data)
+            setError(err.response)
         })
+    }
+
+    const updateHandler = async (e) => {
+        e.preventDefault()
+        await putItem(e,EDIT_CATEGORY,formFields)
+        await putItem(e,EDIT_PHOTO,photo)
     }
 
     const postItem = async (e) => {
@@ -84,28 +73,14 @@ const CreateCategory = (props) => {
         props.setSpinner(false)
     }
 
-    // const findPhotos = () => {
-    //     const url = photo_url
-    //     try {
-    //         axios.post(GET_PHOTOS_WITH_URL,{url}).then(res => {
-    //             setPhoto(...res.data)
-    //         })
-    //     } catch(err) {console.log(err)}
-    // }
-
-    // const updateImage = async (img,e) => {
-    //     e.preventDefault()
-
-    //     props.setSpinner(true)
-    //     const { category,category_id } = formFields
-    //     const updatedObject = {
-    //         category:category,
-    //         category_id:category_id,
-    //         photo_url:img
-    //     }
-    //     await putItem(e,EDIT_CATEGORY,updatedObject)
-    //     props.setSpinner(false)
-    // }
+    const findPhotos = () => {
+        const url = photo_url
+        try {
+            axios.post(GET_PHOTOS_WITH_URL,{url}).then(res => {
+                setPhoto(...res.data)
+            })
+        } catch(err) {console.log(err)}
+    }
 
     const deleteCategory = async () => {
         props.setSpinner(true)
@@ -119,11 +94,11 @@ const CreateCategory = (props) => {
         await axios.post('/api/photos/delete/url',photo_url)
 
         await axios.delete(`${DELETE_CATEGORY}/${category_id}`).then(res => {
+            setError('Category has been deleted')
+            props.getCategories()
+            props.setSpinner(false)
         })
 
-        props.setSpinner(false)
-        setError('Category has been deleted')
-        props.getCategories()
         udpateList()
     }
 
@@ -149,7 +124,7 @@ const CreateCategory = (props) => {
                 />
                 
                 {category_id ?
-                    <BaseButton onClick={(e) => putItem(e,EDIT_CATEGORY,formFields)} >update category</BaseButton>
+                    <BaseButton onClick={updateHandler} >submit updates</BaseButton>
                 :
                     <BaseButton onClick={(e) => postItem(e,formFields)} >save category</BaseButton>
                 }
@@ -165,6 +140,8 @@ const CreateCategory = (props) => {
                         handleDelete={handleDelete}
                         formFields={formFields}
                         setSpinner={props.setSpinner}
+                        photo={photo}
+                        setPhoto={setPhoto}
                     />
                 : null}
 
