@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { UserProvider } from './Components/Context/user.context';
 import { RecipeProvider } from './Components/Context/recipe.context';
+import { PhotoProvider } from './Components/Context/photos.context';
 import { Provider } from 'react-redux'
 import store from './ducks/store';
 import { HashRouter, BrowserRouter } from 'react-router-dom';
@@ -14,6 +15,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Router>
+      <PhotoProvider>
       <RecipeProvider>
       <UserProvider>
         <Provider store={store} >
@@ -21,6 +23,7 @@ root.render(
         </Provider>
       </UserProvider>
       </RecipeProvider>
+      </PhotoProvider>
     </Router>
   </React.StrictMode>
 );
