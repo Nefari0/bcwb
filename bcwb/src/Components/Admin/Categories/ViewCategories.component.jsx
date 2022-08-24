@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { CatView } from "./Categories.styles";
-import { CATEGORIES } from "../../../endpoints";
 import { BaseButton } from "../../Form/Button.styles";
 import CreateCategory from "./CreateCategory.component";
 import CatItem from "./CatItem.component";
