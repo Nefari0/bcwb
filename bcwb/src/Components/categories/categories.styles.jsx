@@ -1,9 +1,10 @@
 import styled from 'styled-components'
 import { colors } from '../Styles/colors'
 import { fonts } from '../Styles/fonts'
-import { device } from '../Styles/queries'
+import { device,size } from '../Styles/queries'
 
-const { tablet } = device
+const { tablet,xDesktopL } = device
+const { desktopL } = size
 const { darkText } = colors
 const { cursive } = fonts
 
@@ -13,6 +14,7 @@ export const CategoriesContainer = styled.main`
     min-height: 400px;
     margin: auto;
     margin-top:32px;
+    // background-color:pink;
 
     header {
         position:relative;
@@ -23,18 +25,15 @@ export const CategoriesContainer = styled.main`
         display:flex;
         font-size:36px;
         margin:0px;
+        
         ${cursive}
 
         @media ${tablet} {
             font-size:24px;
         }
 
-        h2 {
-            font-weight:100;
-        }
-
         span {
-            border-bottom: solid 3px ${darkText};
+            border-bottom: solid 1px ${darkText};
             min-width:90%;
             margin-left:20px;
             margin-bottom:20px;
@@ -46,10 +45,18 @@ export const CategoriesContainer = styled.main`
     }
 
     section {
-        padding-left:15px;
+        margin-top:32px;
+        min-height:300px;
+        min-width:300px;
+        // background-color:blue;
         display: flex;
-        flex-direction: column;
-        align-items: flex-start;
+        // flex-direction: column;
+        align-items: baseline;
+        // justify-content:flex-start;
+        justify-content:space-around;
+        flex-wrap:wrap;
         text-align: left;
+        // padding-left:15px;
+
     }
 `
