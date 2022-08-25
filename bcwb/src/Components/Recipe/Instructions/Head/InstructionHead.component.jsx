@@ -7,7 +7,7 @@ import { repositionPhoto } from "../../../Admin/Photos/repositionPhoto"
 
 import { RECIPES,PHOTOS } from "../../../../endpoints"
 
-import { ShortRow,LongRow,MainImage,DescriptionText } from '../../../Styles/Images/images.styles'
+import { ShortRow,LongRow,MainImage,DescriptionText,PortraitImage } from '../../../Styles/Images/images.styles'
 import { useState,useEffect } from "react"
 import { deleteFromFB } from '../../../Admin/Photos/deleteFromFB'
 import { TextEditor } from "../../../Form/TextEditor"
@@ -163,7 +163,20 @@ const InstructionHead = (props) => {
             />
             : null}
 
-            <MainImage>
+            {!isAdmin ? <MainImage>
+                <img
+                src={cover_image_url}
+                
+                style={{
+                    position:'absolute',
+                    left:`${photoPositions.x}px`,
+                    top:`${photoPositions.y-1}px`,
+                    width:`${photoPositions.z * .583}px`
+                }}
+                />
+            </MainImage>
+:
+            <PortraitImage>
                 <img
                 src={cover_image_url}
                 
@@ -174,7 +187,7 @@ const InstructionHead = (props) => {
                     width:`${photoPositions.z}px`
                 }}
                 />
-            </MainImage>
+            </PortraitImage>}
 
             {/* -- ADMINS CAN ADD / DELETE PHOTOS -- */}
             {isAdmin ?
@@ -197,7 +210,7 @@ const InstructionHead = (props) => {
                     </button>
               
                     <button onClick={(e) => putItem(PHOTOS.EDIT_PHOTO,photoPositions)} >Submit Photo Updates</button>
-                    <PositionPhoto move={positionHandler} style={{position:'relative'}} />
+                    <PositionPhoto move={positionHandler} style={{position:'absolute'}} />
                 </>
                 }
 
