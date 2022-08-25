@@ -12,6 +12,14 @@ export const AddPhotoContainer = styled.div`
   background-color: ${yellowPaper};
   z-index:1;
   box-shadow:10px 5px 60px 10px rgba(36, 36, 36, 1);
+
+  figure {
+    position:absolute;
+    top:-55px;
+    -webkit-transform: scale(.5);
+    -ms-transform: scale(.5);
+    transform: scale(.5);
+  }
 `
 
 export const PositionController = styled.form`
