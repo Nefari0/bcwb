@@ -3,16 +3,7 @@ import { DescriptionText, PortraitImage } from "../Styles/Images/images.styles"
 import { InvertedButton } from "../Form/Button.styles"
 import { restaurant,clock } from "../SVG"
 
-const photoAlignment = {
-    width:`300px`,
-    position:'absolute',
-    left:'-10px',
-    top:'-5px'
-}
-
 const RecipeCover = ({items}) => {
-
-    // console.log('this is from recipe cover',items)
 
     const {
         description,
@@ -28,6 +19,13 @@ const RecipeCover = ({items}) => {
         y,
         z
     } = items
+    
+    const photoAlignment = {
+        position:'absolute',
+        width:`${z}px`,
+        left:`${x}px`,
+        top:`${y}px`
+    }
 
     const quantityFormats = () => {
         const multiUnit = (input) => {
@@ -45,7 +43,7 @@ const RecipeCover = ({items}) => {
 
     return(
         <CoverContainer>
-            <PortraitImage style={{marginTop:'20px'}}><img src={cover_image_url} style={photoAlignment} /></PortraitImage>
+            <PortraitImage style={{marginTop:'0px'}}><img src={cover_image_url} style={photoAlignment} /></PortraitImage>
 
             <span><h5>{category}</h5></span>
 
