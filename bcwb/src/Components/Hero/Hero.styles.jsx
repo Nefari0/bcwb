@@ -3,7 +3,7 @@ import { colors } from '../Styles/colors';
 import { device } from '../Styles/queries';
 
 const { tablet,mobileM,mobileL } = device
-const { baseColor } = colors
+const { baseColor,white } = colors
 
 
 const menuClosed = css`
@@ -20,7 +20,7 @@ export const NavBar = styled.nav`
   height: 300px;
   min-width:100%;
   overflow:hidden;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.65);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.65);
   margin-bottom:20px;
 
   button {
@@ -60,7 +60,6 @@ export const NavBar = styled.nav`
 
   @media ${tablet} {
     height:100px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0);
   }
 
   @media ${mobileM} {
