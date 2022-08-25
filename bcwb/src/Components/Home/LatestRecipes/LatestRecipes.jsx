@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect,useState } from "react";
 import { RECIPES } from '../../../endpoints';
 import { Link } from 'react-router-dom'
-import Recipe from '../RecipeCover/recipe.component'
+import Recipe from '../../RecipeCover/recipe.component'
 
 const LatestRecipes = () => {
     const [ items,setItems ] = useState([])
