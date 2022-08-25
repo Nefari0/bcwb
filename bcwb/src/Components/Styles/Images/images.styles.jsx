@@ -29,13 +29,13 @@ const selectedImageTag = css`
   }
 `;
 
-export const PortraitImage = styled.div`
-  margin:auto;
-  height:400px;
-  width:267px;
+export const PortraitImage = styled.figure`
   border-radius:2px;
   position:relative;
   overflow:hidden;
+  height:444px;
+  width:300px;
+  background-color:#000;
 `;
 
 export const LandscapeImage = styled.div`
@@ -55,6 +55,9 @@ export const MainImage = styled.div`
   width:175px;
   overflow:hidden;
   border-radius:1px;
+  background-color:#000;
+
+  img {opacity:.9;}
 
   @media ${mobileL}{
     position:relative;
