@@ -15,18 +15,16 @@ export const CoverContainer = styled.div`
     border: solid 1px ${baseColor};
     overflow:hidden;
     padding:5px;
-    // margin-right:10px;
-    // margin-left:10px;
     margin-top:10px;
-
-    // margin-left:104px;
-    // margin-right:104px;
     box-shadow: 0 4px 3px 0  rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
 
-    img,
     h5,
     h3 {
         margin:5px;
+    }
+
+    img {
+        opacity:.9;
     }
 
     h3 {
@@ -43,7 +41,6 @@ export const CoverContainer = styled.div`
         width:40%;
         height:0px;
         position:relative;
-        margin:auto;
         margin:20px 0px 10px 0px;
         padding-bottom:8px;
 
