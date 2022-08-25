@@ -177,7 +177,8 @@ const Photos = (props) => {
 
                 <BaseButton onClick={() => setThumbnail(!thumbnail)}>Toggle{thumbnail ? 'Thumbnail' : 'Portrait'}</BaseButton>
 
-                {thumbnail ? <MainImage style={{margin:'40px'}}>
+                {thumbnail ?
+                <PortraitImage style={{margin:'0px'}}>
                     <img
                         src={preview}
                         style={{
@@ -187,7 +188,7 @@ const Photos = (props) => {
                             width:`${position.z}px`,
                             zIndex:'1'
                     }}/>
-                </MainImage>
+                </PortraitImage>
                 :
                 <LargeThumbnail>
                     <img
