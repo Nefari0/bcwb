@@ -38,11 +38,9 @@ const Hero = () => {
             </Link>
 
             {currentUser != null && access.getAccess(currentUser.uid) === "ACCESS_GRANTED" ? 
-
             <i><Link to="/admin">Admin</Link></i>
             : 
             null
-
             }
 
             {currentUser ?
