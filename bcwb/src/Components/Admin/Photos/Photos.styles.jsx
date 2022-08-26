@@ -6,7 +6,7 @@ const { cursive } = fonts
 const { yellowPaper,baseColor } = colors
 
 export const AddPhotoContainer = styled.div`
-  height: 600px;
+  height: 700px;
   width: 300px;
   position: absolute;
   background-color: ${yellowPaper};
@@ -25,7 +25,7 @@ export const AddPhotoContainer = styled.div`
 export const PositionController = styled.form`
 
   width:200px;
-  height:200px;
+  height:300px;
   position:absolute;
   z-index:1;
   display:flex;
