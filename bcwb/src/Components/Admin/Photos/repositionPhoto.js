@@ -17,6 +17,16 @@
                 var newValue = photoPositions.z + value
                 setPhotoPositions({...photoPositions, ['z']:newValue})
                 break;
+                
+            case '+angle':
+                var newValue = photoPositions.angle + value
+                setPhotoPositions({...photoPositions, ['angle']:newValue})
+                break;
+
+            case '-angle':
+                var newValue = photoPositions.angle - value
+                setPhotoPositions({...photoPositions, ['angle']:newValue})
+                break;
         }
         return
     }
