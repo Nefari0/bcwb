@@ -20,6 +20,8 @@ export const PositionPhoto = ({style,move,otherProps}) => {
             {ControlNob('up','y',-10)}
             {ControlNob('+','z',10)}
             {ControlNob('-','z',-10)}
+            {ControlNob('rotate left','angle',-10)}
+            {ControlNob('rotate right','angle',10)}
 
         </PositionController>
     )
