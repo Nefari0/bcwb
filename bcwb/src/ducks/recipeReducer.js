@@ -2,7 +2,7 @@ import axios from "axios";
 import { CATEGORIES,RECIPES } from "../endpoints";
 
 const { GET_ALL_CATEGORIES,GET_CATEGORY_NAMES } = CATEGORIES
-const { GET_RECIPES } = RECIPES
+const { GET_RECIPES,GET_PUBLISHED_RECIPES } = RECIPES
 
 const initialState = {
   recipes: {},
@@ -25,7 +25,7 @@ const SET_SPINNER = "SET_SPINNER";
 export function getRecipes() {
   return {
     type: FETCH_RECIPES,
-    payload: axios.get(GET_RECIPES)
+    payload: axios.get(GET_PUBLISHED_RECIPES)
 
   };
 };
@@ -104,7 +104,7 @@ export default function recipeReducer(state = initialState, action) {
     case FETCH_RECIPES + "_FULFILLED":
         return {
             ...state,
-            recipes: action.payload,
+            recipes: action.payload.data,
             isLoading:false
         };
     case FETCH_RECIPES + "_REJECTED":
