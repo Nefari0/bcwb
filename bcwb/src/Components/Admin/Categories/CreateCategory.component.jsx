@@ -113,7 +113,7 @@ const CreateCategory = (props) => {
         
         <CreateCat >
 
-            <form>
+            <>
 
                 <FormInput
                     label={'Category'}
@@ -129,7 +129,7 @@ const CreateCategory = (props) => {
                     <BaseButton onClick={(e) => postItem(e,formFields)} >save category</BaseButton>
                 }
 
-            </form>
+            </>
 
  
                 {category_id ? 
@@ -144,7 +144,8 @@ const CreateCategory = (props) => {
                         setPhoto={setPhoto}
                     />
                 : null}
-
+                
+            <InvertedButton onClick={handleDelete}>Delete category</InvertedButton>
             <InvertedButton onClick={(e) => selectCat(e,null)} >cancel</InvertedButton>
 
         </CreateCat>
