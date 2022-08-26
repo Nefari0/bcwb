@@ -35,25 +35,28 @@ const Photos = (props) => {
     const [ position,setPosition ] = useState({
         x:0,
         y:0,
-        z:300
+        z:300,
+        angle:0
     })
 
     const move = (e,value,direction) => {
         e.preventDefault()
-        const { x,y,z } = position
+        const { x,y,z,angle } = position
         switch (direction) {
             case 'x':
                 setPosition({
                     x:x+value,
                     y:y,
-                    z:z
+                    z:z,
+                    angle:angle
                 })
                 break;
             case 'y':
                 setPosition({
                     x:x,
                     y:y+value,
-                    z:z
+                    z:z,
+                    angle:angle
                 })
                 break;
             
@@ -61,7 +64,17 @@ const Photos = (props) => {
                 setPosition({
                     x:x,
                     y:y,
-                    z:value+z
+                    z:value+z,
+                    angle:angle
+                })
+                break;
+            
+            case 'angle':
+                setPosition({
+                    x:x,
+                    y:y,
+                    z:z,
+                    angle:angle+value
                 })
         }
         return
@@ -186,6 +199,7 @@ const Photos = (props) => {
                             left:`${position.x}px`,
                             top:`${position.y}px`,
                             width:`${position.z}px`,
+                            transform: `rotate(${position.angle}deg)`,
                             zIndex:'1'
                     }}/>
                 </PortraitImage>
@@ -202,7 +216,8 @@ const Photos = (props) => {
                 </LargeThumbnail>}
                 
                 <PositionPhoto move={move} style={{position:'absolute',bottom:'120px',right:'16%'}} />
-                <div style={{position:'absolute',width:'100%',top:'490px'}} >
+                
+                <div style={{position:'absolute',width:'100%',top:'585px'}} >
                     <BaseButton onClick={(e) => {addPhoto(file,e)}} >Add</BaseButton>
                     <BaseButton  onClick={clearPhoto} >cancel</BaseButton>
                 </div>
