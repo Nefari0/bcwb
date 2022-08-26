@@ -23,7 +23,8 @@ app.use(
         }),
     )
 
-// --- Endpoints --- //
+// --- END POINTS --- //
+
 // --- Photos --- //
 app.get('/api/photos/all',photosController.getAll)
 app.post('/api/photos/get/url/',photosController.getWithUrl)

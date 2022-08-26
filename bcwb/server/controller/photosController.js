@@ -1,5 +1,6 @@
 
 module.exports = {
+    // --- This function was initially used for testing. It will be phased out when no longer needed --- //
     getCategoryPhotos: async (req,res) => {
         const db = req.app.get('db')
         const photos = await db.photos.get_category_photos()
@@ -24,9 +25,9 @@ module.exports = {
 
     addPhoto: async (req,res) => {
         const db = req.app.get('db')
-        const { url,photo_name,album,x,y,z } = req.body
+        const { url,photo_name,album,x,y,z,angle } = req.body
         
-        const photo = await db.photos.add_photo([url,photo_name,album,x,y,z])
+        const photo = await db.photos.add_photo([url,photo_name,album,x,y,z,angle])
 
         return res.status(200).send(photo)
     },
@@ -49,8 +50,8 @@ module.exports = {
 
     updatePhoto: async (req,res) => {
         const db = req.app.get('db')
-        const { url,album,photo_name,photo_id,x,y,z } = req.body
-        const photo = await db.photos.update_photo([url,photo_name,album,x,y,z,photo_id])
+        const { url,album,photo_name,photo_id,x,y,z,angle } = req.body
+        const photo = await db.photos.update_photo([url,photo_name,album,x,y,z,angle,photo_id])
         return res.status(200).send(photo)
     }
 }
