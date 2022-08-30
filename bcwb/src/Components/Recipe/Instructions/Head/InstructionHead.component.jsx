@@ -34,7 +34,7 @@ const InstructionHead = (props) => {
         servings,
         hours,
         author,
-        minutes
+        minutes,
     } = props.items[0]
     
     const { isAdmin } = props
@@ -69,7 +69,8 @@ const InstructionHead = (props) => {
     
     // --- Get styling/position parameters of photo by url --- //
     const getPosititions = async (url) => {
-        if (url != null) {await axios.post(PHOTOS.GET_PHOTOS_WITH_URL,{url}).then(res => {
+        if (url != null) {
+            await axios.post(PHOTOS.GET_PHOTOS_WITH_URL,{url}).then(res => {
             const { x,y,z,photo_id,url,title,album,angle } = res.data[0]
             setPhotoPositions({
                 x:x,
@@ -81,7 +82,8 @@ const InstructionHead = (props) => {
                 photo_id:photo_id,
                 url:url
             })
-        }).catch(err => console.log(err,'styling not found not found'))}
+        }).catch(err => console.log(err,'styling not found not found'))
+    }
     }
 
     // --- Adjust styling/position of photo - Utilized in props in PositionPhoto.jsx --- //
@@ -153,17 +155,17 @@ const InstructionHead = (props) => {
     }
 
     return(
-        <>
-            {confirmDelete ?
+        <main>
+            {confirmDelete && (
             <Confirmation 
                 functionToExecute={handleDeletePhoto}
                 url={cover_image_url}
                 closeMessage={setConfirmDelete}
                 message={confirmDelete}
-            />
-            : null}
+            />)}
 
-            {!isAdmin ? <MainImage>
+            
+            <MainImage>
                 <img
                 src={cover_image_url}
                 
@@ -176,28 +178,16 @@ const InstructionHead = (props) => {
                 }}
                 />
             </MainImage>
-:
-            <PortraitImage>
-                <img
-                src={cover_image_url}
-                
-                style={{
-                    position:'absolute',
-                    left:`${photoPositions.x}px`,
-                    top:`${photoPositions.y}px`,
-                    width:`${photoPositions.z}px`,
-                    transform: `rotate(${photoPositions.angle}deg)`,
-                }}
-                />
-            </PortraitImage>}
+
 
             {/* -- ADMINS CAN ADD / DELETE PHOTOS -- */}
-            {isAdmin ?
-            <>
+            {isAdmin && (
+            <div>
 
-                {cover_image_url === null ?
+                {!cover_image_url ?
 
                 <AddPhoto
+                    styles={{position:'absolute',top:'0'}}
                     label={'add photo'}
                     photo_name={`recipe${recipe_id}/${recipe_id}`}
                     album={`recipe${recipe_id}`}
@@ -216,8 +206,7 @@ const InstructionHead = (props) => {
                 />
                 }
 
-            </>
-            :null}
+            </div>)}
 
             {/* -- DISPLAY OR EDIT TITLE -- */}
             { !isAdmin ?
@@ -226,16 +215,18 @@ const InstructionHead = (props) => {
                 <h5 style={{width:'65%',marginBottom:'40px'}} >{formFields.author}</h5>
             </>
             :
-            <>
+            
             <form>
 
                 <button onClick={(e) => {
-                        e.preventDefault()
-                        handleClick('published',!formFields.published)
-                    }
-                }>click to {formFields.published ? 'un-publish' : 'publish'}</button>
+                    e.preventDefault()
+                    handleClick('published',!formFields.published)
+                }
+                }>
+                    click to {formFields.published ? 'un-publish' : 'publish'}
+                </button>
 
-                {error === null ? null : <ErrorMessage error={error} setError={setError} /> }
+                {error && (<ErrorMessage error={error} setError={setError} />)}
 
                 <FormInput
                     type="text"
@@ -278,23 +269,22 @@ const InstructionHead = (props) => {
 
                 
 
-                <>
-                    <FormInput
-                        type="number"
-                        name="hours"
-                        label="Bake time hours"
-                        value={formFields.hours}
-                        onChange={handleChange}
-                    />
+                
+                <FormInput
+                    type="number"
+                    name="hours"
+                    label="Bake time hours"
+                    value={formFields.hours}
+                    onChange={handleChange}
+                />
 
-                    <FormInput
-                        type="number"
-                        name="minutes"
-                        label="Bake time minutes"
-                        value={formFields.minutes}
-                        onChange={handleChange}
-                    />
-                </>
+                <FormInput
+                    type="number"
+                    name="minutes"
+                    label="Bake time minutes"
+                    value={formFields.minutes}
+                    onChange={handleChange}
+                />
 
                 <FormInput
                     type="number"
@@ -305,7 +295,7 @@ const InstructionHead = (props) => {
                 />
 
             </form>
-            </>
+            
             }
 
             {!isAdmin ? 
@@ -336,7 +326,7 @@ const InstructionHead = (props) => {
                 <Pinterest/>
                 <BaseButton>save</BaseButton>
             </LongRow>
-        </>
+        </main>
     )
 }
 
