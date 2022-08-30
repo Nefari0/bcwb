@@ -13,7 +13,7 @@ import axios from 'axios'
 import { app } from '../../../base'
 import { PortraitImage, MainImage, ThumbnailImage } from '../../Styles/Images/images.styles'
 import { getStorage,ref,uploadBytesResumable,getDownloadURL } from 'firebase/storage'   
-import { PositionPhoto } from './PositionPhoto'
+import { PositionPhoto } from './PhotoEditing/PositionPhoto'
 import { AddPhotoContainer,LargeThumbnail } from './Photos.styles'
 import { BaseButton } from '../../Form/Button.styles'
 import { connect } from 'react-redux'
@@ -111,6 +111,7 @@ const Photos = (props) => {
         }
     }
 
+    // --- Clear attached file --- //
     const clearPhoto = () => {
         setPreview(null)
         setFile(null)
@@ -138,6 +139,7 @@ const Photos = (props) => {
                     x:newDBItem.x,
                     y:newDBItem.y,
                     z:newDBItem.z,
+                    angle:newDBItem.angle
                 }
                 await updatePhotoDB(updateDBObj)
                 // update cover photo if applicable
@@ -153,10 +155,10 @@ const Photos = (props) => {
     }
 
     const addToDb = async (url,photo_name) => {
-        const { x,y,z } = position
+        const { x,y,z,angle } = position
         const storage_ref = null
 
-        const photo = await axios.post(ADD_PHOTO,{url,photo_name,album,x,y,z}).then(res => {
+        const photo = await axios.post(ADD_PHOTO,{url,photo_name,album,x,y,z,angle}).then(res => {
             return (res.data)
         })
 
@@ -212,11 +214,12 @@ const Photos = (props) => {
                             left:`${position.x}px`,
                             top:`${position.y}px`,
                             width:`${position.z}px`,
+                            transform: `rotate(${position.angle}deg)`,
                     }}/>
                 </LargeThumbnail>}
                 
-                <PositionPhoto move={move} style={{position:'absolute',bottom:'120px',right:'16%'}} />
-                
+                <PositionPhoto move={move} styles={{position:'absolute',bottom:'20px',right:''}} />
+
                 <div style={{position:'absolute',width:'100%',top:'585px'}} >
                     <BaseButton onClick={(e) => {addPhoto(file,e)}} >Add</BaseButton>
                     <BaseButton  onClick={clearPhoto} >cancel</BaseButton>
