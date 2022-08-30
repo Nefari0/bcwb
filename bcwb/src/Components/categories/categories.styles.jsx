@@ -6,37 +6,63 @@ const { tablet,desktopL,laptop,mobileM } = device
 const { darkText } = colors
 const { cursive } = fonts
 
-// ---- COMPONENT WIDTHS ----- //
-const xl = css`width:1250px;`;
-const x = css`width:950px;`
-const m = css`width:630px`
-const s = css`width:330px`
-const xs = css`width:100%`
+// --- Screen Widths ---- /
+const pxXl = css`width:1280px;`
+const pxL = css`width:950px;`
+const pxM = css`width:630px;`
+const pxS = css`width:300px;`
+
+// ---- Layouts ----- //
+const xl = css`
+    ${pxXl}
+    display: grid;
+    grid-template-columns: 320px 320px 320px 320px;
+    row-gap: 10px;
+`;
+
+const x = css`
+    ${pxL}
+    display: grid;
+    grid-template-columns: 320px 320px 320px;
+    row-gap: 10px;
+`;
+
+const m = css`
+    ${pxM}
+    display:grid;
+    grid-template-columns: 320px 320px;
+    row-gap:10px;
+`;
+
+const s = css`
+    ${pxS}
+    display:flex;
+    flex-direction:column;
+`;
+
 
 export const CategoriesContainer = styled.main`
 
-// --- Media Queries --- //
-    ${xl}
-    @media${desktopL} {${x}}
-    @media${laptop} {${m}}
-    @media${tablet} {${s}}
-    @media${mobileM} {${xs}}
-
-    min-width: 300px;
     min-height: 400px;
     margin: auto;
     margin-top:32px;
+    display:flex;
+    flex-direction:column;
+    width:100%;
 
     header {
+        margin:auto;
         position:relative;
-        width:100%;
+        ${pxXl}
+        @media${desktopL} {${pxL}}
+        @media${laptop} {${pxM}}
+        @media${tablet} {${pxS}}
+
         text-align:left;
         color:${darkText};
         overflow:hidden;
         display:flex;
         font-size:36px;
-        margin:0px;
-        
         ${cursive}
 
         @media ${tablet} {font-size:24px;}
@@ -54,14 +80,11 @@ export const CategoriesContainer = styled.main`
     }
 
     section {
+        margin: auto;
         margin-top:32px;
-        flex-wrap:wrap;
-        text-align: left;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: flex-start;
-        align-items: stretch;
-        align-content: flex-start;
+        ${xl}
+        @media${desktopL} {${x}}
+        @media${laptop} {${m}}
+        @media${tablet} {${s}}
     }
-`
+`;
