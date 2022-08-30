@@ -13,7 +13,6 @@ export const CatView = styled.section`
 
     button {
         font-style:italic;
-        font-size:24px;
         top:10px;
         left:10px;
     }
@@ -23,6 +22,7 @@ export const CreateCat = styled.div`
     position:absolute;
     margin:auto;
     max-width:290px;
+    padding:2px;
     background-color:${yellowPaper};
     box-shadow:10px 5px 60px 10px rgba(36, 36, 36, 1);
     z-index:1001;
@@ -30,11 +30,6 @@ export const CreateCat = styled.div`
     display:flex;
     flex-direction:column;
     min-height:300px;
-
-    button {
-        margin:0px 0px 5px 15px;
-        width:90%;
-    }
 
     input {
         width:90%;
