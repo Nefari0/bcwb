@@ -1,9 +1,10 @@
 import styled, { css } from 'styled-components';
+import { BaseButton } from '../../Form/Button.styles';
 import { fonts } from '../../Styles/fonts';
 import { colors } from '../../Styles/colors';
 
 const { cursive } = fonts
-const { yellowPaper,baseColor } = colors
+const { yellowPaper,baseColor,white } = colors
 
 export const AddPhotoContainer = styled.div`
   height: 700px;
@@ -20,25 +21,6 @@ export const AddPhotoContainer = styled.div`
     -ms-transform: scale(.5);
     transform: scale(.5);
   }
-`
-
-export const PositionController = styled.form`
-
-  width:200px;
-  height:300px;
-  position:absolute;
-  z-index:1;
-  display:flex;
-  flex-wrap:wrap;
-  
-`
-
-export const KeyStyling = styled.button`
-  max-width:100px;
-  max-height:100px;
-  font-size:12px;
-  padding:0px;
-  ${cursive}
 `
 
 // -- Similar to thumnail image in StyledComponents - eliminated media queries -- //
