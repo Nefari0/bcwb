@@ -26,7 +26,14 @@ module.exports = {
     addPhoto: async (req,res) => {
         const db = req.app.get('db')
         const { url,photo_name,album,x,y,z,angle } = req.body
+
+        // --- Update photo DB if it already exists --- //
+        const existing = await db.photos.existing_photo([photo_name])
+        if (existing[0]) {
+            return res.status(200).send(existing)
+        }
         
+        // --- Create new db row in there is no existing photo --- //
         const photo = await db.photos.add_photo([url,photo_name,album,x,y,z,angle])
 
         return res.status(200).send(photo)
