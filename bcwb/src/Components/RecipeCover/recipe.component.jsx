@@ -19,14 +19,16 @@ const RecipeCover = ({items}) => {
         cover_image_url,
         x,
         y,
-        z
+        z,
+        angle
     } = items
     
     const photoAlignment = {
         position:'absolute',
         width:`${z}px`,
         left:`${x}px`,
-        top:`${y}px`
+        top:`${y}px`,
+        transform:`rotate(${angle}deg)`
     }
 
     const quantityFormats = () => {
