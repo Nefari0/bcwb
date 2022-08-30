@@ -38,6 +38,14 @@ const Photos = (props) => {
         z:300,
         angle:0
     })
+    const { x,y,z,angle } = position
+    var imgStyle = {
+        position:'absolute',
+        left:`${x}px`,
+        top:`${y}px`,
+        width:`${z}px`,
+        transform: `rotate(${angle}deg)`,
+    }
 
     const move = (e,value,direction) => {
         e.preventDefault()
@@ -155,7 +163,6 @@ const Photos = (props) => {
     }
 
     const addToDb = async (url,photo_name) => {
-        const { x,y,z,angle } = position
         const storage_ref = null
 
         const photo = await axios.post(ADD_PHOTO,{url,photo_name,album,x,y,z,angle}).then(res => {
@@ -193,37 +200,25 @@ const Photos = (props) => {
                 <BaseButton onClick={() => setThumbnail(!thumbnail)}>Toggle{thumbnail ? 'Thumbnail' : 'Portrait'}</BaseButton>
 
                 {thumbnail ?
-                <PortraitImage style={{margin:'0px'}}>
+                <PortraitImage style={{position:'relative',marginBottom:'-160px',marginTop:'-70px'}}>
                     <img
                         src={preview}
-                        style={{
-                            position:'absolute',
-                            left:`${position.x}px`,
-                            top:`${position.y}px`,
-                            width:`${position.z}px`,
-                            transform: `rotate(${position.angle}deg)`,
-                            zIndex:'1'
-                    }}/>
+                        style={imgStyle}
+                    />
                 </PortraitImage>
                 :
                 <LargeThumbnail>
                     <img
                         src={preview}
-                        style={{
-                            position:'absolute',
-                            left:`${position.x}px`,
-                            top:`${position.y}px`,
-                            width:`${position.z}px`,
-                            transform: `rotate(${position.angle}deg)`,
-                    }}/>
+                        style={imgStyle}
+                    />
                 </LargeThumbnail>}
                 
-                <PositionPhoto move={move} styles={{position:'absolute',bottom:'20px',right:''}} />
+                <PositionPhoto move={move} styles={{position:'relative',margin:'auto',marginTop:'200'}} />
 
-                <div style={{position:'absolute',width:'100%',top:'585px'}} >
                     <BaseButton onClick={(e) => {addPhoto(file,e)}} >Add</BaseButton>
                     <BaseButton  onClick={clearPhoto} >cancel</BaseButton>
-                </div>
+                
             </AddPhotoContainer>
             }
         </div>
