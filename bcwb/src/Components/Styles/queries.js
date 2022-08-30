@@ -1,5 +1,5 @@
 export const size = { // --- Pixels
-    mobileSPx: '320px',
+    mobileSPx: '300px',
     mobileMPx: '400px',
     mobileLPx: '550px',
     tabletSPx: '700px',
@@ -23,6 +23,6 @@ export const device = {
 
     // -- MIN-WIDTHS -- //
     xMobileL: `(min-width: ${size.mobileLPx})`,
-    xDesktop: `(min-width): ${size.desktopPx}`,
+    xDesktop: `(min-width: ${size.desktopPx})`,
     xDesktopL: `(min-width: ${size.desktopLPx})`,
 };
