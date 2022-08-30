@@ -1,7 +1,9 @@
 import { CoverContainer } from "./recipe.styles"
 import { DescriptionText, PortraitImage } from "../Styles/Images/images.styles"
 import { InvertedButton } from "../Form/Button.styles"
+import { InvertedButtonLink,BaseButtonLink } from "../Form/Button.styles"
 import { restaurant,clock } from "../SVG"
+import { Link } from 'react-router-dom'
 
 const RecipeCover = ({items}) => {
 
@@ -43,9 +45,15 @@ const RecipeCover = ({items}) => {
 
     return(
         <CoverContainer>
-            <PortraitImage style={{marginTop:'0px'}}><img src={cover_image_url} style={photoAlignment} /></PortraitImage>
+            <PortraitImage style={{marginTop:'0px'}}>
+                <Link to={`/recipe/${recipe_id}`}><img src={cover_image_url} style={photoAlignment} /></Link>
+            </PortraitImage>
 
-            <span><h5>{category}</h5></span>
+            <span>
+                <Link style={{textDecoration:'none'}} to={`/categories/${category}`} >
+                    <h5>{category}</h5>
+                </Link>
+            </span>
 
             <h3>{title}</h3>
             
@@ -59,9 +67,14 @@ const RecipeCover = ({items}) => {
                 {quantityFormats()}
             </div>
   
-            <DescriptionText>{description.split('').length > 100 ? `${description.substring(0,100) + '...'}` : description}</DescriptionText>
+            <DescriptionText>
+                {description.split('').length > 100 ? `${description.substring(0,100) + '...'}` : description}
+            </DescriptionText>
 
-            <InvertedButton>Read more</InvertedButton>
+            <InvertedButtonLink to={`/recipe/${recipe_id}`} >
+                Read more
+            </InvertedButtonLink>
+
         </CoverContainer>
     )
 }
