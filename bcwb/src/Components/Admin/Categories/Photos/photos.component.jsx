@@ -2,10 +2,9 @@ import AddPhotos from "../../Photos/AddPhotos"
 import axios from "axios"
 import { CATEGORIES,PHOTOS } from "../../../../endpoints"
 import { ThumbnailImage } from "../../../Styles/Images/images.styles"
-import { repositionPhoto } from "../../Photos/repositionPhoto"
-import { PositionPhoto } from "../../Photos/PositionPhoto"
+import { repositionPhoto } from "../../Photos/PhotoEditing/repositionPhoto"
+import { PositionPhoto } from "../../Photos/PhotoEditing/PositionPhoto"
 import { useState,useEffect } from "react"
-import { InvertedButton } from "../../../Form/Button.styles"
 
 const { GET_PHOTOS_WITH_URL,EDIT_PHOTO } = PHOTOS
 const { EDIT_CATEGORY } = CATEGORIES
@@ -19,8 +18,9 @@ const thumbnailImageObject = { // --- This is default object for items in Thumbn
 const addPhotoStyle = {position:'absolute',right:'110px'}
 const positionPhotoStyles = {
     position:'relative',
-    backgroundColor:'blue',
-    margin:'auto',
+    fontsize:'10px',
+    margin:'10px',
+    marginLeft:'20%'
 }
 const thumbnailStyles = {margin:'100px',marginBottom:'12px',marginTop:'12px'}
 
@@ -34,6 +34,7 @@ export const PhotoManager = (props) => {
         left:`${photo.x}px`,
         width:`${photo.z}px`,
         top:`${photo.y}px`,
+        transform:`rotate(${photo.angle}deg)`
     }
 
     useEffect(() => {if (photo_url != null) {findPhotos()}},[])
@@ -79,11 +80,6 @@ export const PhotoManager = (props) => {
             />
             :
             <>
-                <PositionPhoto 
-                move={positionHandler}
-                style={positionPhotoStyles}
-                />
-
                 <ThumbnailImage
                 propObject={thumbnailImageObject}
                 style={thumbnailStyles}
@@ -91,11 +87,15 @@ export const PhotoManager = (props) => {
                 >
                     <img src={photo_url} style={photoCoordinates}/>
                 </ThumbnailImage>
-                
+
+                <PositionPhoto 
+                move={positionHandler}
+                styles={positionPhotoStyles}
+                />
             </>
             }
                 
-            <InvertedButton onClick={handleDelete} >delete category</InvertedButton>
+            {/* <InvertedButton onClick={handleDelete} >delete category</InvertedButton> */}
         </section>
     )
 }
