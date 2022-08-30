@@ -89,22 +89,18 @@ const Recipe = (props) => {
                 <BaseButton onClick={() => setConfirmDelete(confirmDeleteMessage)} >Delete Recipe</BaseButton>
             </LongRow> : null}
 
-            
-
-            {items[0] != undefined ?
-
-            <InstructionContainer
-            items={items} ingredients={ingredients}
-            instructions={instructions}
-            notes={notes}
-            isAdmin={isAdmin}
-            grabIngredients={grabIngredients}
-            grabInstructions={grabInstructions}
-            grabNotes={grabNotes}
-            getItems={getItems}
-            />
-            
-            : null}
+            {items[0] && ( 
+                <InstructionContainer
+                items={items} ingredients={ingredients}
+                instructions={instructions}
+                notes={notes}
+                isAdmin={isAdmin}
+                grabIngredients={grabIngredients}
+                grabInstructions={grabInstructions}
+                grabNotes={grabNotes}
+                getItems={getItems}
+                />
+            )}
 
         </main>
     )
