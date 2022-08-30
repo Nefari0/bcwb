@@ -38,7 +38,8 @@ const Categories = (props) => {
             cover_image_url:el.cover_image_url,
             x:el.x,
             y:el.y,
-            z:el.z
+            z:el.z,
+            angle:el.angle
         }
         return <Recipe key={el.recipe_id} items={items} />
     })
