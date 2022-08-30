@@ -3,49 +3,57 @@ import { SpinnerContainer } from '../Spinner/spinner.styles';
 import { colors, baseGradient } from '../Styles/colors';
 import { fonts } from '../Styles/fonts';
 import { device } from '../Styles/queries';
+import { Link } from 'react-router-dom'
 
 const { tablet,mobileL } =device
 const { cursive } = fonts
 const { baseColor,white,darkText,lightPaper,secondaryColor } = colors
 
-export const BaseButton = styled.button`
-  min-width: 165px;
-  margin: 0px 0px 16px 5px;
-  width: auto;
-  height: 50px;
-  letter-spacing: 0.5px;
-  line-height: 50px;
-  padding: 0 25px 0 25px;
-  font-size: 16px;
-  background-color: ${baseColor};
+// --- BaseButton --- //
+export const BaseButtonCSS = css`
+min-width: 165px;
+margin: 0px 0px 16px 5px;
+width: auto;
+height: 50px;
+letter-spacing: 0.5px;
+line-height: 50px;
+padding: 0 25px 0 25px;
+font-size: 16px;
+background-color: ${baseColor};
+overflow:hidden;
 
-  color: ${white};
-  text-transform: capitalize;
-  ${cursive}
-  border: none;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+color: ${white};
+text-transform: capitalize;
+${cursive}
+border: none;
+cursor: pointer;
+display: flex;
+justify-content: center;
+align-items: center;
+transition: 300ms ease all;
+
+&:hover {
+  background: white;
+  color: black;
+  border: 1px solid ${baseColor};
   transition: 300ms ease all;
+}
 
-  &:hover {
-    background: white;
-    color: black;
-    border: 1px solid ${baseColor};
-    transition: 300ms ease all;
-  }
+@media ${mobileL} {
+  margin:auto;
+  margin-bottom:15px;
+  width:90%;
+  padding: 0 10px 0 10px;
+}
+`
 
-  @media ${mobileL} {
-    margin:auto;
-    margin-bottom:15px;
-    width:90%;
-    padding: 0 10px 0 10px;
-  }
-`;
-
+export const BaseButton = styled.button`${BaseButtonCSS}`;
+export const BaseButtonLink = styled(Link)`  ${BaseButtonCSS}`;
 BaseButton.displayName = 'BaseButton';
 
+// ----------------------- //
+
+// --- Google sign in button --- //
 export const GoogleSignInButton = styled(BaseButton)`
   background-color: #4285f4;
   color: white;
@@ -57,18 +65,33 @@ export const GoogleSignInButton = styled(BaseButton)`
 `;
 
 GoogleSignInButton.displayName = 'GoogleSignInButton';
+// -------------------------- //
 
-export const InvertedButton = styled(BaseButton)`
+
+// --- Inverted Button --- //
+export const InvertedButtonCSS = css`
   background-color: ${white};
   color: ${baseColor};
   border: 1px solid ${baseColor};
 
   &:hover {
-    background-color: ${baseColor}
+    background-color: ${baseColor};
     color: white;
     border: none;
   }
+`
+
+export const InvertedButton = styled(BaseButton)`${InvertedButtonCSS}`;
+
+export const InvertedButtonLink = styled(Link)`
+  ${BaseButtonCSS}
+  ${InvertedButtonCSS}
+  &:hover {
+    border: 1px solid ${baseColor};
+  }
+  text-decoration:none;
 `;
+// --------------------------- //
 
 InvertedButton.displayName = 'InvertedButton';
 
