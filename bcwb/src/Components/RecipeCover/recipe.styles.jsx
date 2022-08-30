@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { colors } from '../Styles/colors'
 
-const { baseColor,darkText,lightPaper } = colors
+const { baseColor,darkText,white } = colors
 
 export const CoverContainer = styled.div`
     position:relative;
@@ -11,12 +11,9 @@ export const CoverContainer = styled.div`
     display:flex;
     flex-direction:column;
     align-items:center;
-    background-color: ${lightPaper};
-    border: solid 1px ${baseColor};
     overflow:hidden;
-    padding:5px;
+    margin:auto;
     margin-top:10px;
-    box-shadow: 0 4px 3px 0  rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
 
     h5,
     h3 {
@@ -25,6 +22,12 @@ export const CoverContainer = styled.div`
 
     img {
         opacity:.9;
+
+        &:hover{
+            opacity:1;
+            transform: scale(1.1);
+            transition: transform 6s cubic-bezier(0.25, 0.45, 0.45, 0.95);
+        }
     }
 
     h3 {
@@ -46,7 +49,7 @@ export const CoverContainer = styled.div`
 
         h5 {
             margin:auto;
-            background-color: ${lightPaper};
+            background-color: ${white};
             width:60px;
             font-size: 12px;
             text-transform:uppercase;
@@ -69,5 +72,7 @@ export const CoverContainer = styled.div`
 
     button {
         width:50%;
+
     }
+
 `
