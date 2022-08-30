@@ -3,19 +3,18 @@ import axios from "axios"
 import { connect } from "react-redux"
 import { setSpinner } from "../../../../ducks/recipeReducer"
 import { getCategories,getCategoryNames } from "../../../../ducks/recipeReducer"
-import { repositionPhoto } from "../../../Admin/Photos/repositionPhoto"
+import { repositionPhoto } from "../../../Admin/Photos/PhotoEditing/repositionPhoto"
 
 import { RECIPES,PHOTOS } from "../../../../endpoints"
 
-import { ShortRow,LongRow,MainImage,DescriptionText,PortraitImage } from '../../../Styles/Images/images.styles'
+import { LongRow,MainImage,DescriptionText,PortraitImage } from '../../../Styles/Images/images.styles'
 import { useState,useEffect } from "react"
 import { deleteFromFB } from '../../../Admin/Photos/deleteFromFB'
 import { TextEditor } from "../../../Form/TextEditor"
 import { DetailGrid } from "./DetailGrid"
-import { PositionPhoto } from "../../../Admin/Photos/PositionPhoto"
 import { ErrorMessage } from "../../../dialogues/errorMessage.component"
+import { EditPhoto } from "./editphoto/edit.component"
 import AddPhoto from "../../../Admin/Photos/AddPhotos"
-import Button from "../../../Form/Button"
 import FormInput from "../../../Form/FormInput"
 import Pinterest from "../../../Pinterest/Pinterest"
 import { BaseButton,InvertedButton } from "../../../Form/Button.styles"
@@ -71,11 +70,12 @@ const InstructionHead = (props) => {
     // --- Get styling/position parameters of photo by url --- //
     const getPosititions = async (url) => {
         if (url != null) {await axios.post(PHOTOS.GET_PHOTOS_WITH_URL,{url}).then(res => {
-            const { x,y,z,photo_id,url,title,album } = res.data[0]
+            const { x,y,z,photo_id,url,title,album,angle } = res.data[0]
             setPhotoPositions({
                 x:x,
                 y:y,
                 z:z,
+                angle:angle,
                 title:title,
                 album:album,
                 photo_id:photo_id,
@@ -103,7 +103,7 @@ const InstructionHead = (props) => {
         setFormFields({ ...formFields, [name]:val})
     }
 
-    // -- Updates the cover_photo_url according to the AddPhotos.jsx update function requirements -- //
+        // -- Updates the cover_photo_url according to the AddPhotos.jsx update function requirements -- //
     const updateCoverImage = async (cover_image_url) => {
 
         // const { title,description,pinterest_url,category,published,recipe_id,servings,hours,author,minutes } = formFields
@@ -171,7 +171,8 @@ const InstructionHead = (props) => {
                     position:'absolute',
                     left:`${photoPositions.x}px`,
                     top:`${photoPositions.y-1}px`,
-                    width:`${photoPositions.z * .583}px`
+                    width:`${photoPositions.z * .583}px`,
+                    transform: `rotate(${photoPositions.angle}deg)`,
                 }}
                 />
             </MainImage>
@@ -184,14 +185,15 @@ const InstructionHead = (props) => {
                     position:'absolute',
                     left:`${photoPositions.x}px`,
                     top:`${photoPositions.y}px`,
-                    width:`${photoPositions.z}px`
+                    width:`${photoPositions.z}px`,
+                    transform: `rotate(${photoPositions.angle}deg)`,
                 }}
                 />
             </PortraitImage>}
 
             {/* -- ADMINS CAN ADD / DELETE PHOTOS -- */}
             {isAdmin ?
-            <ShortRow>
+            <>
 
                 {cover_image_url === null ?
 
@@ -203,18 +205,19 @@ const InstructionHead = (props) => {
                 />
 
                 :
-
-                <>
-                    <button onClick={() => setConfirmDelete(confirmDeletePhoto)} >
-                        delete photo
-                    </button>
-              
-                    <button onClick={(e) => putItem(PHOTOS.EDIT_PHOTO,photoPositions)} >Submit Photo Updates</button>
-                    <PositionPhoto move={positionHandler} style={{position:'absolute'}} />
-                </>
+                
+                <EditPhoto
+                confirmDeletePhoto={confirmDeletePhoto}
+                confirmDelete={confirmDelete}
+                setConfirmDelete={setConfirmDelete}
+                photoPositions={photoPositions}
+                positionHandler={positionHandler}
+                putItem={putItem}
+                />
                 }
 
-            </ShortRow> : null}
+            </>
+            :null}
 
             {/* -- DISPLAY OR EDIT TITLE -- */}
             { !isAdmin ?
@@ -321,9 +324,9 @@ const InstructionHead = (props) => {
                 label={"Description"}
                 />
 
-                <Button onClick={(e) => putItem(RECIPES.EDIT_RECIPE,formFields)}>
+                <BaseButton onClick={(e) => putItem(RECIPES.EDIT_RECIPE,formFields)}>
                     submit updates
-                </Button>
+                </BaseButton>
             </>
             
             }
