@@ -1,5 +1,4 @@
 import axios from "axios"
-import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { getRecipes } from "../../ducks/recipeReducer"
 import { useEffect, useState } from "react"
@@ -35,13 +34,13 @@ const Categories = (props) => {
             minutes:el.minutes,
             servings:el.servings,
             author:el.author,
-            recipe_id:el.id_recipe,
+            recipe_id:el.recipe_id,
             cover_image_url:el.cover_image_url,
             x:el.x,
             y:el.y,
             z:el.z
         }
-        return <Link to={`/recipe/${el.recipe_id}`} key={el.recipe_id} style={{textDecoration:'none',width:'300px'}} ><Recipe items={items} /></Link>
+        return <Recipe key={el.recipe_id} items={items} />
     })
 
     return (
