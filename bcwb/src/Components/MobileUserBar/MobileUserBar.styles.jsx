@@ -9,10 +9,6 @@ export const UserHeader = styled.header`
     display:flex;
     justify-content:center;
     align-items:center;
-    
-    @media (min-width:550px) {
-        display:none;
-    }
 
     span {
         @media ${mobileL} {

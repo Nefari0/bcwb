@@ -1,21 +1,25 @@
+import { changeView } from "../../ducks/navReducer"
+import { connect } from 'react-redux'
 import { UserHeader } from "./MobileUserBar.styles"
-import { BaseButton,DecoButtonWrapper } from "../Form/Button.styles"
+import { CustomLink,InvertedButton } from "../Form/Button.styles"
 import { Link } from 'react-router-dom' 
 import { useContext } from "react"
 import { UserContext } from "../Context/user.context"
 import { signOutUser } from '../../base'
-import { styles } from "../Styles/customStyles"
 import access from "../../access"
 
-const { decoButton } = styles
-
-export const MobileUserBar = (props) => {
+const MobileUserBar = (props) => {
 
     const { currentUser,setCurrentUser } = useContext(UserContext)
 
     const signOutHandler = async () => {
         await signOutUser()
         setCurrentUser(null)
+        props.changeView(null)
+    }
+
+    const handler = () => {
+        props.changeView(null)
     }
 
     return(
@@ -24,27 +28,33 @@ export const MobileUserBar = (props) => {
             {/*** ACCESS TO ADMIN LINK IF APPLICABLE ***/}
             {currentUser != null && access.getAccess(currentUser.uid) === "ACCESS_GRANTED" ? 
 
-            <DecoButtonWrapper >
-                <Link to="/admin">
-                    <BaseButton style={decoButton} >Admin</BaseButton>
+            <CustomLink >
+                <Link to="/admin" onClick={handler}>
+                    <InvertedButton >Admin</InvertedButton>
                 </Link>
-            </DecoButtonWrapper>
+            </CustomLink>
             : 
             null
 
             }
             {/* ************************************** */}
  
-            <DecoButtonWrapper>
+            <CustomLink>
                 {currentUser ?
-                <BaseButton style={decoButton} onClick={signOutHandler} >sign out</BaseButton>
+                <InvertedButton onClick={signOutHandler} >sign out</InvertedButton>
                 :
-                <Link to="/signin" >
-                    <BaseButton style={decoButton} >sign in</BaseButton>
+                <Link to="/signin" onClick={handler} >
+                    <InvertedButton  >sign in</InvertedButton>
                 </Link>
                 }
-            </DecoButtonWrapper>
+            </CustomLink>
  
         </UserHeader>
     )
 }
+
+function mapStateToProps(reduxState) {
+    return reduxState
+}
+
+export default connect(mapStateToProps, {changeView})(MobileUserBar)
