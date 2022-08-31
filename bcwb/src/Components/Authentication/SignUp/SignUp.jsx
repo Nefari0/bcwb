@@ -25,7 +25,7 @@ const SignUp = (props) => {
 
         const { user } = await signInWithGooglePopup();
         const userDocRef = await createUserDocumentFromAuth(user)
-        props.history.push(`/home/${userDocRef.id}`)
+        props.history.push(`/`)
     }
 
     const handleChange = (e) => {
@@ -47,7 +47,7 @@ const SignUp = (props) => {
         try {
             const { user } = await createAuthUserWithEmailAndPassword(email,password);
 
-            props.history.push(`/home/${user.uid}`)
+            props.history.push(`/`)
 
             await createUserDocumentFromAuth(user,{ displayName })
             

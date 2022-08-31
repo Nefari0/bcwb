@@ -40,7 +40,7 @@ const SignIn = (props) => {
         const { user } = await signInWithGooglePopup();
         const userDocRef = await createUserDocumentFromAuth(user)
 
-        await props.history.push(`/home/${userDocRef.id}`)
+        await props.history.push(`/`)
         setCurrentUser(user)
 
     }
@@ -60,7 +60,7 @@ const SignIn = (props) => {
 
             await setCurrentUser(user)
             await resetForm()
-            await props.history.push(`/home/${user.uid}`)
+            await props.history.push(`/`)
         } catch (error) {
             switch (error.code) {
                 case "auth/wrong-password": 
