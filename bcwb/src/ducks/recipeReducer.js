@@ -1,6 +1,7 @@
 import axios from "axios";
 import { CATEGORIES,RECIPES } from "../endpoints";
 
+// --- End points --- //
 const { GET_ALL_CATEGORIES,GET_CATEGORY_NAMES } = CATEGORIES
 const { GET_RECIPES,GET_PUBLISHED_RECIPES } = RECIPES
 
