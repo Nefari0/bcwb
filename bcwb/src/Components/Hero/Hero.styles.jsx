@@ -11,59 +11,28 @@ height: 0px;
 width: 0px;
 transition: 300ms ease all;
 `
+const imagePixels = 340
 
-export const NavBar = styled.nav`
+export const HeroBar = styled.nav`
   list-style-type: none;
   display: flex;
-  justify-content: space-between;
+  justify-content:center;
   align-items: center;
-  height: 300px;
+  height: 200px;
+
   min-width:100%;
   overflow:hidden;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.65);
   margin-bottom:20px;
 
-  button {
-    margin:-30px
-    @media ${tablet} {
-      -webkit-transform: scale(.6);
-      -ms-transform: scale(.6);
-      transform: scale(.6);
-      
-    }
-  }
-
-  i,
-  span {
-    margin:50px;
-    @media ${mobileL} {
-      display:none;
-    }
-  }
-
-  i {
-    margin:75px;
-    position:absolute;
-    color: ${baseColor};
-    width:50px;
-    top:60px;
-    right:200px;
-    font-size:24px;
-    text-decoration: underline;
-
-    @media ${tablet} {
-      font-size:16px;
-      top:-35px;
-      right:125px;
-    }
+  a {
+    max-width:${imagePixels}px;
+    height:auto;
   }
 
   @media ${tablet} {
-    height:100px;
-  }
-
-  @media ${mobileM} {
-    height:100px;
+    height:150px;
+    a {width:${imagePixels/2};}
   }
 `
 
@@ -81,7 +50,6 @@ export const DesktopMenu = styled.div`
 `
 
 export const MobileMenu = styled.div`
-  background-color:blue;
   opacity:.5;
   position: absolute;
   top: 0px;
@@ -91,13 +59,4 @@ export const MobileMenu = styled.div`
   transition: 300ms ease all;
   z-index: 3;
   ${( {isMenuClosed } ) => isMenuClosed && menuClosed}
-`
-
-export const LogoBox = styled.img`
-  max-width:500px;
-  overflow:none;
-  margin:none;
-  @media ${tablet}{
-    max-width:300px;
-  }
 `
