@@ -2,7 +2,7 @@ import FormInput from "../../Form/FormInput"
 import { Form } from "../../Form/FormInput.styles"
 import { withRouter } from 'react-router'
 import { Link } from 'react-router-dom'
-import { useState,useContext } from "react"
+import { useState,useContext,useEffect } from "react"
 import { BaseButton,GoogleSignInButton,InvertedButton } from "../../Form/Button.styles"
 
 import {
@@ -23,6 +23,13 @@ const SignIn = (props) => {
     const [ formFields,setFormFields ] = useState(defaultState)
     const { password,email } = formFields
     const  { setCurrentUser } = useContext(UserContext)
+
+    useEffect(() => {
+        window.scrollTo({
+            top: 260,
+            behavior: 'smooth'
+        });
+    },[])
 
     const resetForm = () => {
         setFormFields(defaultState)

@@ -1,5 +1,6 @@
 import axios from "axios"
 import { connect } from 'react-redux'
+import { changeView } from "../../ducks/navReducer"
 import { getRecipes } from "../../ducks/recipeReducer"
 import { useEffect, useState } from "react"
 import { CategoriesContainer } from "./categories.styles"
@@ -10,6 +11,7 @@ const { GET_PUBLISHED_RECIPES } = RECIPES
 const Categories = (props) => {
     const { category } = props.match.params
     const [ items,setItems ] = useState([])
+    const [categoryId, seCategoryId] = useState(props.currentCategory.currentCategory)
 
     useEffect(() => {
         if (items[0] === undefined) {getDB()}
@@ -56,4 +58,4 @@ function mapStateToProps(reduxState) {
     return reduxState
 }
 
-export default connect(mapStateToProps, {getRecipes})(Categories)
+export default connect(mapStateToProps, {getRecipes,changeView})(Categories)

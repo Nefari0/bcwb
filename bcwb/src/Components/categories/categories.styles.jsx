@@ -20,7 +20,7 @@ const xl = css`
     row-gap: 10px;
 `;
 
-const x = css`
+const l = css`
     ${pxL}
     display: grid;
     grid-template-columns: 320px 320px 320px;
@@ -45,7 +45,7 @@ export const CategoriesContainer = styled.main`
 
     min-height: 400px;
     margin: auto;
-    margin-top:32px;
+    margin-top:16px;
     display:flex;
     flex-direction:column;
     width:100%;
@@ -64,17 +64,21 @@ export const CategoriesContainer = styled.main`
         display:flex;
         font-size:36px;
         ${cursive}
+        white-space: nowrap;
+        font-weight:200;
+        font-size:30px;
 
         @media ${tablet} {font-size:24px;}
 
         span {
             border-bottom: solid 1px ${darkText};
-            min-width:90%;
-            margin-left:20px;
-            margin-bottom:20px;
+            width:90%;
+            margin-left:16px;
+            margin-bottom:18px;
 
             @media ${tablet} {
-                margin-bottom:12px;
+                margin-bottom:14px;
+                margin-left:12px;
             }
         }
     }
@@ -83,7 +87,7 @@ export const CategoriesContainer = styled.main`
         margin: auto;
         margin-top:32px;
         ${xl}
-        @media${desktopL} {${x}}
+        @media${desktopL} {${l}}
         @media${laptop} {${m}}
         @media${tablet} {${s}}
     }
