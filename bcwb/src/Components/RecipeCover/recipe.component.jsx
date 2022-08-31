@@ -1,6 +1,7 @@
+import { changeView } from "../../ducks/navReducer"
+import { connect } from 'react-redux' 
 import { CoverContainer } from "./recipe.styles"
 import { DescriptionText, PortraitImage } from "../Styles/Images/images.styles"
-import { InvertedButton } from "../Form/Button.styles"
 import { InvertedButtonLink,BaseButtonLink } from "../Form/Button.styles"
 import { restaurant,clock } from "../SVG"
 import { Link } from 'react-router-dom'
@@ -81,4 +82,8 @@ const RecipeCover = ({items}) => {
     )
 }
 
-export default RecipeCover
+function mapStateToProps(reduxState) {
+    return reduxState    
+}
+
+export default connect(mapStateToProps, {changeView})(RecipeCover)
