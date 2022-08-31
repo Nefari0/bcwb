@@ -92,13 +92,13 @@ export const ThumbnailImage = styled.div`
     margin:-9px;
 
 
-    ${({propObject}) => (propObject.selectedCategory === propObject.category_id && selectedThumbnail)}
+    ${({props}) => (props.currentCategory === props.category_id && selectedThumbnail)}
   }
 
-  ${({propObject}) => (propObject.selectedCategory === propObject.category_id && selectedThumbnail)}
+  ${({props}) => (props.currentCategory === props.category_id && selectedThumbnail)}
 
   p {
-    ${({propObject}) => (propObject.selectedCategory === propObject.category_id && selectedImageTag)}
+    ${({props}) => (props.currentCategory === props.category_id && selectedImageTag)}
   }
 
 
