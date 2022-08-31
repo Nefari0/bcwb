@@ -1,11 +1,13 @@
-import { BaseButton,DecoButtonWrapperPrototype } from "../../Form/Button.styles";
-import {styles} from '../../Styles/customStyles'
+import {
+    BaseButton,
+ } from "../../Form/Button.styles";
+
+// import {styles} from '../../Styles/customStyles'
 import {
     colors,
     baseGradient,
     secondaryGradientJSX
  } from "../../Styles/colors";
-import { DecoButton } from "../../Form/DecoButton";
 import { AdminPrototype } from "./prototype.styles";
 
 const {
@@ -17,7 +19,7 @@ const {
     white,
     } = colors
 
-const { decoButton } = styles
+// const { decoButton } = styles
 
 export const ButtonsPrototype = () => {
 
@@ -26,13 +28,12 @@ export const ButtonsPrototype = () => {
 
             <BaseButton style={{backgroundColor:secondaryColor}}>base button</BaseButton>
 
-            <DecoButton
+            {/* <DecoButton
             label={'Composite 1'}
             customStyles={{
-                // background:baseColor,
-                // color:white
+           
             }}
-            />
+            /> */}
 
             {/* <DecoButton
                 label={'Composite 2'}
@@ -40,11 +41,11 @@ export const ButtonsPrototype = () => {
                 customStyles={{backgroundColor:baseColor,color:white}}
             /> */}
 
-            <DecoButton
+            {/* <DecoButton
                 label={'Composite 2'}
                 customStyles={{backgroundColor:secondaryColor}}
-            />
-
+            /> */}
+{/* 
             <DecoButton
                 label={'Composite 3'}
                 customStyles={{
@@ -52,7 +53,7 @@ export const ButtonsPrototype = () => {
                     color:darkText,
                 }}
                     
-            />
+            /> */}
             
 
 

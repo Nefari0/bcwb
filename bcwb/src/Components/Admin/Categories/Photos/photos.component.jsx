@@ -81,7 +81,7 @@ export const PhotoManager = (props) => {
             :
             <>
                 <ThumbnailImage
-                propObject={thumbnailImageObject}
+                props={thumbnailImageObject}
                 style={thumbnailStyles}
                 onClick={() => setAdjustPhoto(!adjustPhoto)}
                 >

@@ -3,7 +3,7 @@ import Hero from './Components/Hero/Hero';
 import Nav from './Components/Nav/Nav';
 import routes from './routes';
 import { HashRouter } from 'react-router-dom'
-import { MobileUserBar } from './Components/MobileUserBar/MobileUserBar.component';
+import MobileUserBar from './Components/MobileUserBar/MobileUserBar.component';
 import Spinner from './Components/Spinner/spinner.component';
 import { setSpinner } from './ducks/recipeReducer';
 import { connect } from 'react-redux'

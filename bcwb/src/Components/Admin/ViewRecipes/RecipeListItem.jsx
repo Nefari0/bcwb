@@ -7,7 +7,6 @@ export const RecipeListItem = (props) => {
     const propObject = {
         category_id:0,
         selectedCategory:null,
-        setSelectedCategory:null
     }
 
     const style = {
@@ -17,7 +16,7 @@ export const RecipeListItem = (props) => {
     }
 
     return (
-        <ThumbnailImage propObject={propObject}>
+        <ThumbnailImage props={propObject}>
             <img src={items.cover_image_url} />
             <ImageTag style={style}>{items.title}</ImageTag>
         </ThumbnailImage>

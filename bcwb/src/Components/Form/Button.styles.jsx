@@ -20,6 +20,7 @@ line-height: 50px;
 padding: 0 25px 0 25px;
 font-size: 16px;
 background-color: ${baseColor};
+// background: linear-gradient(0turn,${baseColor},${secondaryColor});
 overflow:hidden;
 
 color: ${white};
@@ -48,7 +49,10 @@ transition: 300ms ease all;
 `
 
 export const BaseButton = styled.button`${BaseButtonCSS}`;
-export const BaseButtonLink = styled(Link)`  ${BaseButtonCSS}`;
+export const BaseButtonLink = styled(Link)`
+  text-decoration:none;
+  ${BaseButtonCSS}
+`;
 BaseButton.displayName = 'BaseButton';
 
 // ----------------------- //
@@ -102,65 +106,75 @@ export const ButtonSpinner = styled(SpinnerContainer)`
 
 ButtonSpinner.displayName = 'ButtonSpinner';
 
-export const DecoButtonWrapper =  styled.span`
-  opacity:.7;
+export const CustomLink =  styled.span`
   position:relative;
   height:50px;
   max-width:165px;
   min-width:165px;
-  border: solid 2px ${darkText};
-
-  @media ${tablet} {
-    -webkit-transform: scale(.6);
-    -ms-transform: scale(.6);
-    transform: scale(.6);
+  // box-shadow: 5px 40px 28px -22px #000000;  
+  
+  a {text-decoration:none;}
+    -webkit-transform: scale(.8);
+    -ms-transform: scale(.8);
+    transform: scale(.8);
     margin:-30px
-  }
 `
 // --- DecoButtonWrapper uses decoButton.styles.js in jsx for styling to work --- //
 // --- e.i. <DecoButtonWrapper><BaseButton style={styles.decoButton}> --- //
 
-DecoButtonWrapper.displayName  = "DecoButtonWrapper"
+// DecoButtonWrapper.displayName  = "DecoButtonWrapper"
 
+// export const SmallButtonWrapper = styled.span`
+//   max-width:165px;
+//   // height:auto;
+//   // margin
+//   a,
+//   button {
+//     -webkit-transform: scale(.6);
+//     -ms-transform: scale(.6);
+//     transform: scale(.6);
+//     margin:-30px;
+//     text-decoration:none;
+//   }
+//   // ${BaseButtonLink} {
+//   //   background-color:blue;
+//   // }
+// `
 
 //  PROTPTYPING NEW DECOBUTTON
-export const DecoButtonWrapperPrototype =  styled.span`
-  margin: 0px 0px 16px 5px;
-  position:relative;
-  height:50px;
-  min-width:165px;
-  width:auto;
-  border: solid 2px ${darkText};
-  z-index:1;
+// export const DecoButtonWrapperPrototype =  styled.span`
+//   margin: 0px 0px 16px 5px;
+//   position:relative;
+//   height:50px;
+//   min-width:165px;
+//   width:auto;
+//   border: solid 2px ${darkText};
+//   z-index:1;
 
-  button {
-    width:100%;
-    position:absolute;
-    right: -5px;
-    top: 5px;
-    opacity:.6;
-    font-size:18px;
-    z-index:0;
-    transition: 300ms ease all;
+//   button {
+//     width:100%;
+//     position:absolute;
+//     right: -5px;
+//     top: 5px;
+//     opacity:.6;
+//     font-size:18px;
+//     z-index:0;
+//     transition: 300ms ease all;
     
-    &:hover {
-      transition: 300ms ease all;
-      right:0px;
-      top:0px;
-      background:white;
-      box-shadow:10px 5px 60px 10px rgba(6, 6, 6, .1);
-    }
-  }
+//     &:hover {
+//       transition: 300ms ease all;
+//       right:0px;
+//       top:0px;
+//       background:white;
+//       box-shadow:10px 5px 60px 10px rgba(6, 6, 6, .1);
+//     }
+//   }
 
-  @media ${mobileL} {
-    width:90%;
-    // -webkit-transform: scale(.6);
-    // -ms-transform: scale(.6);
-    // transform: scale(.6);
-    // margin:-30px
-  }
-`
+//   @media ${mobileL} {
+//     width:90%;
+//   }
+// `
 // --- DecoButtonWrapper uses decoButton.styles.js in jsx for styling to work --- //
 // --- e.i. <DecoButtonWrapper><BaseButton style={styles.decoButton}> --- //
 
-DecoButtonWrapperPrototype.displayName  = "DecoButtonWrapperPrototype"
+// DecoButtonWrapperPrototype.displayName  = "DecoButtonWrapperPrototype"

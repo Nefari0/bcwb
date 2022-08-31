@@ -14,7 +14,7 @@ const CatItem = (props) => {
 
     return(
         <ThumbnailImage
-            propObject={propObject}
+            props={propObject}
             onClick={(e) => 
                 {e.preventDefault()
                 selectFunction(e,props)}
