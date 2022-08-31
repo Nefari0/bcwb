@@ -6,7 +6,7 @@ export const NavBox = styled.div`
     display:flex;
     flex-direction:row;
     justify-content:center;
-    padding:20px 0px 20px 0px;
+    padding:16px 0px 20px 0px;
     flex-wrap:wrap;
     margin: auto;
     margin-top:16px;
