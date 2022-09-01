@@ -19,7 +19,7 @@ const LatestRecipes = () => {
         })
     }
 
-    const mappedItems = items.map(el => {
+    const mappedItems = items.slice(0,5).map(el => {
         const items = {
             description:el.description,
             title:el.title,
