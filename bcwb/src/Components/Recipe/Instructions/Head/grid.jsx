@@ -1,4 +1,4 @@
-import { Table,TableItem } from "./InstructionHead.styles"
+import { Table,TableItem } from "./instructionhead.styles"
 
 export const DetailGrid = (props) => {
 

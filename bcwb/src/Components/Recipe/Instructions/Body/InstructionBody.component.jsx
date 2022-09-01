@@ -1,11 +1,11 @@
 
 import axios from "axios";
 import { useState } from "react";
-import Instruction from "./Instruction";
-import Ingredient from "./Ingredient";
+import Instruction from "./instruction.component";
+import Ingredient from "./ingredient.component";
 import { Note } from "./Note";
 import { RECIPES } from "../../../../endpoints";
-import { ErrorMessage } from "../../../dialogues/errorMessage.component";
+import { ErrorMessage } from "../../../Dialogues/errorMessage.component";
 
 export const InstructionBody = (props) => {
     const { instructions,ingredients,items,grabIngredients,grabInstructions,isAdmin,notes,grabNotes } = props

@@ -1,6 +1,6 @@
-import {InstructionBody }from "./Body/InstructionBody.component"
-import {InstructionMain} from "./Instructions.styles"
-import InstructionHead from './Head/InstructionHead.component'
+import {InstructionBody }from "./Body/instructionbody.component"
+import {InstructionMain} from "./instructions.styles"
+import InstructionHead from './Head/instructionhead.component'
 
 const InstructionContainer = (props) => {
     const { instructions,ingredients,items,grabInstructions,grabIngredients,getItems,isAdmin,notes,grabNotes } = props 

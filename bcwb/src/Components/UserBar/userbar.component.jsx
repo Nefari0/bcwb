@@ -1,6 +1,6 @@
 import { changeView } from "../../ducks/navReducer"
 import { connect } from 'react-redux'
-import { UserHeader } from "./MobileUserBar.styles"
+import { UserHeader } from "./userbar.styles"
 import { CustomLink,InvertedButton } from "../Form/Button.styles"
 import { Link } from 'react-router-dom' 
 import { useContext } from "react"

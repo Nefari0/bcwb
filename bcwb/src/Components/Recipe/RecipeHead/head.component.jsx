@@ -1,4 +1,4 @@
-import { RecipeHeader } from "./RecipeHead.styles"
+import { RecipeHeader } from "./head.styles"
 import { InvertedButton } from "../../Form/Button.styles"
 
 const RecipeHead = (props) => {

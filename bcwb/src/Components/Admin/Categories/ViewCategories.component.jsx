@@ -3,7 +3,7 @@ import { CatView } from "./Categories.styles";
 import { BaseButton } from "../../Form/Button.styles";
 import CreateCategory from "./CreateCategory.component";
 import CatItem from "./CatItem.component";
-import { ErrorMessage } from "../../dialogues/errorMessage.component";
+import { ErrorMessage } from "../../Dialogues/errorMessage.component";
 import { connect } from 'react-redux'
 import { getCategories,getCategoryNames } from "../../../ducks/recipeReducer";
 

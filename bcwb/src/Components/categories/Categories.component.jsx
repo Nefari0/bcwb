@@ -3,9 +3,10 @@ import { connect } from 'react-redux'
 import { changeView } from "../../ducks/navReducer"
 import { getRecipes } from "../../ducks/recipeReducer"
 import { useEffect, useState } from "react"
-import { CategoriesContainer } from "./categories.styles"
+// import { CategoriesContainer } from "./categories.styles"
+import { BasicPage } from "../Styles/BasePageStyling/page.styles"
 import { RECIPES } from "../../endpoints"
-import Recipe from '../RecipeCover/recipe.component'
+import Recipe from '../RecipeCard/recipe.component'
 const { GET_PUBLISHED_RECIPES } = RECIPES
  
 const Categories = (props) => {
@@ -47,10 +48,10 @@ const Categories = (props) => {
     })
 
     return (
-    <CategoriesContainer>
+    <BasicPage>
         <header>{category}<span></span></header>
         <section>{mappedItems}</section>
-    </CategoriesContainer>
+    </BasicPage>
     )
 }
 

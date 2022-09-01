@@ -1,13 +1,13 @@
 import axios from "axios";
 import { useEffect,useState } from "react";
 import { RECIPES } from '../../endpoints';
-import { Link } from 'react-router-dom'
-import Recipe from '../RecipeCover/recipe.component'
-// import { Latest } from '../Home/HomeStyles.styles'
-import { Latest } from './latest.styles'
+import Recipe from '../RecipeCard/recipe.component'
+import { BasicPage } from "../Styles/BasePageStyling/page.styles";
 
 const LatestRecipes = () => {
+
     const [ items,setItems ] = useState([])
+
     useEffect(() => {
         getDB()
     }, [])
@@ -39,10 +39,10 @@ const LatestRecipes = () => {
     })
 
     return(
-        <Latest>
-            <header>{'LatestRecipes'}<span></span></header>
+        <BasicPage>
+            <header>{'Latest Recipes'}<span></span></header>
             <section>{mappedItems}</section>
-        </Latest>
+        </BasicPage>
     )
 }
 

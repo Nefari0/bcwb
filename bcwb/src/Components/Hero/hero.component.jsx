@@ -2,10 +2,10 @@
 import { Link } from 'react-router-dom'
 import { changeView } from '../../ducks/navReducer'
 import { connect } from 'react-redux'
-import { NavLink,DesktopMenu,MobileMenu,HeroBar } from './Hero.styles'
+import { NavLink,DesktopMenu,MobileMenu,HeroBar } from './hero.styles'
 import Logo from '../Assets/Brittanys-Culinary-Creations-v3.png'
 
-const Hero = (props) => {
+const HeroView = (props) => {
 
     // *** REMOVED PENDING DESIGN UPDATES *** //
     // const [ isMenuClosed,setMenu ] = useState(true)
@@ -38,4 +38,4 @@ function mapStateToProps(reduxState) {
     return reduxState
 }
 
-export default connect(mapStateToProps,{changeView})(Hero)
+export default connect(mapStateToProps,{changeView})(HeroView)

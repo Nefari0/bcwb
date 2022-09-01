@@ -1,18 +1,18 @@
-import './Recipe.scss'
+import './recipe.styles.jsx'
 import { useState,useEffect,useContext } from 'react'
 import { UserContext } from '../Context/user.context'
 import axios from 'axios'
 import { connect } from 'react-redux'
 
-import InstructionContainer from './Instructions/InstructionContainer'
+import InstructionContainer from './Instructions/intructions.component'
 import { BaseButton } from '../Form/Button.styles'
 import { LongRow } from '../Styles/Images/images.styles'
 import { RECIPES } from '../../endpoints'
 import { deleteFromFB } from '../Admin/Photos/deleteFromFB'
 import access from '../../access'
-import Confirmation from '../dialogues/confirmation.component'
+import Confirmation from '../Dialogues/confirmation.component'
 import { setSpinner } from '../../ducks/recipeReducer'
-import RecipeHead from './RecipeHead/RecipeHead.component'
+import RecipeHead from './RecipeHead/head.component'
 
 const Recipe = (props) => {
     const { recipe_id } = props.match.params

@@ -6,7 +6,7 @@ import { InvertedButtonLink,BaseButtonLink } from "../Form/Button.styles"
 import { restaurant,clock } from "../SVG"
 import { Link } from 'react-router-dom'
 
-const RecipeCover = ({items}) => {
+const RecipeCard = ({items}) => {
 
     const {
         description,
@@ -86,4 +86,4 @@ function mapStateToProps(reduxState) {
     return reduxState    
 }
 
-export default connect(mapStateToProps, {changeView})(RecipeCover)
+export default connect(mapStateToProps, {changeView})(RecipeCard)

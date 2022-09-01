@@ -1,7 +1,8 @@
 import styled, { css } from 'styled-components'
-import { colors } from '../Styles/colors'
-import { fonts } from '../Styles/fonts'
-import { device } from '../Styles/queries'
+// import { colors } from './Styles/colors'
+import { colors } from '../colors'
+import { fonts } from '../fonts'
+import { device } from '../queries'
 const { tablet,desktopL,laptop,mobileM } = device
 const { darkText } = colors
 const { cursive } = fonts
@@ -41,7 +42,7 @@ const s = css`
 `;
 
 
-export const CategoriesContainer = styled.main`
+export const BasicPage = styled.main`
 
     min-height: 400px;
     margin: auto;

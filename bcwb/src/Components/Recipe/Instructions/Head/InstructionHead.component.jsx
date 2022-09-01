@@ -11,16 +11,16 @@ import { LongRow,MainImage,DescriptionText,PortraitImage } from '../../../Styles
 import { useState,useEffect } from "react"
 import { deleteFromFB } from '../../../Admin/Photos/deleteFromFB'
 import { TextEditor } from "../../../Form/TextEditor"
-import { DetailGrid } from "./DetailGrid"
-import { ErrorMessage } from "../../../dialogues/errorMessage.component"
+import { DetailGrid } from "./grid"
+import { ErrorMessage } from "../../../Dialogues/errorMessage.component"
 import { EditPhoto } from "./editphoto/edit.component"
 import AddPhoto from "../../../Admin/Photos/AddPhotos"
 import FormInput from "../../../Form/FormInput"
 import Pinterest from "../../../Pinterest/Pinterest"
 import { BaseButton,InvertedButton } from "../../../Form/Button.styles"
-import Confirmation from "../../../dialogues/confirmation.component"
+import Confirmation from "../../../Dialogues/confirmation.component"
 import Cats from "../../../Admin/CreateRecipe/cats.component"
-import NewCatTextField from "./NewCatTextField.component"
+import NewCatTextField from "./addcategory.component"
 
 const InstructionHead = (props) => {
     const {
