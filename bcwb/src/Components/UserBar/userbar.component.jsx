@@ -8,7 +8,7 @@ import { UserContext } from "../Context/user.context"
 import { signOutUser } from '../../base'
 import access from "../../access"
 
-const MobileUserBar = (props) => {
+const UserBar = (props) => {
 
     const { currentUser,setCurrentUser } = useContext(UserContext)
 
@@ -57,4 +57,4 @@ function mapStateToProps(reduxState) {
     return reduxState
 }
 
-export default connect(mapStateToProps, {changeView})(MobileUserBar)
+export default connect(mapStateToProps, {changeView})(UserBar)
