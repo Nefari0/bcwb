@@ -13,33 +13,33 @@ const Nav = (props) => {
         translate:0,
         increment:110,
         carouselWidth:0,
+        maxWidth:300,
         items:[]
     })
-    const { translate,increment,items } = state
+    const { translate,increment,items,carouselWidth,maxWidth } = state
 
     const setTranslation = (prop,val) => {
-
         var newVal = prop+val // THIS IS THE INCREMENTED ITEM
-
         var newArr = [...items]
 
-        switch(val > 0) {
-            case true:
-                // console.log('is greater',val)
-                // var lastEl = newArr[newArr.length-1]
-                // newArr.pop()
-                // newArr.unshift(lastEl)
-            break;
+        // switch(val > 0) {
+        //     case true:
 
-            case false:
-                // console.log('is smaller',val)
-                // var lastEl = newArr[0]
-                // newArr.shift()
-                // newArr.push(lastEl)
-            break;
-        default:
+        //         console.log('is greater',maxWidth,newVal)
+        //         // var lastEl = newArr[newArr.length-1]
+        //         // newArr.pop()
+        //         // newArr.unshift(lastEl)
+        //     break;
 
-        }
+        //     case false:
+        //         console.log('is smaller',-maxWidth,newVal)
+        //         // var lastEl = newArr[0]
+        //         // newArr.shift()
+        //         // newArr.push(lastEl)
+        //     break;
+        // default:
+
+        // }
 
         setState({
             ...state,
@@ -48,6 +48,12 @@ const Nav = (props) => {
             // firstElement:
         })
     }
+
+    // **************** TESTING ************************ //
+    // **************************************************//
+
+    // **************************************************//
+    // **************************************************//
 
     const getDB = async () => {
         const response = await props.getCategories()
@@ -72,7 +78,7 @@ const Nav = (props) => {
                 {RightArrow()}
             </SlideButton>
 
-            <NavOverlay props={translate}>
+            <NavOverlay props={{translate,carouselWidth}}>
 
                 <LNavScreen></LNavScreen>
 

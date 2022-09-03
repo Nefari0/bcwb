@@ -21,9 +21,11 @@ const returnLocation = (val) => {
 }
 
 export const NavOverlay = styled.div`
+
     position:relative;
     min-width:300px;
     max-width:80%;
+// background-color:blue;
     height:110px;
     display: flex;
 	flex-direction: row;
@@ -34,10 +36,11 @@ export const NavOverlay = styled.div`
     padding:16px 0px 20px 0px;
     margin: auto;
     margin-top:16px;
+    overflow:hidden;
 
     // --- The span contains the images. They move with onclick events. Used in the carousel effect --- //
     span {
-        ${({props}) => returnLocation(props)}
+        ${({props}) => returnLocation(props.translate)}
         transition:all 500ms;
         width:110px;
         height:110px;
@@ -45,10 +48,17 @@ export const NavOverlay = styled.div`
     }
 
     ${pxXl}
-    @media${desktopL} {${pxL}}
-    @media${laptop} {${pxM}}
-    @media${tablet} {${pxS}}
-    overflow:hidden;
+    @media${desktopL} {
+        ${pxL}
+    }
+
+    @media${laptop} {
+        ${pxM}
+    }
+
+    @media${tablet} {
+        ${pxS}
+    }
     `
 
 export const SlideButton = styled.div`
@@ -59,6 +69,7 @@ export const SlideButton = styled.div`
     z-index:3;
     color:${baseColor};
     top:40px;
+    cursor: pointer;
 `
 
 export const NavBox = styled.div`
