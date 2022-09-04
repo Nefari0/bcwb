@@ -1,15 +1,22 @@
 import styled, { css } from 'styled-components'
-import { device,size } from '../Styles/queries'
+import { device } from '../Styles/queries'
 import { colors } from '../Styles/colors'
-import { arrow } from '../SVG'
+import { thumbnailDimensions } from '../Styles/Images/images.styles'
+
+// --- All the display widths in the Nav component --- //
+export const navPixelObject = {
+    XS:300,
+    S:630,
+    M:950,
+    L:1280,
+}
+const { XS,S,M,L } = navPixelObject
 
 const { tablet,desktopL,laptop,mobileM } = device
-const {mobileMPx} = size
-const { baseColor,white } = colors
-const pxXl = css`width:1280px;`
-const pxL = css`width:950px;`
-const pxM = css`width:630px;`
-const pxS = css`width:300px;`
+const { baseColor } = colors
+const pxXl = css`width:${L}px;`
+const pxL = css`width:${M}px;`
+const pxM = css`width:${S}px;`
 
 // --- Changing location of span elements for carousel effect --- //
 const returnLocation = (val) => {
@@ -20,12 +27,19 @@ const returnLocation = (val) => {
     return(style)
 }
 
-export const NavOverlay = styled.div`
-
+export const NavBox = styled.div` // --- Nav bar container
     position:relative;
     min-width:300px;
-    max-width:80%;
-// background-color:blue;
+    display: flex;
+	justify-content: center;
+	align-items: center;
+    width:100%;
+    margin:auto;
+`
+
+export const NavOverlay = styled.section` // -- Carousel view port
+    position:relative;
+    min-width:300px;
     height:110px;
     display: flex;
 	flex-direction: row;
@@ -39,44 +53,29 @@ export const NavOverlay = styled.div`
     overflow:hidden;
 
     // --- The span contains the images. They move with onclick events. Used in the carousel effect --- //
-    span {
-        ${({props}) => returnLocation(props.translate)}
-        transition:all 500ms;
-        width:110px;
-        height:110px;
-        position:relative;
-    }
+        span {
+            ${({translate}) => returnLocation(translate)}
+            transition:all 500ms;
+            width:${thumbnailDimensions + 10}px;
+            height:${thumbnailDimensions + 10}px;
+            position:relative;
+        }
 
     ${pxXl}
-    @media${desktopL} {
-        ${pxL}
-    }
-
-    @media${laptop} {
-        ${pxM}
-    }
-
-    @media${tablet} {
-        ${pxS}
-    }
+    @media${desktopL} { ${pxL} }
+    @media${laptop} { ${pxM} }
+    @media${tablet} {width:80%}
     `
 
 export const SlideButton = styled.div`
     width:60px;
-    height:60px;
-    border-radius:50%;
+    height:100%;
     position:absolute;
+    top:-10px;
     z-index:3;
     color:${baseColor};
-    top:40px;
     cursor: pointer;
-`
-
-export const NavBox = styled.div`
-    position:relative;
-    min-width:300px;
-    max-width:80%;
-    margin:auto;
+    display:flex;
 `
 
 // --- CREATING FADE IN/OUT FOG EFFECT --- //
@@ -86,25 +85,23 @@ const screen = css`
     rgba(255,255,255, .4),
     rgba(255,255,255, .6),
     rgba(255,255,255, .8),
-    rgba(255,255,255, 1)  
+    rgba(255,255,255, 1) 
 `
 
-export const LNavScreen = styled.div`
+export const LNavScreen = styled.div` // --- Left fade out
     width:20%;
     left:0;
     height:100%;
     background: linear-gradient(to left, ${screen} 100%); 
     z-index:3;
     position:absolute;
-    pointer-events: none; 
 `
 
-export const RNavScreen = styled.div`
+export const RNavScreen = styled.div` // --- Right fade out
     width:20%;
     right:0;
     height:100%;
     background: linear-gradient(to right, ${screen}100%);
-    z-index:2;
+    z-index:3;
     position:absolute;
-    pointer-events: none; 
 `
