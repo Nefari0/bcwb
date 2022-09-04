@@ -5,6 +5,7 @@ import { device } from '../queries';
 
 const { mobileL } = device
 const { baseColor,yellowPaper } = colors
+export const thumbnailDimensions = 100
 
 const selectedThumbnail = css`
   -webkit-transform: scale(1.15);
@@ -68,13 +69,10 @@ export const MainImage = styled.div`
 
 export const ThumbnailImage = styled.div`
   position:relative;
-  height: 100px;
-  width: 100px;
+  height: ${thumbnailDimensions}px;
+  width: ${thumbnailDimensions}px;
   border-radius:50%;
   border: 2px solid ${baseColor};
-  -webkit-transform: scale(1);
-  -ms-transform: scale(1);
-  transform: scale(1);
   overflow: hidden;
   opacity:.9;
   -webkit-transition: -webkit-transform 0.5s, opacity 0.5s;
@@ -90,7 +88,6 @@ export const ThumbnailImage = styled.div`
     -ms-transform: scale(.75);
     transform: scale(.75);
     margin:-9px;
-
 
     ${({props}) => (props.currentCategory === props.category_id && selectedThumbnail)}
   }
@@ -117,7 +114,6 @@ export const ThumbnailImage = styled.div`
     }
   }
 
-
 `
 
 export const ImageTag = styled.p`
@@ -137,7 +133,6 @@ export const ImageTag = styled.p`
   transform: rotate(45deg);
   transition:all 200ms;
   box-shadow: 0 4px 3px 0  rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
-
 `
 
 export const DescriptionText = styled.p`

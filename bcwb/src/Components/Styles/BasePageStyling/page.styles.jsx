@@ -43,7 +43,6 @@ const s = css`
 
 
 export const BasicPage = styled.main`
-
     min-height: 400px;
     margin: auto;
     margin-top:16px;
