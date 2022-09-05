@@ -19,42 +19,73 @@ const Nav = (props) => {
         increment:110, // increment for actual db photos/content
         carouselWidth:0,
         items:[],
-        windowSize:0
+        scrollLimit:0
     })
-    const { translate,increment,items,carouselWidth,windowSize } = state
+    const { translate,increment,items,carouselWidth,scrollLimit } = state
 
     // --- This will be used to flip mappedItems for continuous scrollinf effect --- //
     const setTranslation = (prop,val) => {
         var newVal = prop+val // THIS IS THE INCREMENTED ITEM
-        var newArr = [...items]
+        // var newArr = [...items]
 
         switch(val > 0) {
             case true:
 
-                // console.log('is greater',windowSize.innerWidth*.8,carouselWidth,newVal)
-                // const compensation = (Math.floor(innerWidth / 100) * 100);
-                // console.log('rounded down',(carouselWidth)/2,translate, (carouselWidth/2)-(windowSize/2))
-                // var lastEl = newArr[newArr.length-1]
-                // newArr.pop()
-                // newArr.unshift(lastEl)
+                if (translate < (carouselWidth/2)-(scrollLimit/2)) {
+                    setState({
+                        ...state,
+                        translate:newVal
+                        // items:newArr,
+                    })
+                }
+
+                // const scrollLeft = async () => {
+                //     const updatedArray = [...locations];
+                //     const newLocations = [];
+                //     updatedArray.forEach((el) => {
+                //       if (el < locations.length*100-100){
+                //         newLocations.push(el+100)
+                //       } else {newLocations.push(0)}
+                //       setLocations(newLocations);
+                //     });
+                //   };
+
             break;
 
             case false:
-                // console.log('is smaller',windowSize.innerWidth*.8,carouselWidth,newVal)
-                // console.log('rounded down',(carouselWidth/2),translate, (carouselWidth/2)-(windowSize/2))
-                // var lastEl = newArr[0]
-                // newArr.shift()
-                // newArr.push(lastEl)
+
+                if (-translate < (carouselWidth/2)-(scrollLimit/2)) {
+                    setState({
+                        ...state,
+                        translate:newVal
+                        // items:newArr,
+                    })
+                }
+                
+                // const scrollRight = async () => {
+                //     const updatedArray = [...locations];
+                //     const newLocations = [];
+                //     updatedArray.forEach((el) => {
+                //       if (el < 100) {
+                //         newLocations.push(el + 100 * locations.length - 100);
+                //       } else {
+                //         newLocations.push(el - 100);
+                //       }
+                //       console.log(newLocations);
+                //       setLocations(newLocations);
+                //     });
+                //   };
+
             break;
         default:
 
         }
 
-        setState({
-            ...state,
-            translate:newVal,
-            items:newArr,
-        })
+        // setState({
+        //     ...state,
+        //     translate:newVal
+        //     // items:newArr,
+        // })
     }
     
     const initializeNav = async () => {
@@ -63,7 +94,7 @@ const Nav = (props) => {
         await setState({...state,
             items:data,
             carouselWidth:increment*data.length,
-            windowSize:getWindowSize()
+            scrollLimit:getWindowSize()
         })
     }
 
@@ -72,34 +103,21 @@ const Nav = (props) => {
     })
 
     return (
-        <NavBox props={windowSize}>
+        <NavBox props={scrollLimit}>
+
+            <SlideButton onClick={() => setTranslation(translate,increment)}>
+                {LeftArrow()}
+            </SlideButton>
 
             <NavOverlay translate={translate}>
-
-                <LNavScreen>
-                    {translate < (carouselWidth/2)-(windowSize/2) &&
-                    <SlideButton
-                        onClick={() => setTranslation(translate,increment)}
-                        styles={{left:'0px'}}
-                    >
-                        {LeftArrow()}
-                    </SlideButton>}
-                </LNavScreen>
-
+                <LNavScreen></LNavScreen>
                 {mappedItems}
-
-                <RNavScreen>
-                    {-translate < (carouselWidth/2)-(windowSize/2) &&
-                    <SlideButton
-                        onClick={() => setTranslation(translate,-increment)}
-                        style={{right:'0px'}}
-                    >     
-                        {RightArrow()}
-                    </SlideButton>}
-                </RNavScreen>
-
+                <RNavScreen></RNavScreen>
             </NavOverlay>
 
+            <SlideButton onClick={() => setTranslation(translate,-increment)}>     
+                {RightArrow()}
+            </SlideButton>
 
         </NavBox>
     )
@@ -108,28 +126,28 @@ const Nav = (props) => {
 const getWindowSize = () => { // --- Carousel scroll constraints
     const {innerWidth } = window;
     
-    var maxWidth = 0
+    var scrollLimit = 0
     switch (innerWidth > XS) {
         case innerWidth > L:
-            maxWidth = L
+            scrollLimit = L
         break;
 
         case innerWidth > M:
-            maxWidth = M
+            scrollLimit = M
         break;
 
         case innerWidth > S:
-            maxWidth = S
+            scrollLimit = S
         break;
 
         case innerWidth > XS:
-            maxWidth = XS
+            scrollLimit = XS
         break;
 
         default:
             return;
     }
-    return maxWidth;
+    return scrollLimit;
   }
 
 function mapStateToProps(reduxState) {
