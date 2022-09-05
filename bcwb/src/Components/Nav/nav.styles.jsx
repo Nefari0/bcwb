@@ -5,18 +5,21 @@ import { thumbnailDimensions } from '../Styles/Images/images.styles'
 
 // --- All the display widths in the Nav component --- //
 export const navPixelObject = {
+    XXS:250,
     XS:300,
     S:630,
     M:950,
     L:1280,
 }
-const { XS,S,M,L } = navPixelObject
+const { XXS,XS,S,M,L } = navPixelObject
 
-const { tablet,desktopL,laptop,mobileM } = device
+const { tablet,desktopL,laptop,mobileM,mobileS } = device
 const { baseColor } = colors
 const pxXl = css`width:${L}px;`
 const pxL = css`width:${M}px;`
 const pxM = css`width:${S}px;`
+const pxS = css`width:${XS}px;`
+const pxXS = css`width:${XXS}px;`
 
 // --- Changing location of span elements for carousel effect --- //
 const returnLocation = (val) => {
@@ -34,48 +37,54 @@ export const NavBox = styled.div` // --- Nav bar container
 	justify-content: center;
 	align-items: center;
     width:100%;
-    margin:auto;
 `
 
 export const NavOverlay = styled.section` // -- Carousel view port
     position:relative;
-    min-width:300px;
+    // min-width:300px;
     height:110px;
     display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
 	justify-content: center;
 	align-items: center;
-	align-content: center;
     padding:16px 0px 20px 0px;
-    margin: auto;
     margin-top:16px;
     overflow:hidden;
 
     // --- The span contains the images. They move with onclick events. Used in the carousel effect --- //
         span {
-            ${({translate}) => returnLocation(translate)}
+            ${({translate}) => returnLocation(translate)};
             transition:all 500ms;
             width:${thumbnailDimensions + 10}px;
             height:${thumbnailDimensions + 10}px;
             position:relative;
+            margin:5px;
+
+            @media${tablet} {
+                -webkit-transform: scale(.5);
+                -ms-transform: scale(.5);
+                transform: scale(.5);
+                margin:-25px;
+            }
         }
 
     ${pxXl}
     @media${desktopL} { ${pxL} }
     @media${laptop} { ${pxM} }
-    @media${tablet} {width:80%}
+    @media${tablet} { ${pxS} }
+    @media${mobileS} { ${pxXS} }
     `
 
 export const SlideButton = styled.div`
     width:60px;
     height:100%;
-    position:absolute;
     top:-10px;
     z-index:3;
     color:${baseColor};
     cursor: pointer;
     display:flex;
+    pointer-events: auto;
 `
 
 // --- CREATING FADE IN/OUT FOG EFFECT --- //
@@ -95,6 +104,7 @@ export const LNavScreen = styled.div` // --- Left fade out
     background: linear-gradient(to left, ${screen} 100%); 
     z-index:3;
     position:absolute;
+    pointer-events: none;
 `
 
 export const RNavScreen = styled.div` // --- Right fade out
@@ -104,4 +114,5 @@ export const RNavScreen = styled.div` // --- Right fade out
     background: linear-gradient(to right, ${screen}100%);
     z-index:3;
     position:absolute;
+    pointer-events: none;
 `
