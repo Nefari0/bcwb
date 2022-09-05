@@ -3,7 +3,7 @@ import styled, {css} from 'styled-components';
 import { colors } from '../colors';
 import { device } from '../queries';
 
-const { mobileL } = device
+const { mobileL,tablet } = device
 const { baseColor,yellowPaper } = colors
 export const thumbnailDimensions = 100
 
@@ -83,11 +83,11 @@ export const ThumbnailImage = styled.div`
   background-color:#000;
   img {opacity:.7;}
 
-  @media ${mobileL} {
-    -webkit-transform: scale(.75);
-    -ms-transform: scale(.75);
-    transform: scale(.75);
-    margin:-9px;
+  @media ${tablet} {
+    // -webkit-transform: scale(.5);
+    // -ms-transform: scale(.5);
+    // transform: scale(.5);
+    // margin:-9px;
 
     ${({props}) => (props.currentCategory === props.category_id && selectedThumbnail)}
   }

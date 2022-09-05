@@ -1,5 +1,5 @@
 export const size = { // --- Pixels
-    mobileSPx: '300px',
+    mobileSPx: '350px',
     mobileMPx: '400px',
     mobileLPx: '550px',
     tabletSPx: '700px',
