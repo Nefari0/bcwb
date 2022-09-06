@@ -1,8 +1,30 @@
 module.exports = {
     getCategoriesAndPhotos: async (req,res) => {
         const db = req.app.get('db')
-        const categories = await db.recipe.categories.get_categories_and_coordinates()
-        return res.status(200).send(categories)
+        const categories = await db.recipe.categories.get_categories_and_coordinates() 
+        
+        // -- Determine the size and locations of returned element containers -- //
+        // -- This is different from the photo coordinate system stored in DB -- //
+        const { screenWidth } = req.params 
+        const width = (screenWidth <= 630 ? 80 : 110)
+
+
+        // -- Initialize array to store container coordinates -- //
+        const initLocations = Array.from(Array(categories.length).keys()) 
+
+        // -- Populate array with container coordinate values -- //
+        const locations = [];
+        initLocations.forEach((el) => {
+          locations.push(el * width);
+        });
+
+        const itemObject = {
+            locations:locations,
+            categories:categories,
+            dimensions:width
+        }
+       
+        return res.status(200).send(itemObject)
     },
 
     getCategoryNames: async (req,res) => {
