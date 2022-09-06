@@ -1,5 +1,5 @@
 import axios from "axios"
-
+import styled, { css } from 'styled-components'
 import { connect } from "react-redux"
 import { setSpinner } from "../../../../ducks/recipeReducer"
 import { getCategories,getCategoryNames } from "../../../../ducks/recipeReducer"
@@ -21,6 +21,14 @@ import { BaseButton,InvertedButton } from "../../../Form/Button.styles"
 import Confirmation from "../../../Dialogues/confirmation.component"
 import Cats from "../../../Admin/CreateRecipe/cats.component"
 import NewCatTextField from "./addcategory.component"
+import { device } from "../../../Styles/queries"
+
+const mainHItems = css`
+    width:65%;
+    @media ${device.mobileL}{width:100%}
+`
+const Author = styled.h4`${mainHItems}`
+const Title = styled.h3`${mainHItems}`
 
 const InstructionHead = (props) => {
     const {
@@ -211,8 +219,8 @@ const InstructionHead = (props) => {
             {/* -- DISPLAY OR EDIT TITLE -- */}
             { !isAdmin ?
             <>
-                <h3 style={{width:'65%'}}>{title}</h3>
-                <h5 style={{width:'65%',marginBottom:'40px'}} >{formFields.author}</h5>
+                <Title>{formFields.title}</Title>
+                <Author>{formFields.author}</Author>
             </>
             :
             
@@ -309,9 +317,10 @@ const InstructionHead = (props) => {
             <>
             
                 <TextEditor
-                textVal={formFields.description}
-                handler={handleChange} 
-                label={"Description"}
+                    textVal={formFields.description}
+                    handler={handleChange} 
+                    label={"Description"}
+                    name={'description'}
                 />
 
                 <BaseButton onClick={(e) => putItem(RECIPES.EDIT_RECIPE,formFields)}>
