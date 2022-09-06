@@ -24,11 +24,8 @@ export const NavBox = styled.div` // --- Nav bar container
     position:relative;
     min-width:300px;
     display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
 	justify-content: center;
 	align-items: center;
-	align-content: stretch;
     width:100%;
 `
 
@@ -36,8 +33,6 @@ export const NavOverlay = styled.main` // -- Carousel view port
     position:relative;
     height:110px;
     display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
 	justify-content: center;
 	align-items: center;
     padding:16px 0px 20px 0px;
