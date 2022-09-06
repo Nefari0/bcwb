@@ -10,112 +10,98 @@ const { XS,S,M,L } = navPixelObject
 
 const Nav = (props) => {
 
+    
+    const [state,setState] = useState({
+        carouselWidth:0, // -- Sum of thumbnail containers * dimensions
+        items:[],
+        screenWidth:0, // -- Client screen width
+        locations:[], // -- Absolute value locations are computed in node.js
+        dimensions:0 // -- Width of thumbnail containers
+    })
+    const {
+        translate,
+        items,
+        carouselWidth,
+        screenWidth,
+        locations,
+        dimensions
+    } = state
+
     useEffect(() => {
         initializeNav()
     },[])
 
-    const [state,setState] = useState({
-        translate:0,
-        increment:110, // increment for actual db photos/content
-        carouselWidth:0,
-        items:[],
-        scrollLimit:0
-    })
-    const { translate,increment,items,carouselWidth,scrollLimit } = state
+// --- Scroll effect --- //
+    const setTranslation = (val) => {
 
-    // --- This will be used to flip mappedItems for continuous scrollinf effect --- //
-    const setTranslation = (prop,val) => {
-        var newVal = prop+val // THIS IS THE INCREMENTED ITEM
-        // var newArr = [...items]
+        const updatedArray = [...locations];
+        const newLocations = [];
 
-        switch(val > 0) {
-            case true:
-
-                if (translate < (carouselWidth/2)-(scrollLimit/2)) {
-                    setState({
-                        ...state,
-                        translate:newVal
-                        // items:newArr,
-                    })
-                }
-
-                // const scrollLeft = async () => {
-                //     const updatedArray = [...locations];
-                //     const newLocations = [];
-                //     updatedArray.forEach((el) => {
-                //       if (el < locations.length*100-100){
-                //         newLocations.push(el+100)
-                //       } else {newLocations.push(0)}
-                //       setLocations(newLocations);
-                //     });
-                //   };
-
+        switch(val) {
+            case 'right':          
+                updatedArray.forEach((el) => {
+                    if (el < dimensions) {
+                    newLocations.push(el + dimensions * locations.length - dimensions);
+                    } else {
+                    newLocations.push(el - dimensions);
+                    }
+                });
+                setState({...state,locations:newLocations})
             break;
 
-            case false:
-
-                if (-translate < (carouselWidth/2)-(scrollLimit/2)) {
-                    setState({
-                        ...state,
-                        translate:newVal
-                        // items:newArr,
-                    })
-                }
-                
-                // const scrollRight = async () => {
-                //     const updatedArray = [...locations];
-                //     const newLocations = [];
-                //     updatedArray.forEach((el) => {
-                //       if (el < 100) {
-                //         newLocations.push(el + 100 * locations.length - 100);
-                //       } else {
-                //         newLocations.push(el - 100);
-                //       }
-                //       console.log(newLocations);
-                //       setLocations(newLocations);
-                //     });
-                //   };
-
-            break;
+            case 'left':
+                updatedArray.forEach((el) => {
+                    if (el < locations.length*dimensions-dimensions){
+                    newLocations.push(el+dimensions)
+                    } else {newLocations.push(0)}
+                });
+                setState({...state,locations:newLocations});
+                break;
         default:
 
         }
-
-        // setState({
-        //     ...state,
-        //     translate:newVal
-        //     // items:newArr,
-        // })
     }
     
     const initializeNav = async () => {
-        const response = await props.getCategories()
-        const { data } = response.value
+        const response = await props.getCategories(getWindowSize())
+        const { categories,locations,dimensions } = response.value.data
         await setState({...state,
-            items:data,
-            carouselWidth:increment*data.length,
-            scrollLimit:getWindowSize()
+            items:categories,
+            carouselWidth:dimensions*categories.length,
+            screenWidth:getWindowSize(),
+            locations:locations,
+            dimensions:dimensions
         })
     }
 
     const mappedItems = items.map((el,index) => {
-        return <Content key={el.category_id} content={el} index={index}/>
+        return (
+        <Content 
+            key={el.category_id}
+            content={el}
+            index={index}
+            location={locations[index]}
+            screenWidth={screenWidth} 
+            carouselWidth={carouselWidth}
+            dimensions={dimensions}
+        />
+        )
     })
 
     return (
-        <NavBox props={scrollLimit}>
+        <NavBox props={screenWidth}>
 
-            <SlideButton onClick={() => setTranslation(translate,increment)}>
+            <SlideButton onClick={() => setTranslation('right')}>
                 {LeftArrow()}
             </SlideButton>
 
-            <NavOverlay translate={translate}>
+            <NavOverlay carouselWidth={carouselWidth}>
                 <LNavScreen></LNavScreen>
-                {mappedItems}
+                <section>{mappedItems}</section>
                 <RNavScreen></RNavScreen>
             </NavOverlay>
 
-            <SlideButton onClick={() => setTranslation(translate,-increment)}>     
+            <SlideButton onClick={() => setTranslation('left')}>     
                 {RightArrow()}
             </SlideButton>
 
@@ -123,31 +109,30 @@ const Nav = (props) => {
     )
 }
 
-const getWindowSize = () => { // --- Carousel scroll constraints
+const getWindowSize = () => { // --- Screen width constraints --- //
     const {innerWidth } = window;
     
-    var scrollLimit = 0
-    switch (innerWidth > XS) {
+    var limit = 300
+ 
+    switch (innerWidth >= 300) {
         case innerWidth > L:
-            scrollLimit = L
+            limit = L
         break;
 
         case innerWidth > M:
-            scrollLimit = M
+            limit = M
         break;
 
         case innerWidth > S:
-            scrollLimit = S
+            limit = S
         break;
 
         case innerWidth > XS:
-            scrollLimit = XS
+            limit = XS
         break;
-
-        default:
-            return;
     }
-    return scrollLimit;
+
+    return limit;
   }
 
 function mapStateToProps(reduxState) {
