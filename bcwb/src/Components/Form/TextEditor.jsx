@@ -4,14 +4,21 @@ import { FormInputLabel, Group, TextArea } from './FormInput.styles';
 // The handler, also passed from parent, updates the textVal value.
 // The optional dimensions parameter is a styling object that taylors TextEditor to it's parent,
 
-export const TextEditor = ({ textVal, dimensions, handler, label }) => {
+export const TextEditor = (props) => {
+    const {
+    textVal,
+    dimensions,
+    handler,
+    label,
+    name 
+    } = props
 
     return(
         <Group>
             <TextArea
             style={dimensions}
             type="text"
-            name="description"
+            name={name}
             value={textVal}
             onChange={handler}
             />
