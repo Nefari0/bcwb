@@ -91,7 +91,7 @@ const Nav = (props) => {
     return (
         <NavBox props={screenWidth}>
 
-            <SlideButton onClick={() => setTranslation('right')}>
+            <SlideButton onClick={() => setTranslation('left')}>
                 {LeftArrow()}
             </SlideButton>
 
@@ -101,7 +101,7 @@ const Nav = (props) => {
                 <RNavScreen></RNavScreen>
             </NavOverlay>
 
-            <SlideButton onClick={() => setTranslation('left')}>     
+            <SlideButton onClick={() => setTranslation('right')}>     
                 {RightArrow()}
             </SlideButton>
 
