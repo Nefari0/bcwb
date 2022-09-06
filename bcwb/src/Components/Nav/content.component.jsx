@@ -3,22 +3,11 @@ import { connect } from 'react-redux'
 import { ThumbnailImage,ImageTag } from "../Styles/Images/images.styles"
 
 import { Link } from 'react-router-dom'
-import { useState,useEffect } from "react"
 
 const Content = (props) => {
 
-    const { content,index } = props
+    const { content,location,dimensions } = props
     const { currentCategory } = props.currentCategory
-    // const [style,setStyle] = useState(null)
-
-    // useEffect(() => {overrideStyle()}, [])
-    
-    // --- Moving last element of array to first --- //
-    // const overrideStyle = () => {
-    //     if (index === 0) {
-    //         setStyle(0)
-    //     } else {setStyle(null)}
-    // }
 
     const {
         x,y,z,
@@ -36,19 +25,27 @@ const Content = (props) => {
     }
 
     // --- Move element to back of array --- //
-    // const wrapper = {
-    //     left:`${style}px`,
-    //     transition:'all 500ms'
-    // }
+    const wrapper = {
+        position:'absolute',
+        transform: `translateX(${0+location}px)`,
+        transition: "all 500ms",
+        width:`${dimensions}px`,
+        height:`${dimensions}px`
+    }
 
     return (
-            <span>
-            <ThumbnailImage props={{category_id,currentCategory}} onClick={() => props.changeView(category_id)}>
-                <Link to={`/categories/${category}`}  ><img src={photo_url} style={positions} />
-                    <ImageTag label={category}>{category}</ImageTag>
-                </Link>
-            </ThumbnailImage>
-            </span>
+            <Link
+                to={`/categories/${category}`}
+                style={wrapper}
+                onClick={() => {props.changeView(category_id)}}
+            >
+
+                <ThumbnailImage props={{category_id,currentCategory}}>
+                        <img src={photo_url} style={positions} />
+                        <ImageTag label={category}>{category}</ImageTag>
+                </ThumbnailImage>
+
+            </Link>
         )
 }
 
