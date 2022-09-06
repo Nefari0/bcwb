@@ -3,19 +3,27 @@ import styled, {css} from 'styled-components';
 import { colors } from '../colors';
 import { device } from '../queries';
 
-const { mobileL,tablet } = device
+const { mobileL,tablet,laptop } = device
 const { baseColor,yellowPaper } = colors
 export const thumbnailDimensions = 100
 
 const selectedThumbnail = css`
+  transition: all 200ms;
+  z-index:2;
+  opacity:1;
   -webkit-transform: scale(1.15);
   -ms-transform: scale(1.15);
   transform: scale(1.15);
-  transition: all 200ms;
-  z-index:1;
-  opacity:1;
+
 
   img {opacity:1;}
+
+  @media ${tablet} {
+    -webkit-transform: scale(.8);
+    -ms-transform: scale(.8);
+    transform: scale(.8);
+    z-index:2;
+  }
 `
 
 const selectedImageTag = css`
@@ -74,7 +82,6 @@ export const ThumbnailImage = styled.div`
   border-radius:50%;
   border: 2px solid ${baseColor};
   overflow: hidden;
-  opacity:.9;
   -webkit-transition: -webkit-transform 0.5s, opacity 0.5s;
   transition: transform 0.5s, opacity 0.5s;
   transition: all 200ms;
@@ -82,15 +89,6 @@ export const ThumbnailImage = styled.div`
   margin:6px;
   background-color:#000;
   img {opacity:.7;}
-
-  @media ${tablet} {
-    // -webkit-transform: scale(.5);
-    // -ms-transform: scale(.5);
-    // transform: scale(.5);
-    // margin:-9px;
-
-    ${({props}) => (props.currentCategory === props.category_id && selectedThumbnail)}
-  }
 
   ${({props}) => (props.currentCategory === props.category_id && selectedThumbnail)}
 
@@ -101,18 +99,37 @@ export const ThumbnailImage = styled.div`
 
 
   &:hover {
+
     img {opacity:1;}
+
     -webkit-transform: scale(1.15);
     -ms-transform: scale(1.15);
     transform: scale(1.15);
     transition: all 200ms;
-    z-index:2;
+    z-index:3;
     opacity:1;
 
     p {
       ${selectedImageTag}
     }
   }
+
+  @media ${laptop} {
+    -webkit-transform: scale(.75);
+    -ms-transform: scale(.75);
+    transform: scale(.75);
+    margin:-12px;
+
+    ${({props}) => (props.currentCategory === props.category_id && selectedThumbnail)}
+
+    &:hover {
+      -webkit-transform: scale(.8);
+      -ms-transform: scale(.8);
+      transform: scale(.8);
+      z-index:3;
+    }
+  }
+
 
 `
 
@@ -148,9 +165,9 @@ export const ShortRow = styled.div`
   align-items:center;
   margin:20px;
   width:65%;
-  `
+`
   
-  export const LongRow = styled.div`
+export const LongRow = styled.div`
   display:flex;
   align-items:center;
   justify-content:space-between;
