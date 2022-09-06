@@ -1,4 +1,5 @@
 import { colors } from "../../Styles/colors"
+import { CancelX } from "../../SVG"
 
 const { baseColor,yellowPaper } = colors
 
@@ -31,6 +32,7 @@ const Cats = (props) => {
 
     return(
         <div style={catStyles}>
+            <button onClick={() => closeMenu(false)} style={{width:'50px'}}>{CancelX()}</button>
             {mappedCategories}
             <h3 onClick={goToCreateNewCategory}>create new</h3>
         </div>
