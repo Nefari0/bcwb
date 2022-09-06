@@ -32,10 +32,10 @@ export function getRecipes() {
 };
 
 // --- Get all categories and photo coordinates - This is for published recipes --- //
-export function getCategories() {
+export function getCategories(param) {
   return {
     type: FETCH_CATEGORIES,
-    payload: axios.get(GET_ALL_CATEGORIES)
+    payload: axios.get(GET_ALL_CATEGORIES+`${param}`)
   }
 }
 

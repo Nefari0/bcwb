@@ -32,7 +32,7 @@ export const PHOTOS = {
 
 export const CATEGORIES = {
     GET_CATEGORY_NAMES:'/api/category/get/names',
-    GET_ALL_CATEGORIES:'/api/category/get/all/photos',
+    GET_ALL_CATEGORIES:'/api/category/get/all/photos/',
     ADD_CATEGORY:'/api/category/add',
     EDIT_CATEGORY:'/api/category/edit',
     DELETE_CATEGORY:'/api/category/delete/',
