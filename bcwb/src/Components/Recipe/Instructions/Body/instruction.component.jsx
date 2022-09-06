@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { TextEditor } from '../../../Form/TextEditor';
 
 const Instruction = (props) => {
     const { isAdmin,instruction_id,recipe_id,step,content,grabInstructions,deleteItem,DELETE_INSTRUCTION,PUT_INSTRUCTION,putItem  } = props
@@ -26,7 +27,13 @@ const Instruction = (props) => {
             <input style={{width:'35px'}} type='number'  name="step" onChange={(e) => handleChange(e)} value={formFields.step} />
 
             {/* -- Edit content -- */}
-            <input type='text' name="content" onChange={(e) => handleChange(e)} value={formFields.content} />
+            <TextEditor
+                textVal={formFields.content}
+                handler={handleChange}
+                label={"Instruction"}
+                name={'content'}
+            />
+
 
             
             <button onClick={(e) => putItem(e,PUT_INSTRUCTION,formFields,grabInstructions)} >
