@@ -3,7 +3,8 @@ import Admin from './Components/Admin/Admin.component'
 import Recipe from './Components/Recipe/recipe.component'
 import SignUp from './Components/Authentication/SignUp/SignUp'
 import SignIn from './Components/Authentication/SignIn/SignIn'
-import Categories from './Components/Categories/categories.component'
+// import Categories from './Components/Categories/Categories.component'
+import Categories from './Components/categories/Categories.component'
 import LatestRecipes from './Components/LatestRecipes/latest.component'
 
 export default (

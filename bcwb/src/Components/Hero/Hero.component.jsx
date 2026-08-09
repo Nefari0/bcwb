@@ -2,7 +2,7 @@
 import { Link } from 'react-router-dom'
 import { changeView } from '../../ducks/navReducer'
 import { connect } from 'react-redux'
-import { NavLink,DesktopMenu,MobileMenu,HeroBar } from './hero.styles'
+import { NavLink,DesktopMenu,MobileMenu,HeroBar } from './Hero.styles'
 import Logo from '../Assets/Brittanys-Culinary-Creations-v3.png'
 
 const HeroView = (props) => {

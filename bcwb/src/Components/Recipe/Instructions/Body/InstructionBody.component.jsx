@@ -1,7 +1,8 @@
 
 import axios from "axios";
 import { useState } from "react";
-import Instruction from "./instruction.component";
+import Instruction from "./Instruction.component";
+// import Instruction from "./instruction.component";
 import Ingredient from "./ingredient.component";
 import { Note } from "./Note";
 import { RECIPES } from "../../../../endpoints";

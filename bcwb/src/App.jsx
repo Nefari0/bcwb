@@ -1,5 +1,6 @@
 import './App.scss';
-import Hero from './Components/Hero/hero.component';
+import Hero from './Components/Hero/Hero.component';
+// import HeroComponent from './Components/Hero/hero.component';
 import Nav from './Components/Nav/Nav';
 import routes from './routes';
 import { HashRouter } from 'react-router-dom';
