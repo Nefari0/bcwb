@@ -100,7 +100,7 @@ const CreateRecipe = (props) => {
 
                 {categoryList ?
                 <Cats
-                    categories={props.recipes.categories}
+                    categories={props.recipes.categories.categories}
                     handleClick={selectCategory}
                     closeMenu={setCategoryList}
                     changeView={changeView}

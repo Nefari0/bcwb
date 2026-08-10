@@ -25,7 +25,7 @@ const Cats = (props) => {
         closeMenu(false)
     }
 
-    const mappedCategories = categories.categories.map(el =>{
+    const mappedCategories = categories.map(el =>{
         return <h4 key={el.category_id} onClick={() => selectCatHandler('category',el.category)}>{el.category}</h4>
     })
 
